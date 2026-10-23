@@ -822,7 +822,8 @@
           };
           utter.onend = function () {
             self.setSpeaking(false);
-            self.setCaption(notice + '<em>مريم تستمع إليك الآن... (يمكنك الإجابة أو الضغط على إنهاء المكالمة)</em>');
+            self.setCaption(notice + '<em>مريم تستمع إليك الآن... (يمكنك التحدث بـ "نعم / باهي" أو الضغط على إنهاء المكالمة)</em>');
+            self.startSpeechRecognitionFallback();
           };
           utter.onerror = function (e) {
             console.warn('[DarnaAICall] Speech synthesis error:', e);
@@ -844,6 +845,97 @@
       }
     },
 
+    startSpeechRecognitionFallback: function () {
+      var self = this;
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition || !this.isOpen) return;
+
+      try {
+        var rec = new SpeechRecognition();
+        rec.lang = 'ar-TN';
+        rec.interimResults = false;
+        rec.maxAlternatives = 1;
+
+        rec.onresult = function (event) {
+          if (!self.isOpen) return;
+          var transcript = (event.results[0] && event.results[0][0] && event.results[0][0].transcript) || '';
+          transcript = transcript.trim();
+          if (!transcript) return;
+
+          self.transcript.push({ role: 'customer', text: transcript });
+          self.setCaption('<b>أنت:</b> ' + transcript);
+
+          var isConfirm = /(نعم|اي|إي|باهي|اكيد|أكيد|تفضل|صحيح|مريقل|واضح|اوكي|أوكي|oui|d'accord|bon)/i.test(transcript);
+          var isCancel = /(لا|بطلت|فسخ|الغاء|إلغاء|غيرت رايي|non)/i.test(transcript);
+
+          setTimeout(function () {
+            if (isConfirm) {
+              var confirmResp = 'يعيشك وصحة وبالشفاء! تم تأكيد طلبك توا في المنظومة والـ Livraison باش تخرجلك مباشرة توا لدارك، والدفع عند الاستلام. نهارك زين!';
+              self.speakFallbackResponse(confirmResp, function () {
+                setTimeout(function () { self.endCall(); }, 1800);
+              });
+            } else if (isCancel) {
+              var cancelResp = 'واضح يعيشك، ربي يفضلك، تم تسجيل طلبك وإعلام الإدارة.';
+              self.speakFallbackResponse(cancelResp, function () {
+                setTimeout(function () { self.endCall(); }, 1800);
+              });
+            } else {
+              var generalResp = 'مفهوم يعيشك، تم تسجيل ملاحظتك وتأكيد الطلب.';
+              self.speakFallbackResponse(generalResp, function () {
+                setTimeout(function () { self.endCall(); }, 1800);
+              });
+            }
+          }, 600);
+        };
+
+        rec.onerror = function (e) {
+          console.log('[DarnaAICall] Speech recognition status:', e.error);
+        };
+
+        this.recognition = rec;
+        rec.start();
+      } catch (e) {
+        console.warn('[DarnaAICall] Speech recognition init note:', e);
+      }
+    },
+
+    speakFallbackResponse: function (text, onEndCallback) {
+      var self = this;
+      this.setCaption('<b>مريم:</b> ' + text);
+      this.transcript.push({ role: 'maryem', text: text });
+      this.playCallDialChime();
+
+      if (window.speechSynthesis) {
+        try {
+          window.speechSynthesis.cancel();
+          if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+          var utter = new SpeechSynthesisUtterance(text);
+          var voices = window.speechSynthesis.getVoices() || [];
+          var arabicVoice = voices.find(function (v) {
+            var l = (v.lang || '').toLowerCase();
+            return l.startsWith('ar') || (v.name || '').toLowerCase().includes('arabic');
+          });
+          if (arabicVoice) {
+            utter.voice = arabicVoice;
+            utter.lang = arabicVoice.lang;
+          } else if (voices.length) {
+            utter.voice = voices[0];
+          }
+          utter.rate = 0.95;
+          utter.onstart = function () { self.setSpeaking(true); };
+          utter.onend = function () {
+            self.setSpeaking(false);
+            if (onEndCallback) onEndCallback();
+          };
+          window.speechSynthesis.speak(utter);
+        } catch (e) {
+          if (onEndCallback) onEndCallback();
+        }
+      } else {
+        if (onEndCallback) onEndCallback();
+      }
+    },
+
     endCall: function () {
       this.stopTimer();
       this.isOpen = false;
@@ -852,6 +944,12 @@
         this.connectionTimeout = null;
       }
       var duration = this.callStartTime ? Math.round((Date.now() - this.callStartTime) / 1000) : 15;
+
+      // Stop speech recognition if running
+      if (this.recognition) {
+        try { this.recognition.stop(); } catch(e){}
+        this.recognition = null;
+      }
 
       // Stop any queued or playing audio sources immediately
       if (this.activeSources) {
