@@ -102,9 +102,9 @@
     micStream: null,
     audioWorkletNode: null,
     isMuted: false,
-    audioQueue: [],
-    isPlaying: false,
+    isSpeaking: false,
     nextPlayTime: 0,
+    activeSources: [],
     order: null,
     transcript: [],
     callStartTime: null,
@@ -414,8 +414,8 @@
 
       this.init();
       this.transcript = [];
-      this.audioQueue = [];
-      this.isPlaying = false;
+      this.activeSources = [];
+      this.isSpeaking = false;
       this.nextPlayTime = 0;
       this.isMuted = false;
 
@@ -509,25 +509,32 @@
       var productName = o.product_name_snapshot || (o.order_items && o.order_items[0] && o.order_items[0].product_name_snapshot) || 'المهراس التونسي التقليدي الأصيل';
 
       var systemPrompt = `
-أنتِ "مريم" (Maryem)، ممثلة خدمة الحرفاء الرسمية لمتجر "دارنا" (DARNA) في تونس.
-دارنا هو متجر تونسي فاخر متخصص في صناعة المهاريس النحاسية والخشبية والأواني التقليدية الفاخرة.
+أنتِ "مريم" (Maryem)، ممثلة خدمة الحرفاء لمتجر "دارنا" (DARNA) للمهاريس والأواني التقليدية الفاخرة في تونس.
+تتحدثين عبر مكالمة هاتفية حية بالدارجة التونسية الأصيلة، المهذبة والسريعة لتأكيد الطلب مباشرة وإرسال التوصيل.
 
-تعليماتك الصارمة في هذه المكالمة الصوتية:
-1. التحدث حصرياً وبطلاقة فائقة بالدارجة التونسية المهذبة، الدافئة والترحيبية (مثال: عسلامة، يعيشك، تفضل، إن شاء الله، مرحبا بيك، ربي يفضلك).
-2. بيانات الحريف الحالي وطلبه:
-   - اسم الحريف: "${customerName}"
-   - رقم الطلب: "${orderNum}"
-   - المنتج: "${productName}"
-   - المجموع المطلوب دفعه عند الاستلام: "${total} دينار تونسي"
-   - الولاية والعنوان: "${city} - ${address}"
+بيانات الحريف والطلب:
+- اسم الحريف: "${customerName}"
+- رقم الطلب: "${orderNum}"
+- المنتج المطلوب: "${productName}"
+- المبلغ الإجمالي للدفع عند الاستلام: "${total} دينار تونسي"
+- ولاية التوصيل: "${city}"
+- العنوان: "${address}"
 
-3. سيناريو المكالمة:
-   - الخطوة 1: رحّبي بالزبون بحرارة باسمه، وقدمي نفسك: "عسلامة سي/للا ${customerName}، يعيشك ومرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء... إن شاء الله نهارك زين".
-   - الخطوة 2: ذكّريه بطلبه: "رينا طلبك متاع ${productName} بمبلغ ${total} دينار للتوصيل لـ ${city}... وحبينا نثبتوا معاك باش نأكدوا الطلب ونبعثوهولك في أقرب وقت إن شاء الله".
-   - الخطوة 3: اسأليه إن كان يؤكد الطلب أو لديه أي ملاحظة في التوصيل أو التوقيت المفضل.
-   - الخطوة 4: إذا قال "نعم / باهي / أكيد / صحيح" -> عبّري عن فرحتك واشكريه: "يعيشك برشا، تم تأكيد طلبك توا، والتوصيل يوصلك لباب الدار خلال 24 إلى 48 ساعة والدفع عند الاستلام. ربي يباركلك ونهارك طيب!".
-   - الخطوة 5: إذا طلب الإلغاء أو التعديل، كوني لبقة وودودة وسجلي ملاحظته بلطف.
-4. قاعدة ذهبية: تحدثي واكتبي حصرياً الكلام المنطوق بالدارجة التونسية فقط والموجه مباشرة للحريف. ممنوع منعاً باتاً كتابة أي تفكير داخلي أو لغة إنجليزية أو ملاحظات وصفية.
+سيناريو المحادثة الصارم والمباشر:
+1. الجملة الافتتاحية الأولى (قوليها كاملة فور فتح المكالمة في نفس النفس):
+"عسلامة سي/للا ${customerName}، يعيشك ومرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ${productName} بمبلغ ${total} دينار للتوصيل لـ ${city}... تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟"
+
+2. عند إجابة الحريف بالموافقة (نعم / باهي / أكيد / تفضل / إي / صحيح / مريقل):
+ردي فوراً بفرح وتشجيع:
+"يعيشك وصحة وبالشفاء! تم تأكيد طلبك توا في المنظومة والـ Livraison باش تخرجلك مباشرة توا لعنوانك في ${city}، والدفع عند الاستلام. ربي يباركلك ونهارك طيب وزين!"
+
+3. إذا طلب الحريف الإلغاء أو التعديل:
+ردي بلطف واحترام: "واضح يعيشك، ربي يفضلك، تم تسجيل طلبك."
+
+قواعد صارمة جداً:
+- ادخلي في صلب الموضوع مباشرة: رحبي بالحريف، واذكري طلبه ومبلغه، واسأليه فوراً لتأكيد إرسال التوصيل بدون أي مقدمات طويلة أو أسئلة إضافية.
+- تحدثي واكتبي حصرياً الكلام المنطوق بالدارجة التونسية فقط الموجه مباشرة للحريف.
+- ممنوع منعاً باتاً كتابة أي تفكير داخلي أو لغة إنجليزية أو شروحات.
       `;
 
       var setupMsg = {
@@ -559,20 +566,21 @@
         // Start microphone capturing after setup is complete
         this.startMicrophone();
 
-        // Trigger Maryem's opening greeting
+        // Trigger Maryem's opening greeting immediately
         var o = this.order || {};
         var customerName = o.customer_name || 'حريفنا العزيز';
+        var city = o.city || 'تونس';
         var triggerMsg = {
           clientContent: {
             turns: [{
               role: 'user',
-              parts: [{ text: 'الحريف فتح المكالمة الآن. رحّبي به فوراً باسمه بالدارجة التونسية وافتحي المكالمة كما هو مطلوب.' }]
+              parts: [{ text: 'الحريف فتح المكالمة توا. رحّبي به فوراً باسمه بالدارجة التونسية، واذكري طلبه ومبلغه لـ ' + city + '، واسأليه مباشرة إن كان يؤكد الطلب لنرسل له الـ Livraison ديراكت لدارو.' }]
             }],
             turnComplete: true
           }
         };
         this.ws.send(JSON.stringify(triggerMsg));
-        this.setCaption('مريم تبدأ بالترحيب بك الآن...');
+        this.setCaption('مريم تبدأ بالترحيب بك وبطلبك الآن...');
       }
 
       if (msg.serverContent) {
@@ -607,7 +615,8 @@
           sampleRate: 16000,
           channelCount: 1,
           echoCancellation: true,
-          noiseSuppression: true
+          noiseSuppression: true,
+          autoGainControl: true
         }
       }).then(function (stream) {
         self.micStream = stream;
@@ -617,9 +626,20 @@
 
         processor.onaudioprocess = function (e) {
           if (self.isMuted || !self.ws || self.ws.readyState !== WebSocket.OPEN) return;
-          var inputData = e.inputBuffer.getChannelData(0);
-          var b64Pcm = float32ToInt16Base64(inputData);
+          // CRITICAL: Prevent self-echo interruption. If Maryem is speaking, do not send mic input.
+          if (self.isSpeaking) return;
 
+          var inputData = e.inputBuffer.getChannelData(0);
+
+          // Voice Activity Detection (VAD): filter out background noise/breathing
+          var sum = 0;
+          for (var i = 0; i < inputData.length; i++) {
+            sum += inputData[i] * inputData[i];
+          }
+          var rms = Math.sqrt(sum / inputData.length);
+          if (rms < 0.012) return; // Silent / background noise
+
+          var b64Pcm = float32ToInt16Base64(inputData);
           var chunkMsg = {
             realtimeInput: {
               mediaChunks: [{
@@ -641,38 +661,39 @@
     enqueueAudioChunk: function (base64Pcm) {
       if (!this.audioCtx) return;
       var buffer = base64PcmToAudioBuffer(this.audioCtx, base64Pcm, 24000);
-      this.audioQueue.push(buffer);
-      if (!this.isPlaying) {
-        this.playNextAudioChunk();
-      }
-    },
-
-    playNextAudioChunk: function () {
-      var self = this;
-      if (!this.audioQueue.length) {
-        this.isPlaying = false;
-        this.setSpeaking(false);
-        return;
-      }
-
-      this.isPlaying = true;
-      this.setSpeaking(true);
-      var buffer = this.audioQueue.shift();
       var source = this.audioCtx.createBufferSource();
       source.buffer = buffer;
       source.connect(this.audioCtx.destination);
 
-      var currentTime = this.audioCtx.currentTime;
-      var startTime = Math.max(currentTime, this.nextPlayTime);
-      source.start(startTime);
-      this.nextPlayTime = startTime + buffer.duration;
+      var now = this.audioCtx.currentTime;
+      // Start slightly ahead (35ms cushion) if starting anew or recovering from silence
+      if (this.nextPlayTime < now) {
+        this.nextPlayTime = now + 0.035;
+      }
 
+      source.start(this.nextPlayTime);
+      this.nextPlayTime += buffer.duration;
+
+      this.activeSources = this.activeSources || [];
+      this.activeSources.push(source);
+      this.setSpeaking(true);
+
+      var self = this;
       source.onended = function () {
-        self.playNextAudioChunk();
+        if (self.activeSources) {
+          var idx = self.activeSources.indexOf(source);
+          if (idx !== -1) self.activeSources.splice(idx, 1);
+          if (self.activeSources.length === 0) {
+            if (!self.audioCtx || self.nextPlayTime <= self.audioCtx.currentTime + 0.06) {
+              self.setSpeaking(false);
+            }
+          }
+        }
       };
     },
 
     setSpeaking: function (isSpeaking) {
+      this.isSpeaking = isSpeaking;
       var avatar = document.getElementById('aiCallAvatar');
       var waveBars = document.getElementById('aiCallWaveBars');
       if (avatar) {
@@ -707,7 +728,7 @@
       var total = o.total_tnd || o.total || 92;
       var city = o.city || 'تونس';
 
-      var greeting = 'عسلامة سي ' + name + '! معاك مريم من خدمة الحرفاء في دارنا. رينا طلبك متع ' + prod + ' بمبلغ ' + total + ' د.ت للتوصيل في ' + city + '. حبيت نأكد معاك الطلب إن شاء الله؟';
+      var greeting = 'عسلامة سي ' + name + '، مرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ' + prod + ' بمبلغ ' + total + ' دينار للتوصيل لـ ' + city + '. تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟';
       this.setCaption('<b>مريم:</b> ' + greeting);
       this.transcript.push({ role: 'maryem', text: greeting });
 
@@ -718,7 +739,7 @@
         utter.onstart = function () { self.setSpeaking(true); };
         utter.onend = function () {
           self.setSpeaking(false);
-          self.setCaption('<em>مريم تستمع إليك الآن... (يمكنك التحدث أو الضغط على إنهاء المكالمة)</em>');
+          self.setCaption('<em>مريم تستمع إليك الآن... (يمكنك الإجابة أو الضغط على إنهاء المكالمة)</em>');
         };
         window.speechSynthesis.speak(utter);
       }
@@ -727,6 +748,14 @@
     endCall: function () {
       this.stopTimer();
       var duration = this.callStartTime ? Math.round((Date.now() - this.callStartTime) / 1000) : 15;
+
+      // Stop any queued or playing audio sources immediately
+      if (this.activeSources) {
+        this.activeSources.forEach(function (s) { try { s.stop(); } catch(e){} });
+        this.activeSources = [];
+      }
+      this.nextPlayTime = 0;
+      this.setSpeaking(false);
 
       // Close live mic and ws
       if (this.micStream) {
