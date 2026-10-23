@@ -48,23 +48,24 @@
     return btoa(binary);
   }
 
-  // Audio helper: convert 24kHz Int16 PCM base64 to AudioBuffer
+  // Audio helper: convert 24kHz Int16 PCM base64 to AudioBuffer safely
   function base64PcmToAudioBuffer(audioCtx, base64Data, sampleRate) {
     sampleRate = sampleRate || 24000;
     var binary = atob(base64Data);
-    var bytes = new Uint8Array(binary.length);
-    for (var i = 0; i < binary.length; i++) {
-      bytes[i] = binary.charCodeAt(i);
-    }
-    var int16 = new Int16Array(bytes.buffer);
-    var float32 = new Float32Array(int16.length);
-    for (var j = 0; j < int16.length; j++) {
-      float32[j] = int16[j] / (int16[j] < 0 ? 0x8000 : 0x7FFF);
+    var numSamples = Math.floor(binary.length / 2);
+    var float32 = new Float32Array(numSamples);
+    for (var i = 0; i < numSamples; i++) {
+      var byte1 = binary.charCodeAt(i * 2);
+      var byte2 = binary.charCodeAt(i * 2 + 1);
+      var val = (byte2 << 8) | byte1;
+      if (val >= 0x8000) val -= 0x10000;
+      float32[i] = val / 32768.0;
     }
     var buffer = audioCtx.createBuffer(1, float32.length, sampleRate);
     buffer.copyToChannel(float32, 0, 0);
     return buffer;
   }
+
 
   // Text helper: extract pure spoken Arabic dialogue and strip thoughts/meta commentary
   function extractSpokenDialogue(raw) {
@@ -413,6 +414,8 @@
       }
 
       this.init();
+      this.isOpen = true;
+      this.setupComplete = false;
       this.transcript = [];
       this.activeSources = [];
       this.isSpeaking = false;
@@ -453,17 +456,33 @@
     connectWebSocket: function () {
       var self = this;
       var cfg = getConfig();
-      var url = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=' + cfg.apiKey;
+      var url = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=' + encodeURIComponent(cfg.apiKey || '');
+
+      self.setupComplete = false;
 
       try {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.audioCtx = new AudioContext({ sampleRate: 24000 });
+        if (!this.audioCtx) {
+          this.audioCtx = new AudioContext({ sampleRate: 24000 });
+        }
         if (this.audioCtx.state === 'suspended') {
           this.audioCtx.resume();
         }
       } catch (e) {
         console.warn('[DarnaAICall] Web Audio API init error:', e);
       }
+
+      // Play soft calling chime to ensure speakers are active and give immediate acoustic feedback
+      this.playCallDialChime();
+
+      // Guard: if connection takes more than 4.5 seconds, automatically kick off fallback voice!
+      if (this.connectionTimeout) clearTimeout(this.connectionTimeout);
+      this.connectionTimeout = setTimeout(function () {
+        if (!self.setupComplete && self.isOpen) {
+          console.warn('[DarnaAICall] WebSocket setup timeout, switching to resilient voice fallback.');
+          self.fallbackInteractiveSpeech();
+        }
+      }, 4500);
 
       try {
         this.ws = new WebSocket(url);
@@ -490,11 +509,19 @@
 
       this.ws.onerror = function (err) {
         console.warn('[DarnaAICall] WebSocket error, switching to resilient fallback:', err);
-        self.fallbackInteractiveSpeech();
+        if (!self.setupComplete && self.isOpen) {
+          self.fallbackInteractiveSpeech();
+        }
       };
 
       this.ws.onclose = function (event) {
         console.log('[DarnaAICall] WebSocket closed:', event.code, event.reason);
+        if (!self.setupComplete && self.isOpen) {
+          if (event.code === 1008) {
+            console.warn('[DarnaAICall] API key was blocked or leaked by Google.');
+          }
+          self.fallbackInteractiveSpeech();
+        }
       };
     },
 
@@ -562,6 +589,11 @@
     handleServerMessage: function (msg) {
       var self = this;
       if (msg.setupComplete) {
+        self.setupComplete = true;
+        if (self.connectionTimeout) {
+          clearTimeout(self.connectionTimeout);
+          self.connectionTimeout = null;
+        }
         console.log('[DarnaAICall] Setup acknowledged by Gemini.');
         // Start microphone capturing after setup is complete
         this.startMicrophone();
@@ -720,33 +752,105 @@
       }
     },
 
-    fallbackInteractiveSpeech: function () {
+    playCallDialChime: function () {
+      try {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!this.audioCtx) this.audioCtx = new AudioContext({ sampleRate: 24000 });
+        if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+        var ctx = this.audioCtx;
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + 0.05);
+        osc.stop(ctx.currentTime + 0.6);
+      } catch (e) {}
+    },
+
+    fallbackInteractiveSpeech: function (reasonNote) {
       var self = this;
+      if (this.connectionTimeout) {
+        clearTimeout(this.connectionTimeout);
+        this.connectionTimeout = null;
+      }
       var o = this.order || {};
       var name = o.customer_name || 'حريفنا الكريم';
-      var prod = o.product_name_snapshot || 'المهراس التقليدي';
+      var prod = o.product_name_snapshot || (o.order_items && o.order_items[0] && o.order_items[0].product_name_snapshot) || 'المهراس التقليدي الأصيل';
       var total = o.total_tnd || o.total || 92;
       var city = o.city || 'تونس';
 
-      var greeting = 'عسلامة سي ' + name + '، مرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ' + prod + ' بمبلغ ' + total + ' دينار للتوصيل لـ ' + city + '. تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟';
-      this.setCaption('<b>مريم:</b> ' + greeting);
+      var notice = reasonNote ? `<div style="font-size:11px;color:#f59e0b;margin-bottom:4px">⚠️ ${reasonNote}</div>` : '';
+      this.setCaption(notice + '<b>مريم:</b> ' + greeting);
       this.transcript.push({ role: 'maryem', text: greeting });
 
+      // Immediate acoustic confirmation via Web Audio chime
+      this.playCallDialChime();
+
       if (window.speechSynthesis) {
-        var utter = new SpeechSynthesisUtterance(greeting);
-        utter.lang = 'ar-TN';
-        utter.rate = 0.95;
-        utter.onstart = function () { self.setSpeaking(true); };
-        utter.onend = function () {
-          self.setSpeaking(false);
-          self.setCaption('<em>مريم تستمع إليك الآن... (يمكنك الإجابة أو الضغط على إنهاء المكالمة)</em>');
-        };
-        window.speechSynthesis.speak(utter);
+        try {
+          window.speechSynthesis.cancel();
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+
+          var utter = new SpeechSynthesisUtterance(greeting);
+          
+          var voices = window.speechSynthesis.getVoices() || [];
+          var arabicVoice = voices.find(function (v) {
+            var l = (v.lang || '').toLowerCase();
+            var n = (v.name || '').toLowerCase();
+            return l.startsWith('ar') || n.includes('arabic') || n.includes('tunis') || n.includes('saudi') || n.includes('egypt');
+          });
+
+          if (arabicVoice) {
+            utter.voice = arabicVoice;
+            utter.lang = arabicVoice.lang;
+          } else if (voices.length) {
+            // Use available voice without forcing unavailable locale so it doesn't drop
+            utter.voice = voices[0];
+          }
+          utter.rate = 0.95;
+          utter.pitch = 1.05;
+
+          utter.onstart = function () {
+            self.setSpeaking(true);
+          };
+          utter.onend = function () {
+            self.setSpeaking(false);
+            self.setCaption(notice + '<em>مريم تستمع إليك الآن... (يمكنك الإجابة أو الضغط على إنهاء المكالمة)</em>');
+          };
+          utter.onerror = function (e) {
+            console.warn('[DarnaAICall] Speech synthesis error:', e);
+            self.setSpeaking(false);
+          };
+
+          if (self.audioCtx && self.audioCtx.state === 'suspended') {
+            self.audioCtx.resume();
+          }
+
+          window.speechSynthesis.speak(utter);
+          // Safety pulse if speech doesn't trigger onstart
+          setTimeout(function() {
+            if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+          }, 200);
+        } catch (err) {
+          console.warn('[DarnaAICall] Speech fallback error:', err);
+        }
       }
     },
 
     endCall: function () {
       this.stopTimer();
+      this.isOpen = false;
+      if (this.connectionTimeout) {
+        clearTimeout(this.connectionTimeout);
+        this.connectionTimeout = null;
+      }
       var duration = this.callStartTime ? Math.round((Date.now() - this.callStartTime) / 1000) : 15;
 
       // Stop any queued or playing audio sources immediately
@@ -756,6 +860,10 @@
       }
       this.nextPlayTime = 0;
       this.setSpeaking(false);
+
+      if (window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
 
       // Close live mic and ws
       if (this.micStream) {
@@ -837,13 +945,11 @@
     },
 
     closeModal: function () {
+      if (this.isOpen) {
+        this.endCall();
+      }
       var overlay = document.getElementById('darnaAiCallOverlay');
       if (overlay) overlay.classList.remove('active');
-      // If a success modal is on the page, keep it clean
-      var receiptBox = document.getElementById('receiptSummaryBox');
-      if (receiptBox) {
-        // user returns to final order confirmation view
-      }
     }
   };
 
