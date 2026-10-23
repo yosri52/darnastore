@@ -868,11 +868,20 @@
               <p>متابعة دقيقة لمبيعات المتجر، رأس المال، الأرباح الصافية، والطلبات عبر الفترات الزمنية</p>
             </div>
             <div class="admin-header-actions">
-              <button class="btn-secondary" onclick="openAiCallSettingsModal()" style="display:inline-flex;align-items:center;gap:7px">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-                <span>المكالمة الذكية (مريم)</span>
-                <span id="aiCallHeaderBadge" style="font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(16,185,129,0.15);color:#10b981;font-weight:700">مفعل</span>
-              </button>
+              <!-- DIRECT AI VOICE AGENT TOGGLE & SETTINGS -->
+              <div style="display:inline-flex;align-items:center;gap:10px;background:var(--bg-card);border:1px solid var(--border);padding:6px 12px;border-radius:30px">
+                <span style="font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px">
+                  <span>🎙️ مكالمة مريم:</span>
+                  <span id="aiCallHeaderBadge" style="font-size:11px;padding:2px 8px;border-radius:12px;background:rgba(16,185,129,0.15);color:#10b981;font-weight:800">مفعّلة</span>
+                </span>
+                <label style="position:relative;display:inline-block;width:38px;height:20px;cursor:pointer;margin:0" title="تشغيل / تعطيل المكالمة الصوتية للزبائن مباشرة">
+                  <input type="checkbox" id="aiCallHeaderToggle" checked onchange="toggleAiCallDirect(this.checked)" style="opacity:0;width:0;height:0" />
+                  <span id="aiCallHeaderSlider" style="position:absolute;inset:0;background:#10b981;border-radius:20px;transition:0.3s"></span>
+                </label>
+                <button type="button" class="btn-icon" onclick="openAiCallSettingsModal()" title="إعدادات متقدمة للمكالمة الذكية" style="width:26px;height:26px;border-radius:50%;padding:0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </button>
+              </div>
               <button class="btn-primary" onclick="addFakeOrderInCurrentPeriod()">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>إضافة طلب تجريبي بالفترة الحالية</span>
@@ -1376,55 +1385,55 @@
 
           <!-- PRICING & DISCOUNT 3-COLUMN GRID -->
           <div style="background:var(--bg-elevated);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:16px">
-            <div style="font-weight:700;font-size:13px;margin-bottom:10px;color:var(--text-primary);display:flex;align-items:center;gap:6px">
+            <div style="font-weight:700;font-size:13px;margin-bottom:12px;color:var(--text-primary);display:flex;align-items:center;gap:6px">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent)"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
               <span>الأسعار، التخفيض للزبون وهامش الربح:</span>
             </div>
-            <div class="pricing-grid-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <div class="pricing-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:12px">
               <!-- SALE PRICE -->
               <div class="form-group" style="margin-bottom:0">
-                <label for="prodPrice" style="display:flex;align-items:center;gap:4px">
+                <label for="prodPrice" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
                   <span style="font-weight:700;color:var(--accent)">سعر البيع الحالي</span>
-                  <span style="font-size:10px;background:var(--accent-glow);padding:1px 5px;border-radius:4px;color:var(--accent)">يظهر بالمتجر</span>
+                  <span style="font-size:10px;background:var(--accent-glow);padding:1px 6px;border-radius:4px;color:var(--accent);font-weight:600">يظهر بالمتجر</span>
                 </label>
                 <div style="position:relative">
-                  <input type="number" id="prodPrice" class="form-control" step="0.5" min="0" placeholder="مثال: 64" oninput="calculateProfitMargin()" style="border-color:var(--accent);font-weight:700" />
+                  <input type="number" id="prodPrice" class="form-control" step="0.5" min="0" placeholder="64" oninput="calculateProfitMargin()" style="border-color:var(--accent);font-weight:700;padding-left:46px" />
                   <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--accent);font-weight:700;pointer-events:none">TND</span>
                 </div>
-                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:3px">السعر الفعلي المطلوب دفعه</small>
+                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:4px">السعر الفعلي المطلوب دفعه</small>
               </div>
 
               <!-- ORIGINAL PRICE (FOR DISCOUNT) -->
               <div class="form-group" style="margin-bottom:0">
-                <label for="prodOriginalPrice" style="display:flex;align-items:center;gap:4px">
+                <label for="prodOriginalPrice" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
                   <span style="font-weight:700">السعر قبل التخفيض</span>
-                  <span style="font-size:10px;background:rgba(239,68,68,0.12);padding:1px 5px;border-radius:4px;color:var(--color-danger)">تخفيض للزبون</span>
+                  <span style="font-size:10px;background:rgba(239,68,68,0.12);padding:1px 6px;border-radius:4px;color:var(--color-danger);font-weight:600">تخفيض للزبون</span>
                 </label>
                 <div style="position:relative">
-                  <input type="number" id="prodOriginalPrice" class="form-control" step="0.5" min="0" placeholder="مثال: 89" oninput="calculateProfitMargin()" />
+                  <input type="number" id="prodOriginalPrice" class="form-control" step="0.5" min="0" placeholder="89" oninput="calculateProfitMargin()" style="padding-left:46px" />
                   <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-muted);pointer-events:none">TND</span>
                 </div>
-                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:3px">يظهر مشطوباً لإبراز نسبة التخفيض</small>
+                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:4px">يظهر مشطوباً لإبراز نسبة التخفيض</small>
               </div>
 
               <!-- COST PRICE -->
               <div class="form-group" style="margin-bottom:0">
-                <label for="prodCostPrice" style="display:flex;align-items:center;gap:4px">
+                <label for="prodCostPrice" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
                   <span style="font-weight:700">سعر التكلفة (رأس المال)</span>
-                  <span style="font-size:10px;background:var(--bg-card);padding:1px 5px;border-radius:4px;color:var(--text-muted)">خاص بالإدارة</span>
+                  <span style="font-size:10px;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;color:var(--text-muted);font-weight:600">خاص بالإدارة</span>
                 </label>
                 <div style="position:relative">
-                  <input type="number" id="prodCostPrice" class="form-control" step="0.5" min="0" placeholder="مثال: 32" oninput="calculateProfitMargin()" />
+                  <input type="number" id="prodCostPrice" class="form-control" step="0.5" min="0" placeholder="32" oninput="calculateProfitMargin()" style="padding-left:46px" />
                   <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-muted);pointer-events:none">TND</span>
                 </div>
-                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:3px">لحساب الأرباح ورأس المال</small>
+                <small style="color:var(--text-muted);font-size:10px;display:block;margin-top:4px">لحساب الأرباح ورأس المال</small>
               </div>
             </div>
 
             <!-- LIVE INDICATORS -->
-            <div id="profitMarginIndicator" style="display:none;margin-top:12px;padding:8px 12px;border-radius:var(--radius-sm);background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px">
-              <div id="discountIndicatorBadge" style="color:var(--color-danger);font-weight:800"></div>
+            <div id="profitMarginIndicator" style="display:none;margin-top:14px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px">
               <div id="profitMarginValue" style="color:var(--color-success);font-weight:800"></div>
+              <div id="discountIndicatorBadge" style="color:var(--color-danger);font-weight:800"></div>
             </div>
           </div>
 
@@ -1682,15 +1691,9 @@
             </div>
           </div>
 
-          <div class="form-group" style="margin-bottom:12px">
-            <label for="aiModelInput">نموذج الذكاء الاصطناعي (Model)</label>
-            <input type="text" id="aiModelInput" class="form-control" value="models/gemini-2.5-flash-native-audio-preview-12-2025" required />
-          </div>
-
-          <div class="form-group" style="margin-bottom:18px">
-            <label for="aiApiKeyInput">مفتاح Google AI Studio API Key</label>
-            <input type="password" id="aiApiKeyInput" class="form-control" value="AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE" required />
-          </div>
+          <!-- HIDDEN CONFIG (Kept active in system without displaying to admin) -->
+          <input type="hidden" id="aiModelInput" value="models/gemini-2.5-flash-native-audio-preview-12-2025" />
+          <input type="hidden" id="aiApiKeyInput" value="AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE" />
 
           <div style="display:flex;gap:10px">
             <button type="submit" class="btn-primary" style="flex:2;justify-content:center">حفظ الإعدادات</button>
@@ -2104,9 +2107,7 @@
 
       function seedProducts() {
         var products = DB.get('products', []);
-        var hasValidVariants = products.length && products.some(function(p){ return p.sizes && p.sizes.length; });
-
-        if (!products.length || !hasValidVariants) {
+        if (!products || !products.length) {
           products = [
             {
               id: 'prod-mehres-core',
@@ -2474,6 +2475,10 @@
         document.getElementById('adminLayout').style.display = 'grid';
         var el = document.getElementById('adminUserEmail');
         if (el) el.textContent = (currentSession && currentSession.user && currentSession.user.email) || 'Admin';
+        if (typeof updateAiCallUiState === 'function') {
+          var cfg = (window.DarnaAICallConfig && window.DarnaAICallConfig.get()) || { enabled: true };
+          updateAiCallUiState(cfg.enabled);
+        }
         loadOverview();
       }
       function handleLogin(e) {
@@ -3791,11 +3796,40 @@
           }
         });
       });
-      /* ============ AI CALL SETTINGS & HANDLERS ============ */
+      /* ============ AI CALL SETTINGS & DIRECT CONTROLS ============ */
+      function toggleAiCallDirect(enabled) {
+        if (window.DarnaAICallConfig) {
+          window.DarnaAICallConfig.set({ enabled: enabled });
+        }
+        updateAiCallUiState(enabled);
+        showToast(enabled ? 'تم تفعيل المكالمة الصوتية الذكية (مريم) للزبائن بنجاح' : 'تم تعطيل المكالمة الصوتية للزبائن');
+      }
+
+      function updateAiCallUiState(enabled) {
+        var badge = document.getElementById('aiCallHeaderBadge');
+        if (badge) {
+          badge.textContent = enabled ? 'مفعّلة' : 'معطّلة';
+          badge.style.background = enabled ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
+          badge.style.color = enabled ? '#10b981' : '#ef4444';
+        }
+        var headSlider = document.getElementById('aiCallHeaderSlider');
+        if (headSlider) {
+          headSlider.style.background = enabled ? '#10b981' : '#64748b';
+        }
+        var headTog = document.getElementById('aiCallHeaderToggle');
+        if (headTog) headTog.checked = !!enabled;
+
+        var sideBadge = document.getElementById('sidebarAiCallBadge');
+        if (sideBadge) {
+          sideBadge.textContent = enabled ? 'مفعل' : 'معطل';
+          sideBadge.style.background = enabled ? '#10b981' : '#ef4444';
+        }
+        var modalTog = document.getElementById('aiCallEnabledToggle');
+        if (modalTog) modalTog.checked = !!enabled;
+      }
+
       function openAiCallSettingsModal() {
         var cfg = (window.DarnaAICallConfig && window.DarnaAICallConfig.get()) || {
-          apiKey: 'AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE',
-          model: 'models/gemini-2.5-flash-native-audio-preview-12-2025',
           voiceName: 'Aoede',
           agentName: 'مريم',
           enabled: true,
@@ -3815,10 +3849,6 @@
         if (nameInp) nameInp.value = cfg.agentName || 'مريم';
         var voiceSel = document.getElementById('aiVoiceSelect');
         if (voiceSel) voiceSel.value = cfg.voiceName || 'Aoede';
-        var modInp = document.getElementById('aiModelInput');
-        if (modInp) modInp.value = cfg.model || 'models/gemini-2.5-flash-native-audio-preview-12-2025';
-        var keyInp = document.getElementById('aiApiKeyInput');
-        if (keyInp) keyInp.value = cfg.apiKey || 'AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE';
 
         document.getElementById('aiCallSettingsModal').classList.add('open');
       }
@@ -3830,8 +3860,6 @@
         var allowRecordSummary = document.getElementById('aiCallRecordSummaryToggle').checked;
         var agentName = document.getElementById('aiAgentNameInput').value.trim() || 'مريم';
         var voiceName = document.getElementById('aiVoiceSelect').value;
-        var model = document.getElementById('aiModelInput').value.trim();
-        var apiKey = document.getElementById('aiApiKeyInput').value.trim();
 
         if (window.DarnaAICallConfig) {
           window.DarnaAICallConfig.set({
@@ -3839,20 +3867,11 @@
             autoConfirm: autoConfirm,
             allowRecordSummary: allowRecordSummary,
             agentName: agentName,
-            voiceName: voiceName,
-            model: model,
-            apiKey: apiKey
+            voiceName: voiceName
           });
         }
 
-        // Update badge
-        var badge = document.getElementById('aiCallHeaderBadge');
-        if (badge) {
-          badge.textContent = enabled ? 'مفعل' : 'معطل';
-          badge.style.background = enabled ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
-          badge.style.color = enabled ? '#10b981' : '#ef4444';
-        }
-
+        updateAiCallUiState(enabled);
         closeModal('aiCallSettingsModal');
         showToast('تم حفظ إعدادات المكالمة الصوتية الذكية (مريم) بنجاح');
       }
