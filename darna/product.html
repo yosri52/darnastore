@@ -1,0 +1,2533 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+    <title>المهراس التونسي التقليدي الأصيل | متجر دارنا — DARNA</title>
+    <meta name="description" content="مهراس تونسي تقليدي أصيل مصنوع يدوياً من الحجر الطبيعي. متوفر بمقاسات وألوان متعددة مع الدفع عند الاستلام وتوصيل سريع لكامل تونس." />
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    
+    <style>
+      :root {
+        --bg-primary: #f8f6f1;
+        --bg-secondary: #f0ede5;
+        --bg-card: #ffffff;
+        --bg-elevated: #f6f3ec;
+        --bg-glass: rgba(255, 255, 255, 0.92);
+        --text-primary: #1a1916;
+        --text-secondary: #524f46;
+        --text-muted: #8c877d;
+        --accent: #b76543;
+        --accent-hover: #9c5234;
+        --accent-light: #c9864a;
+        --accent-glow: rgba(183, 101, 67, 0.16);
+        --accent-gradient: linear-gradient(135deg, #b76543, #d4944e);
+        --gold: #b8922e;
+        --border: rgba(0, 0, 0, 0.08);
+        --border-hover: rgba(183, 101, 67, 0.35);
+        --radius-sm: 8px;
+        --radius-md: 14px;
+        --radius-lg: 20px;
+        --radius-pill: 999px;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+        --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 10px 36px rgba(0, 0, 0, 0.10);
+        --font-main: "Noto Kufi Arabic", "DM Sans", system-ui, sans-serif;
+        --color-success: #10b981;
+        --color-warning: #f59e0b;
+        --color-danger: #ef4444;
+        --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      [data-theme="dark"] {
+        --bg-primary: #0e0e14;
+        --bg-secondary: #14141e;
+        --bg-card: #1b1b26;
+        --bg-elevated: #222230;
+        --bg-glass: rgba(27, 27, 38, 0.92);
+        --text-primary: #f2eee8;
+        --text-secondary: #a39f97;
+        --text-muted: #6e6a63;
+        --accent: #c9864a;
+        --accent-hover: #db9a5e;
+        --accent-light: #e5b27e;
+        --accent-glow: rgba(201, 134, 74, 0.22);
+        --accent-gradient: linear-gradient(135deg, #c9864a, #e8b86d);
+        --gold: #d4a853;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(201, 134, 74, 0.4);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+        --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.45);
+        --shadow-lg: 0 10px 36px rgba(0, 0, 0, 0.55);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+      html {
+        overflow-x: hidden;
+        width: 100%;
+      }
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        line-height: 1.5;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      button, input, select, textarea { font-family: inherit; }
+
+      /* TOP ANNOUNCEMENT BAR */
+      .top-announcement {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 6px 16px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+      .top-announcement b { color: var(--accent); }
+
+      /* SITE HEADER */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 800;
+        background: var(--bg-glass);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        width: 100%;
+      }
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 2px 8px rgba(183, 101, 67, 0.2);
+        border: 1.5px solid var(--accent);
+      }
+      .brand-name {
+        font-size: 18px;
+        font-weight: 900;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      .brand-tagline {
+        font-size: 10px;
+        color: var(--text-muted);
+        display: block;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      @media (max-width: 480px) {
+        .brand-tagline { display: none; }
+        .brand-name { font-size: 16px; }
+        .header-inner { padding: 8px 12px; gap: 8px; }
+        .header-icon-btn { width: 34px; height: 34px; font-size: 14px; }
+        .header-actions { gap: 6px; }
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        list-style: none;
+      }
+      .nav-link {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+      }
+      .nav-link:hover, .nav-link.active {
+        color: var(--accent);
+        background: var(--accent-glow);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-icon-btn {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+      .header-icon-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* SEARCH BAR (LIKE REFERENCE SCREENSHOT) */
+      .search-bar-wrap {
+        max-width: 1200px;
+        margin: 10px auto 0;
+        padding: 0 16px;
+        width: 100%;
+      }
+      .search-bar-box {
+        position: relative;
+        width: 100%;
+      }
+      .search-bar-box input {
+        width: 100%;
+        padding: 10px 42px 10px 16px;
+        border-radius: var(--radius-md);
+        border: 1.5px solid var(--border);
+        background: var(--bg-card);
+        color: var(--text-primary);
+        font-size: 13px;
+        outline: none;
+        transition: var(--transition);
+      }
+      .search-bar-box input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+      .search-bar-icon {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: var(--text-muted);
+        pointer-events: none;
+      }
+
+      /* MAIN CONTAINER */
+      .page-main-container {
+        max-width: 1200px;
+        margin: 14px auto 40px;
+        padding: 0 16px;
+      }
+
+      /* DESKTOP 2-COLUMN GRID / MOBILE 1-COLUMN */
+      .product-layout-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 36px;
+        align-items: start;
+      }
+
+      /* PRODUCT TITLE & PRICE HEADER (DISPLAYED AT TOP IN MOBILE FLOW) */
+      .product-top-header {
+        margin-bottom: 14px;
+      }
+      .product-top-title {
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--text-primary);
+        line-height: 1.35;
+        margin-bottom: 6px;
+      }
+      .product-top-price-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+      .sale-price-text {
+        font-size: 26px;
+        font-weight: 900;
+        color: var(--accent);
+        font-family: "DM Sans", var(--font-main);
+        direction: ltr;
+        display: inline-block;
+      }
+      .orig-price-text {
+        font-size: 16px;
+        color: var(--text-muted);
+        text-decoration: line-through;
+        font-weight: 600;
+        font-family: "DM Sans", var(--font-main);
+        direction: ltr;
+        display: inline-block;
+      }
+      .discount-chip {
+        font-size: 11px;
+        font-weight: 800;
+        background: rgba(239, 68, 68, 0.12);
+        color: var(--color-danger);
+        padding: 3px 8px;
+        border-radius: var(--radius-pill);
+        display: inline-flex;
+        align-items: center;
+      }
+
+      /* GALLERY (STRICTLY NORMAL FLOW ON MOBILE - NO POSITION STICKY OVERLAPPING) */
+      .gallery-wrapper {
+        width: 100%;
+      }
+      @media (min-width: 901px) {
+        .gallery-wrapper {
+          position: sticky;
+          top: 86px;
+        }
+        .product-top-header.mobile-only {
+          display: none;
+        }
+      }
+      @media (max-width: 900px) {
+        .gallery-wrapper {
+          position: static !important;
+          margin-bottom: 18px;
+        }
+        .product-top-header.desktop-only {
+          display: none;
+        }
+      }
+
+      .gallery-main-card {
+        position: relative;
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gallery-main-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.18s ease;
+      }
+      .gallery-arrow-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #1a1916;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+        z-index: 5;
+        user-select: none;
+      }
+      [data-theme="dark"] .gallery-arrow-btn {
+        background: rgba(27, 27, 38, 0.88);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      .gallery-arrow-btn:hover {
+        background: var(--accent);
+        color: #ffffff;
+        transform: translateY(-50%) scale(1.08);
+      }
+      .gallery-arrow-btn.prev { right: 8px; }
+      .gallery-arrow-btn.next { left: 8px; }
+
+      /* Thumbnails Strip (CENTERED) */
+      .gallery-thumbs-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .gallery-thumbs-row::-webkit-scrollbar { display: none; }
+      .gallery-thumb-item {
+        width: 60px;
+        height: 60px;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--border);
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--bg-card);
+        flex-shrink: 0;
+        transition: var(--transition);
+      }
+      .gallery-thumb-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gallery-thumb-item.active {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent-glow);
+      }
+
+      /* BUNDLE / PACK CARDS (SCREENSHOT MATCH) */
+      .bundles-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .bundle-box {
+        background: var(--bg-card);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 12px 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .bundle-box.selected {
+        border-color: var(--accent);
+        background: var(--accent-glow);
+        box-shadow: 0 2px 12px rgba(183, 101, 67, 0.1);
+      }
+      .bundle-info-left {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+      .bundle-name-line {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1.3;
+      }
+      .bundle-tag-pill {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 2px 8px;
+        border-radius: 6px;
+        color: #ffffff;
+        width: fit-content;
+      }
+      .bundle-tag-pill.tag-blue { background: var(--accent); }
+      .bundle-tag-pill.tag-green { background: #1e7e5a; }
+
+      .bundle-price-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-shrink: 0;
+        direction: ltr;
+        text-align: left;
+      }
+      .bundle-orig-strike {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-decoration: line-through;
+        font-weight: 600;
+        font-family: "DM Sans", var(--font-main);
+      }
+      .bundle-final-val {
+        font-size: 16px;
+        font-weight: 900;
+        color: var(--accent);
+        font-family: "DM Sans", var(--font-main);
+      }
+
+      /* SECTIONS CARDS: COLORS & SIZES */
+      .section-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 16px;
+        margin-bottom: 14px;
+      }
+      .section-card-title {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .section-card-title span.cur-val {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* COLOR SWATCHES */
+      .swatches-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .swatches-row::-webkit-scrollbar { display: none; }
+      .swatch-card {
+        position: relative;
+        cursor: pointer;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--border);
+        padding: 4px;
+        background: var(--bg-elevated);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        min-width: 64px;
+        flex-shrink: 0;
+      }
+      .swatch-card.selected {
+        border-color: var(--accent);
+        background: var(--bg-card);
+        box-shadow: 0 0 0 2px var(--accent-glow);
+      }
+      .swatch-img-box {
+        width: 54px;
+        height: 54px;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        position: relative;
+        background: var(--bg-secondary);
+      }
+      .swatch-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .swatch-check {
+        position: absolute;
+        inset: 0;
+        background: rgba(183, 101, 67, 0.45);
+        color: #ffffff;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 900;
+      }
+      .swatch-card.selected .swatch-check {
+        display: flex;
+      }
+      .swatch-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-align: center;
+        max-width: 64px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* SIZES PILLS */
+      .sizes-pills-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .size-circle-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        font-weight: 800;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .size-circle-btn:hover {
+        border-color: var(--accent-light);
+        background: var(--bg-card);
+      }
+      .size-circle-btn.selected {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(183, 101, 67, 0.3);
+      }
+      .size-circle-btn.has-price {
+        width: auto;
+        min-width: 68px;
+        height: auto;
+        min-height: 48px;
+        border-radius: 12px;
+        padding: 6px 14px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+      }
+      .size-circle-btn.has-price .sz-name {
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      .size-circle-btn.has-price .sz-price {
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0.85;
+        line-height: 1.2;
+      }
+      .size-circle-btn.has-price.selected .sz-price {
+        color: #ffffff;
+        opacity: 1;
+      }
+
+      /* MULTI-SIZE SMART SELECTOR */
+      .size-mode-pill-toggle {
+        display: inline-flex;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2px;
+        gap: 2px;
+      }
+      .sm-btn {
+        background: none;
+        border: none;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-muted);
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .sm-btn.active {
+        background: var(--accent);
+        color: #ffffff;
+        box-shadow: 0 2px 8px var(--accent-glow);
+      }
+      .multi-size-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 14px;
+        transition: all 0.2s ease;
+      }
+      .multi-size-row.has-qty {
+        border-color: var(--accent);
+        background: var(--accent-glow);
+      }
+      .multi-size-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--text-primary);
+      }
+      .multi-size-price {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .multi-size-stepper {
+        display: flex;
+        align-items: center;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .multi-size-step-btn {
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+      }
+      .multi-size-step-btn:hover {
+        background: var(--border);
+      }
+      .multi-size-step-val {
+        width: 30px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .multi-size-summary-bar {
+        background: var(--bg-elevated);
+        border: 1.5px dashed var(--accent);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin-top: 10px;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: var(--text-primary);
+      }
+
+      /* DIRECT COD FORM (CLEAN, NO CHUNKINESS) */
+      .order-form-container {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 20px 18px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow-sm);
+      }
+      .field-row {
+        margin-bottom: 12px;
+      }
+      .field-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 5px;
+      }
+      .field-label span.req { color: var(--color-danger); }
+      .field-input {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: var(--radius-sm);
+        border: 1.5px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        font-size: 14px;
+        outline: none;
+        transition: var(--transition);
+      }
+      .field-input:focus {
+        border-color: var(--accent);
+        background: var(--bg-card);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+
+      /* SUMMARY LINES */
+      .pricing-breakdown-box {
+        border-top: 1px solid var(--border);
+        padding-top: 12px;
+        margin-top: 14px;
+      }
+      .breakdown-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+      .breakdown-line.total-line {
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--text-primary);
+        border-top: 1px dashed var(--border);
+        padding-top: 10px;
+        margin-top: 8px;
+        margin-bottom: 0;
+      }
+      .total-line .amount {
+        color: var(--accent);
+        font-family: "DM Sans", var(--font-main);
+      }
+
+      /* BUTTONS ROW */
+      .buttons-action-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .pill-buy-btn {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 50px;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: #ffffff;
+        border: none;
+        border-radius: var(--radius-pill);
+        font-size: 14.5px;
+        font-weight: 800;
+        letter-spacing: 0.1px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: var(--transition);
+        white-space: nowrap;
+        padding: 0 16px;
+        box-shadow: 0 4px 18px var(--accent-glow);
+        box-sizing: border-box;
+      }
+      .pill-buy-btn .buy-btn-text-desktop { display: inline; }
+      .pill-buy-btn .buy-btn-text-mobile { display: none; }
+      [data-theme="dark"] .pill-buy-btn {
+        background: linear-gradient(135deg, var(--accent), #db9a5e);
+      }
+      .pill-buy-btn:hover {
+        background: linear-gradient(135deg, var(--accent-hover), #8a3e1b);
+        box-shadow: 0 6px 24px var(--accent-glow);
+        transform: translateY(-1px);
+      }
+      .pill-buy-btn:active {
+        transform: translateY(0);
+      }
+
+      /* QUANTITY COUNTER (ROUNDED PILL) */
+      .pill-qty-box {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        background: var(--bg-elevated);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 0 8px;
+        flex-shrink: 0;
+        box-sizing: border-box;
+      }
+      .pill-qty-btn {
+        width: 34px;
+        height: 38px;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: var(--transition);
+      }
+      .pill-qty-btn:hover {
+        background: var(--bg-card);
+        color: var(--accent);
+      }
+      .pill-qty-val {
+        width: 36px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--text-primary);
+        font-family: "DM Sans", var(--font-main);
+      }
+
+      /* MOBILE RESPONSIVE STACKING FOR DIRECT ORDER ROW (< 520px) */
+      @media (max-width: 520px) {
+        .buttons-action-row {
+          flex-direction: column-reverse;
+          gap: 10px;
+          align-items: stretch;
+        }
+        .pill-buy-btn {
+          width: 100%;
+          flex: none;
+          height: 50px;
+          font-size: 14.5px;
+          padding: 0 14px;
+        }
+        .pill-qty-box {
+          width: 100%;
+          height: 46px;
+          justify-content: space-between;
+          padding: 0 14px;
+        }
+        .pill-qty-box .pill-qty-label {
+          display: inline !important;
+        }
+      }
+      @media (max-width: 360px) {
+        .pill-buy-btn {
+          font-size: 13.5px;
+        }
+        .pill-buy-btn .buy-btn-text-desktop { display: none; }
+        .pill-buy-btn .buy-btn-text-mobile { display: inline; }
+      }
+
+      /* SECONDARY BUTTON (WHATSAPP FAST ORDER) */
+      .pill-cart-btn {
+        width: 100%;
+        height: 46px;
+        border-radius: var(--radius-pill);
+        border: 1.5px solid var(--border);
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: var(--transition);
+      }
+      .pill-cart-btn:hover {
+        border-color: #25d366;
+        color: #128c7e;
+        background: rgba(37, 211, 102, 0.08);
+      }
+
+      /* ACCORDION / TABS */
+      .details-accordion {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        margin-top: 20px;
+        overflow: hidden;
+      }
+      .accordion-tab-bar {
+        display: flex;
+        background: var(--bg-elevated);
+        border-bottom: 1px solid var(--border);
+      }
+      .accordion-tab-btn {
+        flex: 1;
+        padding: 12px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-muted);
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: center;
+        transition: var(--transition);
+      }
+      .accordion-tab-btn.active {
+        color: var(--accent);
+        background: var(--bg-card);
+        border-bottom: 2px solid var(--accent);
+      }
+      .accordion-pane {
+        padding: 18px;
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+
+      /* STICKY BOTTOM BAR (MOBILE ONLY) */
+      .mobile-sticky-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        z-index: 950;
+        background: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        padding: 8px 10px;
+        padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .bottom-bar-buy-btn {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 44px;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: #ffffff;
+        border: none;
+        border-radius: var(--radius-pill);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.1px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        box-shadow: 0 4px 14px var(--accent-glow);
+        transition: var(--transition);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 14px;
+        box-sizing: border-box;
+      }
+      [data-theme="dark"] .bottom-bar-buy-btn {
+        background: linear-gradient(135deg, var(--accent), #db9a5e);
+      }
+      .bottom-bar-buy-btn:hover {
+        background: linear-gradient(135deg, var(--accent-hover), #8a3e1b);
+        box-shadow: 0 6px 24px var(--accent-glow);
+      }
+      .bottom-bar-icon-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border);
+        background: var(--bg-card);
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: var(--transition);
+        text-decoration: none;
+        box-sizing: border-box;
+      }
+      .bottom-bar-icon-btn.wa-icon {
+        border-color: rgba(37, 211, 102, 0.4);
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        font-size: 18px;
+      }
+      .bottom-bar-icon-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      /* On all mobile screens (<600px), show concise punchy CTA to guarantee 0 overflow */
+      .bottom-bar-buy-btn span.long-text { display: none; }
+      .bottom-bar-buy-btn span.short-text { display: inline; }
+      @media (min-width: 600px) {
+        .bottom-bar-buy-btn span.long-text { display: inline; }
+        .bottom-bar-buy-btn span.short-text { display: none; }
+      }
+
+      /* PADDING FOR BODY TO PREVENT OVERLAPPING WITH STICKY BAR ON MOBILE */
+      @media (max-width: 900px) {
+        body {
+          padding-bottom: 76px !important;
+        }
+        .nav-links {
+          display: none;
+        }
+        .product-layout-grid {
+          grid-template-columns: 1fr;
+          gap: 0;
+          min-width: 0;
+        }
+        .page-main-container {
+          width: 100% !important;
+          max-width: 100% !important;
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+          overflow: hidden;
+        }
+        .product-right-details {
+          min-width: 0;
+          overflow: hidden;
+        }
+        .gallery-wrapper {
+          min-width: 0;
+          overflow: hidden;
+        }
+        .order-form-container {
+          overflow: hidden;
+        }
+        .bundle-box {
+          min-width: 0;
+          overflow: hidden;
+        }
+        .bundle-name-line {
+          white-space: normal !important;
+          word-break: break-word !important;
+        }
+        .field-input {
+          max-width: 100% !important;
+        }
+      }
+      @media (min-width: 901px) {
+        .mobile-sticky-bottom-bar {
+          display: none !important;
+        }
+        .search-bar-wrap {
+          display: none;
+        }
+      }
+
+      /* FLOATING WHATSAPP (DESKTOP ONLY - ON MOBILE IT IS IN BOTTOM BAR) */
+      .floating-wa-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: #25d366;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+        z-index: 900;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      @media (max-width: 900px) {
+        .floating-wa-btn {
+          display: none !important;
+        }
+      }
+      .floating-wa-btn:hover {
+        transform: scale(1.08);
+      }
+
+      /* TRUST BADGES — ULTRA LUXURY VECTOR ICON GRID */
+      .trust-badges-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+      @media (max-width: 640px) {
+        .trust-badges-strip {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+      }
+      .trust-badge {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 14px 8px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: var(--transition);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      }
+      .trust-badge:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px var(--accent-glow);
+      }
+      .trust-badge-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--accent-glow);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: var(--transition);
+        border: 1px solid rgba(183, 101, 67, 0.2);
+      }
+      .trust-badge:hover .trust-badge-icon-wrap {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+        transform: scale(1.08);
+      }
+      .trust-badge-title {
+        font-size: 11.5px;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1.35;
+      }
+      .trust-badge-sub {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text-muted);
+        line-height: 1.35;
+      }
+
+      /* BREADCRUMB */
+      .breadcrumb-bar {
+        max-width: 1200px;
+        margin: 8px auto 0;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .breadcrumb-bar a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+      .breadcrumb-bar a:hover { color: var(--accent); }
+      .breadcrumb-bar .sep { color: var(--border); font-size: 10px; }
+      .breadcrumb-bar .current { color: var(--text-primary); font-weight: 700; }
+
+      /* PRODUCT FOOTER */
+      .product-footer {
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        padding: 28px 16px 20px;
+        margin-top: 40px;
+        text-align: center;
+        width: 100%;
+      }
+      .product-footer .footer-brand {
+        font-size: 18px;
+        font-weight: 900;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      .product-footer .footer-tagline {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        font-size: 12px;
+        color: var(--text-secondary);
+        font-weight: 700;
+        transition: var(--transition);
+      }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-copy {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .product-footer { margin-bottom: 0; }
+        .breadcrumb-bar { display: none; }
+      }
+
+      /* MODAL: SUCCESS CONFIRMATION */
+      .modal-wrap {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(8px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 16px;
+      }
+      .modal-wrap.open { display: flex; }
+      .modal-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        max-width: 440px;
+        width: 100%;
+        padding: 28px 20px;
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+        animation: popModal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes popModal {
+        from { opacity: 0; transform: scale(0.85) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+      .success-tick {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.12);
+        color: #10b981;
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px;
+        animation: tickPop 0.4s ease-out 0.15s both;
+      }
+      @keyframes tickPop {
+        from { transform: scale(0); }
+        50% { transform: scale(1.2); }
+        to { transform: scale(1); }
+      }
+    </style>
+    <script src="cart.js"></script>
+  </head>
+  <body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-announcement">
+      <span>🚚 توصيل سريع لباب دارك لكامل تراب الجمهورية • الدفع عند الاستلام • متجر <b>دارنا</b> الأصيل</span>
+    </div>
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand-wrap">
+          <img src="logo.jpg" alt="دارنا DARNA" class="brand-logo" onerror="this.onerror=null;this.src='mehres_classic.jpg';" />
+          <div>
+            <div class="brand-name">DARNA دارنا</div>
+            <span class="brand-tagline">فخامة الأصالة التونسية</span>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+          <li><a href="index.html#collection" class="nav-link active">المنتجات</a></li>
+          <li><a href="index.html#story" class="nav-link">قصة المهراس</a></li>
+          <li><a href="index.html#faq" class="nav-link">الأسئلة الشائعة</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button class="header-icon-btn" onclick="toggleTheme()" title="تبديل المظهر">🌓</button>
+          <button type="button" class="header-icon-btn" onclick="DarnaCart.open()" title="سلة المشتريات" style="position:relative">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-count-badge">0</span>
+          </button>
+          <button class="header-icon-btn" onclick="window.location.href='index.html'" title="القائمة">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb-bar">
+      <a href="index.html">الرئيسية</a>
+      <span class="sep">›</span>
+      <a href="index.html#collection">المنتجات</a>
+      <span class="sep">›</span>
+      <span class="current" id="breadcrumbProductName">المهراس التونسي</span>
+    </nav>
+
+    <!-- SEARCH BAR (MOBILE) -->
+    <div class="search-bar-wrap">
+      <div class="search-bar-box">
+        <input type="text" placeholder="ابحث عن منتج في متجر دارنا..." />
+        <span class="search-bar-icon">🔍</span>
+      </div>
+    </div>
+
+    <!-- MAIN PRODUCT CONTENT -->
+    <main class="page-main-container">
+
+      <!-- PRODUCT TITLE & PRICE HEADER (TOP ON MOBILE LIKE SCREENSHOT IMAGE 1) -->
+      <div class="product-top-header mobile-only">
+        <h1 class="product-top-title" id="mobileProductTitle">المهراس التونسي التقليدي الأصيل</h1>
+        <div class="product-top-price-row">
+          <span class="sale-price-text" id="mobilePriceVal">64 DT</span>
+          <span class="orig-price-text" id="mobileOrigPriceVal">89 DT</span>
+          <span class="discount-chip" id="mobileDiscountChip">28% تخفيض!</span>
+        </div>
+      </div>
+
+      <div class="product-layout-grid">
+
+        <!-- LEFT: GALLERY (CLEAN, NO POSITION STICKY ON MOBILE) -->
+        <div class="gallery-wrapper">
+          <div class="gallery-main-card">
+            <button class="gallery-arrow-btn prev" onclick="prevGalleryImage()" aria-label="السابق">‹</button>
+            <img id="mainGalleryImg" class="gallery-main-img" src="mehres_classic.jpg" alt="المهراس التونسي" onerror="this.onerror=null;this.src='logo.jpg';" />
+            <button class="gallery-arrow-btn next" onclick="nextGalleryImage()" aria-label="التالي">›</button>
+          </div>
+
+          <!-- Thumbnails Strip -->
+          <div class="gallery-thumbs-row" id="galleryThumbsStrip">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- RIGHT: DETAILS, VARIANTS & EXPRESS CHECKOUT -->
+        <div class="product-right-details">
+
+          <!-- PRODUCT TITLE & PRICE (DESKTOP VIEW) -->
+          <div class="product-top-header desktop-only">
+            <h1 class="product-top-title" id="desktopProductTitle">المهراس التونسي التقليدي الأصيل</h1>
+            <div class="product-top-price-row">
+              <span class="sale-price-text" id="desktopPriceVal">64 DT</span>
+              <span class="orig-price-text" id="desktopOrigPriceVal">89 DT</span>
+              <span class="discount-chip" id="desktopDiscountChip">28% تخفيض!</span>
+            </div>
+          </div>
+
+          <!-- BUNDLE / PACK CARDS (IMAGE 1 EXACT REPRODUCTION) -->
+          <div class="bundles-stack">
+            <div class="bundle-box selected" id="bundle1" onclick="selectBundle(1, 64, 89, false)">
+              <div class="bundle-info-left">
+                <span class="bundle-name-line">1 مهراس = 64 DT</span>
+                <span class="bundle-tag-pill tag-blue" id="bundle1Badge">28% تخفيض!</span>
+              </div>
+              <div class="bundle-price-right">
+                <div class="bundle-orig-strike" id="bundle1OrigPrice">89 DT</div>
+                <div class="bundle-final-val" id="bundle1FinalPrice">64 DT</div>
+              </div>
+            </div>
+
+            <div class="bundle-box" id="bundle2" onclick="selectBundle(2, 120, 178, true)">
+              <div class="bundle-info-left">
+                <span class="bundle-name-line">2 مهاريس = 120 DT + توصيل مجاني</span>
+                <span class="bundle-tag-pill tag-green" id="bundle2Badge">33% تخفيض!</span>
+              </div>
+              <div class="bundle-price-right">
+                <div class="bundle-orig-strike" id="bundle2OrigPrice">178 DT</div>
+                <div class="bundle-final-val" id="bundle2FinalPrice">120 DT</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODEL / COLOR CARD -->
+          <div class="section-card" id="modelsCard">
+            <div class="section-card-title">
+              <span>اللون أو الموديل</span>
+              <span class="cur-val" id="selectedModelLabel">حجري أصيل</span>
+            </div>
+            <div class="swatches-row" id="modelsSwatchesRow">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- SIZES CARD -->
+          <div class="section-card" id="sizesCard">
+            <div class="section-card-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span>المقاس</span>
+                <span class="cur-val" id="selectedSizeLabel">M</span>
+              </div>
+              <!-- Smart Mode Toggle: Single Size vs Multi Size -->
+              <div class="size-mode-pill-toggle" id="sizeModeToggle">
+                <button type="button" class="sm-btn active" id="modeSingleBtn" onclick="setSizeSelectionMode('single')">مقاس واحد</button>
+                <button type="button" class="sm-btn" id="modeMultiBtn" onclick="setSizeSelectionMode('multi')">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:3px;vertical-align:-1px"><path d="m13 2-2 10h5L11 22l2-10H8l5-10z"/></svg>
+                  عدة مقاسات معاً
+                </button>
+              </div>
+            </div>
+
+            <!-- Single Size Container (Pills) -->
+            <div id="singleSizeContainer">
+              <div class="sizes-pills-row" id="sizesPillsRow">
+                <!-- Dynamically populated (S, M, L or custom) -->
+              </div>
+            </div>
+
+            <!-- Multi Size Container (Rows with individual Steppers) -->
+            <div id="multiSizeContainer" style="display:none;margin-top:12px">
+              <div style="display:flex;flex-direction:column;gap:8px" id="multiSizeList">
+                <!-- Dynamically populated size rows -->
+              </div>
+              <div class="multi-size-summary-bar" id="multiSizeSummaryBar">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span id="multiSummaryCountText">0 قطع محددة</span>
+                  <span id="multiSummaryTotalText" style="color:var(--accent);font-size:14px">0.00 DT</span>
+                </div>
+                <div id="multiSummaryDeliveryHint" style="font-size:11.5px;color:var(--text-muted);margin-top:4px">
+                  اختر قطعتين أو أكثر للحصول على التوصيل المجاني!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXPRESS COD FORM -->
+          <form class="order-form-container" id="directOrderForm" onsubmit="handleDirectOrder(event)">
+            <div class="field-row">
+              <label class="field-label" for="custName">الاسم واللقب بالكامل <span class="req">*</span></label>
+              <input type="text" id="custName" class="field-input" placeholder="اكتب اسمك ولقبك هنا..." required />
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="custPhone">رقم الهاتف الجوال <span class="req">*</span></label>
+              <input type="tel" id="custPhone" class="field-input" placeholder="مثال: 98123456 أو 20123456" pattern="[0-9]{8,}" required />
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="custCity">الولاية (كامل تراب الجمهورية) <span class="req">*</span></label>
+              <select id="custCity" class="field-input" required>
+                <option value="" disabled selected>اختر الولاية...</option>
+                <option value="تونس">تونس</option>
+                <option value="أريانة">أريانة</option>
+                <option value="بن عروس">بن عروس</option>
+                <option value="منوبة">منوبة</option>
+                <option value="نابل">نابل</option>
+                <option value="زغوان">زغوان</option>
+                <option value="بنزرت">بنزرت</option>
+                <option value="باجة">باجة</option>
+                <option value="جندوبة">جندوبة</option>
+                <option value="الكاف">الكاف</option>
+                <option value="سليانة">سليانة</option>
+                <option value="سوسة">سوسة</option>
+                <option value="المنستير">المنستير</option>
+                <option value="المهدية">المهدية</option>
+                <option value="صفاقس">صفاقس</option>
+                <option value="القيروان">القيروان</option>
+                <option value="القصرين">القصرين</option>
+                <option value="سيدي بوزيد">سيدي بوزيد</option>
+                <option value="قابس">قابس</option>
+                <option value="مدنين">مدنين</option>
+                <option value="تطاوين">تطاوين</option>
+                <option value="قفصة">قفصة</option>
+                <option value="توزر">توزر</option>
+                <option value="قبلي">قبلي</option>
+              </select>
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="custAddress">العنوان بالتفصيل</label>
+              <input type="text" id="custAddress" class="field-input" placeholder="المدينة، المعتمدية، رقم المنزل أو الشارع..." />
+            </div>
+
+            <!-- PRICE BREAKDOWN -->
+            <div class="pricing-breakdown-box">
+              <div class="breakdown-line">
+                <span>سعر المنتجات:</span>
+                <span id="txtSubtotal">64.00 DT</span>
+              </div>
+              <div class="breakdown-line">
+                <span>مصاريف التوصيل:</span>
+                <span id="txtDelivery">7.00 DT</span>
+              </div>
+              <div class="breakdown-line total-line">
+                <span>المجموع النهائي الصافي:</span>
+                <span class="amount" id="txtTotal">71.00 DT</span>
+              </div>
+            </div>
+
+            <!-- BUTTONS ROW -->
+            <div class="buttons-action-row">
+              <button type="submit" class="pill-buy-btn" id="mainSubmitBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span class="buy-btn-text-desktop">تأكيد الطلب الآن (الدفع عند الاستلام)</span>
+                <span class="buy-btn-text-mobile">تأكيد الطلب الآن</span>
+              </button>
+              <div class="pill-qty-box" id="singleQtyBox">
+                <span class="pill-qty-label" style="display:none;font-size:12.5px;font-weight:700;color:var(--text-secondary)">الكمية المطلوبة:</span>
+                <div style="display:flex;align-items:center">
+                  <button type="button" class="pill-qty-btn" onclick="stepQty(-1)" aria-label="تنقيص">−</button>
+                  <span class="pill-qty-val" id="qtyValDisplay">1</span>
+                  <button type="button" class="pill-qty-btn" onclick="stepQty(1)" aria-label="زيادة">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECONDARY ACTIONS (ADD TO CART + WHATSAPP) -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px" id="secondaryActionsGrid">
+              <button type="button" class="pill-cart-btn" onclick="handleAddToCartClick()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--bg-elevated);border:1.5px solid var(--accent);color:var(--accent);font-weight:800;border-radius:24px;padding:12px;cursor:pointer;transition:all 0.2s ease" onmouseover="this.style.background='var(--accent-glow)'" onmouseout="this.style.background='var(--bg-elevated)'">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span>أضف إلى السلة</span>
+              </button>
+              <button type="button" class="pill-cart-btn" onclick="openWhatsAppOrder()" style="display:flex;align-items:center;justify-content:center;gap:8px;border-radius:24px;padding:12px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink:0"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.12 19.75 7.85 19L7.55 18.82L4.43 19.64L5.26 16.59L5.06 16.28C4.24 14.97 3.81 13.46 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.32 4.54 17.88 6.1C19.43 7.66 20.29 9.72 20.29 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.33C16.32 14.21 15.11 13.61 14.88 13.53C14.66 13.44 14.49 13.4 14.33 13.65C14.16 13.9 13.68 14.46 13.53 14.63C13.38 14.79 13.23 14.82 12.98 14.69C12.73 14.57 11.93 14.31 10.98 13.46C10.24 12.8 9.74 11.99 9.6 11.74C9.45 11.49 9.58 11.36 9.71 11.23C9.82 11.12 9.96 10.94 10.08 10.8C10.21 10.65 10.25 10.55 10.33 10.38C10.41 10.22 10.37 10.07 10.31 9.95C10.25 9.82 9.75 8.6 9.55 8.09C9.35 7.59 9.14 7.66 8.98 7.65C8.83 7.64 8.66 7.64 8.49 7.64C8.32 7.64 8.04 7.7 7.82 7.95C7.59 8.2 6.94 8.81 6.94 10.05C6.94 11.29 7.84 12.49 7.97 12.66C8.09 12.82 9.75 15.39 12.29 16.48C12.89 16.74 13.36 16.9 13.72 17.01C14.33 17.21 14.88 17.18 15.32 17.11C15.81 17.04 16.82 16.5 17.03 15.91C17.24 15.31 17.24 14.81 17.17 14.69C17.11 14.57 16.96 14.46 16.57 14.33Z"/></svg>
+                <span>طلب سريع عبر واتساب</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- ACCORDION TABS -->
+          <div class="details-accordion">
+            <div class="accordion-tab-bar">
+              <button class="accordion-tab-btn active" onclick="switchTab('desc', this)">الوصف والمميزات</button>
+              <button class="accordion-tab-btn" onclick="switchTab('specs', this)">المقاسات المتوفرة</button>
+              <button class="accordion-tab-btn" onclick="switchTab('care', this)">طريقة العناية</button>
+            </div>
+            <div class="accordion-pane" id="paneDesc">
+              <p id="productDescriptionText">
+                المهراس التونسي التقليدي الأصيل من دارنا منحوت من الحجر الطبيعي الصلب. مصمم ليدوم لعقود ويعطي التوابل والهريسة العربي نكهتها التونسية الفواحة.
+              </p>
+            </div>
+            <div class="accordion-pane" id="paneSpecs" style="display:none">
+              <ul style="padding-right:18px;line-height:2">
+                <li><b>مقاس S:</b> قطر 14 سم • وزن حوالي 3.5 كغ (للتوابل اليومية والثوم)</li>
+                <li><b>مقاس M:</b> قطر 18 سم • وزن حوالي 6.0 كغ (الحجم القياسي العائلي)</li>
+                <li><b>مقاس L:</b> قطر 22 سم • وزن حوالي 9.5 كغ (للهريسة العربي والعولة)</li>
+              </ul>
+            </div>
+            <div class="accordion-pane" id="paneCare" style="display:none">
+              <p>يغسل بالماء الدافئ فقط دون مواد كيميائية حارقة. قبل الاستعمال الأول يُفضل تعتيقه بفرك قليل من الأرز الجاف وزيت الزيتون التونسي لتشبيع المسام الطبيعية.</p>
+            </div>
+          </div>
+
+          <!-- TRUST BADGES (PREMIUM VECTOR ICONS) -->
+          <div class="trust-badges-strip">
+            <div class="trust-badge">
+              <div class="trust-badge-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="6" width="20" height="12" rx="2.5"></rect>
+                  <circle cx="12" cy="12" r="2.5"></circle>
+                  <path d="M6 12h.01M18 12h.01"></path>
+                </svg>
+              </div>
+              <div class="trust-badge-title">الدفع عند الاستلام</div>
+              <div class="trust-badge-sub">COD Express</div>
+            </div>
+
+            <div class="trust-badge">
+              <div class="trust-badge-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+                  <path d="M15 18H9"/>
+                  <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-2.48-3.1a1 1 0 0 0-.78-.38H14v9"/>
+                  <circle cx="7" cy="18" r="2"/>
+                  <circle cx="17" cy="18" r="2"/>
+                </svg>
+              </div>
+              <div class="trust-badge-title">توصيل لكامل تونس</div>
+              <div class="trust-badge-sub">24-48 ساعة سريعة</div>
+            </div>
+
+            <div class="trust-badge">
+              <div class="trust-badge-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"/>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                  <path d="m9 8 2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="trust-badge-title">ضمان الجودة</div>
+              <div class="trust-badge-sub">صنعة تقليدية أصيلة</div>
+            </div>
+
+            <div class="trust-badge">
+              <div class="trust-badge-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="trust-badge-title">معلوماتك آمنة</div>
+              <div class="trust-badge-sub">100% محمية وموثوقة</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="product-footer">
+      <div class="footer-brand">DARNA دارنا</div>
+      <div class="footer-tagline">فخامة الأصالة التونسية — من تراثنا لدارك</div>
+      <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="index.html#collection">المنتجات</a>
+        <a href="index.html#story">قصتنا</a>
+        <a href="index.html#faq">الأسئلة الشائعة</a>
+      </div>
+      <div class="footer-copy">© <span id="footerYear">2026</span> DARNA — جميع الحقوق محفوظة</div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="#" class="floating-wa-btn" onclick="openWhatsAppOrder(); return false;" title="تواصل معنا على واتساب">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.12 19.75 7.85 19L7.55 18.82L4.43 19.64L5.26 16.59L5.06 16.28C4.24 14.97 3.81 13.46 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.32 4.54 17.88 6.1C19.43 7.66 20.29 9.72 20.29 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.33C16.32 14.21 15.11 13.61 14.88 13.53C14.66 13.44 14.49 13.4 14.33 13.65C14.16 13.9 13.68 14.46 13.53 14.63C13.38 14.79 13.23 14.82 12.98 14.69C12.73 14.57 11.93 14.31 10.98 13.46C10.24 12.8 9.74 11.99 9.6 11.74C9.45 11.49 9.58 11.36 9.71 11.23C9.82 11.12 9.96 10.94 10.08 10.8C10.21 10.65 10.25 10.55 10.33 10.38C10.41 10.22 10.37 10.07 10.31 9.95C10.25 9.82 9.75 8.6 9.55 8.09C9.35 7.59 9.14 7.66 8.98 7.65C8.83 7.64 8.66 7.64 8.49 7.64C8.32 7.64 8.04 7.7 7.82 7.95C7.59 8.2 6.94 8.81 6.94 10.05C6.94 11.29 7.84 12.49 7.97 12.66C8.09 12.82 9.75 15.39 12.29 16.48C12.89 16.74 13.36 16.9 13.72 17.01C14.33 17.21 14.88 17.18 15.32 17.11C15.81 17.04 16.82 16.5 17.03 15.91C17.24 15.31 17.24 14.81 17.17 14.69C17.11 14.57 16.96 14.46 16.57 14.33Z"/></svg>
+    </a>
+
+    <!-- STICKY BOTTOM BAR (MOBILE ONLY) -->
+    <div class="mobile-sticky-bottom-bar" id="mobileStickyBar">
+      <button type="button" class="bottom-bar-buy-btn" onclick="scrollToOrderForm()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="long-text">اطلب الآن — الدفع عند الاستلام</span>
+        <span class="short-text">اطلب الآن</span>
+      </button>
+      <button type="button" class="bottom-bar-icon-btn cart-icon" onclick="if(window.DarnaCart) DarnaCart.openCart(); return false;" title="السلة" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count-badge" style="position:absolute;top:2px;right:2px;display:none;min-width:16px;height:16px;font-size:10px;line-height:16px;padding:0 3px">0</span>
+      </button>
+      <a href="#" class="bottom-bar-icon-btn wa-icon" onclick="openWhatsAppOrder(); return false;" title="تواصل عبر واتساب">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.12 19.75 7.85 19L7.55 18.82L4.43 19.64L5.26 16.59L5.06 16.28C4.24 14.97 3.81 13.46 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.32 4.54 17.88 6.1C19.43 7.66 20.29 9.72 20.29 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.33C16.32 14.21 15.11 13.61 14.88 13.53C14.66 13.44 14.49 13.4 14.33 13.65C14.16 13.9 13.68 14.46 13.53 14.63C13.38 14.79 13.23 14.82 12.98 14.69C12.73 14.57 11.93 14.31 10.98 13.46C10.24 12.8 9.74 11.99 9.6 11.74C9.45 11.49 9.58 11.36 9.71 11.23C9.82 11.12 9.96 10.94 10.08 10.8C10.21 10.65 10.25 10.55 10.33 10.38C10.41 10.22 10.37 10.07 10.31 9.95C10.25 9.82 9.75 8.6 9.55 8.09C9.35 7.59 9.14 7.66 8.98 7.65C8.83 7.64 8.66 7.64 8.49 7.64C8.32 7.64 8.04 7.7 7.82 7.95C7.59 8.2 6.94 8.81 6.94 10.05C6.94 11.29 7.84 12.49 7.97 12.66C8.09 12.82 9.75 15.39 12.29 16.48C12.89 16.74 13.36 16.9 13.72 17.01C14.33 17.21 14.88 17.18 15.32 17.11C15.81 17.04 16.82 16.5 17.03 15.91C17.24 15.31 17.24 14.81 17.17 14.69C17.11 14.57 16.96 14.46 16.57 14.33Z"/></svg>
+      </a>
+      <a href="tel:27900771" class="bottom-bar-icon-btn" title="اتصال مباشر">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal-wrap" id="successModal">
+      <div class="modal-card">
+        <div class="success-tick">✓</div>
+        <h3 style="font-size:20px;font-weight:900;margin-bottom:6px">تم تسجيل طلبك بنجاح!</h3>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">شكراً لثقتك في دارنا. سنتصل بك في أقرب وقت لتأكيد موعد التوصيل لباب دارك.</p>
+        <div id="receiptSummaryBox" style="background:var(--bg-elevated);padding:14px;border-radius:10px;text-align:right;font-size:13px;margin-bottom:18px;border:1px solid var(--border)"></div>
+        <button class="pill-buy-btn" style="width:100%" onclick="closeSuccessModal()">حسناً، متابعة التسوق</button>
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+         DARNA MOBILE-FIRST PRODUCT ENGINE
+         Matches Reference Screenshot: Clean single-line pills,
+         no overlapping sticky images, natural 60 FPS mobile scroll
+         ============================================================ */
+      var currentProduct = null;
+      var activeImgIdx = 0;
+      var selectedBundleNum = 1;
+      var selectedSizeName = 'M';
+      var selectedColorObj = null;
+      var orderQuantity = 1;
+      var galleryImagesList = [];
+      var sizeSelectionMode = 'single';
+      var multiSizeQuantities = {};
+
+      var defaultProduct = {
+        id: 'prod-mehres-core',
+        slug: 'mehres-tunisien',
+        name: 'المهراس التونسي التقليدي الأصيل',
+        price_tnd: 64,
+        original_price_tnd: 89,
+        has_size_pricing: true,
+        sizes: [
+          { name: 'S', price: 54 },
+          { name: 'M', price: 64 },
+          { name: 'L', price: 79 }
+        ],
+        colors: [
+          { name: 'حجري أصيل', hex: '#7a756b', image: 'mehres_classic.jpg' },
+          { name: 'بيج رخامي', hex: '#d8c5ad', image: 'mehres_signature.jpg' },
+          { name: 'رمادي داكن', hex: '#42403b', image: 'mehres_set.jpg' }
+        ],
+        gallery: ['mehres_classic.jpg', 'mehres_signature.jpg', 'mehres_set.jpg'],
+        description: 'المهراس التونسي التقليدي الأصيل من دارنا منحوت من الحجر الطبيعي الصلب. متوفر بمقاسات متعددة تناسب كل احتياجات المطبخ التونسي الأصيل.'
+      };
+
+      window.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        initProduct();
+      });
+
+      function initTheme() {
+        var saved = localStorage.getItem('darna_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+      function toggleTheme() {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('darna_theme', next);
+      }
+
+      function initProduct() {
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get('id');
+        var slug = params.get('slug');
+
+        var products = [];
+        try {
+          products = JSON.parse(localStorage.getItem('darna_products') || '[]');
+        } catch(e) {}
+
+        var found = null;
+        if (id) found = products.find(function(p){ return p.id === id; });
+        else if (slug) found = products.find(function(p){ return p.slug === slug; });
+
+        if (!found && products.length) {
+          found = products.find(function(p){ return (p.slug && p.slug.includes('mehres')) || (p.name && p.name.includes('مهراس')); }) || products[0];
+        }
+
+        currentProduct = found || defaultProduct;
+
+        // Normalize
+        if (!currentProduct.gallery || !currentProduct.gallery.length) {
+          currentProduct.gallery = [currentProduct.image_url || 'mehres_classic.jpg', 'mehres_signature.jpg', 'mehres_set.jpg'];
+        }
+        galleryImagesList = currentProduct.gallery.map(function(s){ return s.replace(/^\.\.\//, ''); });
+
+        if (!currentProduct.sizes || !currentProduct.sizes.length) {
+          currentProduct.sizes = ['S', 'M', 'L'];
+        }
+        if (!currentProduct.colors || !currentProduct.colors.length) {
+          currentProduct.colors = [
+            { name: 'حجري أصيل', hex: '#7a756b', image: galleryImagesList[0] || 'mehres_classic.jpg' },
+            { name: 'بيج رخامي', hex: '#d8c5ad', image: galleryImagesList[1] || 'mehres_signature.jpg' },
+            { name: 'رمادي داكن', hex: '#42403b', image: galleryImagesList[2] || 'mehres_set.jpg' }
+          ];
+        }
+
+        var hasM = currentProduct.sizes.some(function(s){
+          var n = typeof s === 'string' ? s : (s.name || s.label);
+          return n === 'M';
+        });
+        if (hasM) {
+          selectedSizeName = 'M';
+        } else {
+          selectedSizeName = typeof currentProduct.sizes[0] === 'string' ? currentProduct.sizes[0] : (currentProduct.sizes[0].name || 'M');
+        }
+        selectedColorObj = currentProduct.colors[0];
+
+        // Update breadcrumb
+        var breadcrumb = document.getElementById('breadcrumbProductName');
+        if (breadcrumb) breadcrumb.textContent = currentProduct.name;
+
+        renderAll();
+        initSwipeGestures();
+      }
+
+      function getActiveUnitPrice() {
+        if (!currentProduct) return 64;
+        if (currentProduct.sizes && currentProduct.sizes.length) {
+          var found = currentProduct.sizes.find(function(s) {
+            var name = typeof s === 'string' ? s : (s.name || s.label);
+            return name === selectedSizeName;
+          });
+          if (found && typeof found === 'object' && found.price !== undefined && found.price !== null && found.price !== '') {
+            var num = parseFloat(found.price);
+            if (!isNaN(num) && num > 0) return num;
+          }
+        }
+        return parseFloat(currentProduct.price_tnd) || 64;
+      }
+
+      function updatePricingDisplays() {
+        var p = currentProduct;
+        if (!p) return;
+        var sale = getActiveUnitPrice();
+        var baseProductSale = parseFloat(p.price_tnd) || sale;
+        var baseProductOrig = parseFloat(p.original_price_tnd) || Math.round(baseProductSale * 1.39);
+
+        // Keep discount ratio proportional to base prices
+        var origRatio = (baseProductSale > 0 && baseProductOrig > baseProductSale) ? (baseProductOrig / baseProductSale) : 1.39;
+        var orig = Math.round(sale * origRatio);
+        var discountPct = orig > sale ? Math.round(((orig - sale) / orig) * 100) : 0;
+
+        ['mobile', 'desktop'].forEach(function(prefix) {
+          var priceEl = document.getElementById(prefix + 'PriceVal');
+          if (priceEl) priceEl.textContent = sale + ' DT';
+          var origEl = document.getElementById(prefix + 'OrigPriceVal');
+          var chipEl = document.getElementById(prefix + 'DiscountChip');
+          if (origEl && chipEl) {
+            if (orig > sale) {
+              origEl.textContent = orig + ' DT';
+              origEl.style.display = 'inline';
+              chipEl.textContent = 'تخفيض ' + discountPct + '% !';
+              chipEl.style.display = 'inline-flex';
+            } else {
+              origEl.style.display = 'none';
+              chipEl.style.display = 'none';
+            }
+          }
+        });
+
+        // Bundles
+        var pack2Price = Math.round(sale * 1.88);
+        var pack2Orig = orig * 2;
+        var pack2Pct = Math.round(((pack2Orig - pack2Price) / pack2Orig) * 100);
+
+        var isMehres = (p.name && p.name.includes('مهراس'));
+        var singleLabel = isMehres ? '1 مهراس' : '1 قطعة';
+        var doubleLabel = isMehres ? '2 مهاريس' : '2 قطع';
+
+        var b1Line = document.querySelector('#bundle1 .bundle-name-line');
+        if (b1Line) b1Line.textContent = singleLabel + ' = ' + sale + ' DT';
+        var b1Final = document.getElementById('bundle1FinalPrice');
+        if (b1Final) b1Final.textContent = sale + ' DT';
+        var b1Orig = document.getElementById('bundle1OrigPrice');
+        if (b1Orig) b1Orig.textContent = orig + ' DT';
+        var b1Badge = document.getElementById('bundle1Badge');
+        if (b1Badge && discountPct > 0) b1Badge.textContent = 'تخفيض ' + discountPct + '% !';
+
+        var b2Line = document.querySelector('#bundle2 .bundle-name-line');
+        if (b2Line) b2Line.textContent = doubleLabel + ' = ' + pack2Price + ' DT + توصيل مجاني';
+        var b2Final = document.getElementById('bundle2FinalPrice');
+        if (b2Final) b2Final.textContent = pack2Price + ' DT';
+        var b2Orig = document.getElementById('bundle2OrigPrice');
+        if (b2Orig) b2Orig.textContent = pack2Orig + ' DT';
+        var b2Badge = document.getElementById('bundle2Badge');
+        if (b2Badge) b2Badge.textContent = 'تخفيض ' + pack2Pct + '% !';
+      }
+
+      function renderAll() {
+        var p = currentProduct;
+
+        // Titles
+        document.getElementById('mobileProductTitle').textContent = p.name;
+        document.getElementById('desktopProductTitle').textContent = p.name;
+        document.title = p.name + ' | متجر دارنا — DARNA';
+
+        // Pricing & Discounts
+        updatePricingDisplays();
+
+        // Description
+        if (p.description) {
+          document.getElementById('productDescriptionText').textContent = p.description;
+        }
+
+        renderGallery();
+        renderModels();
+        renderSizes();
+        updateBreakdown();
+      }
+
+      function renderGallery() {
+        var strip = document.getElementById('galleryThumbsStrip');
+        var mainImg = document.getElementById('mainGalleryImg');
+        strip.innerHTML = '';
+
+        galleryImagesList.forEach(function(src, i) {
+          var t = document.createElement('div');
+          t.className = 'gallery-thumb-item' + (i === activeImgIdx ? ' active' : '');
+          t.innerHTML = '<img src="' + src + '" alt="صورة ' + (i + 1) + '" onerror="this.onerror=null;this.src=\'logo.jpg\';" />';
+          t.onclick = function() { setGalleryImg(i); };
+          strip.appendChild(t);
+        });
+
+        if (galleryImagesList[activeImgIdx]) {
+          mainImg.src = galleryImagesList[activeImgIdx];
+        }
+      }
+
+      function setGalleryImg(idx) {
+        if (idx < 0) idx = galleryImagesList.length - 1;
+        if (idx >= galleryImagesList.length) idx = 0;
+        activeImgIdx = idx;
+
+        var mainImg = document.getElementById('mainGalleryImg');
+        mainImg.style.opacity = '0.35';
+        setTimeout(function() {
+          mainImg.src = galleryImagesList[idx];
+          mainImg.style.opacity = '1';
+        }, 100);
+
+        document.querySelectorAll('.gallery-thumb-item').forEach(function(el, i) {
+          if (i === idx) el.classList.add('active');
+          else el.classList.remove('active');
+        });
+      }
+      function prevGalleryImage() { setGalleryImg(activeImgIdx - 1); }
+      function nextGalleryImage() { setGalleryImg(activeImgIdx + 1); }
+
+      function renderModels() {
+        var row = document.getElementById('modelsSwatchesRow');
+        var card = document.getElementById('modelsCard');
+        if (!currentProduct.colors || !currentProduct.colors.length) {
+          card.style.display = 'none';
+          return;
+        }
+        card.style.display = 'block';
+        row.innerHTML = '';
+
+        currentProduct.colors.forEach(function(c) {
+          var isSel = selectedColorObj && selectedColorObj.name === c.name;
+          var item = document.createElement('div');
+          item.className = 'swatch-card' + (isSel ? ' selected' : '');
+
+          var visual = c.image 
+            ? '<img src="' + c.image.replace(/^\.\.\//, '') + '" alt="' + c.name + '" onerror="this.onerror=null;this.src=\'logo.jpg\';" />'
+            : '<div style="width:100%;height:100%;background:' + (c.hex || '#b76543') + '"></div>';
+
+          item.innerHTML = 
+            '<div class="swatch-img-box">' +
+              visual +
+              '<div class="swatch-check">✓</div>' +
+            '</div>' +
+            '<span class="swatch-label">' + c.name + '</span>';
+
+          item.onclick = function() {
+            selectedColorObj = c;
+            renderModels();
+            if (c.image) {
+              var clean = c.image.replace(/^\.\.\//, '');
+              var fIdx = galleryImagesList.indexOf(clean);
+              if (fIdx !== -1) setGalleryImg(fIdx);
+            }
+          };
+          row.appendChild(item);
+        });
+
+        document.getElementById('selectedModelLabel').textContent = selectedColorObj ? selectedColorObj.name : '—';
+      }
+
+      function getSizePrice(szName) {
+        if (!currentProduct) return 64;
+        if (currentProduct.sizes && currentProduct.sizes.length) {
+          var found = currentProduct.sizes.find(function(s) {
+            var name = typeof s === 'string' ? s : (s.name || s.label);
+            return name === szName;
+          });
+          if (found && typeof found === 'object' && found.price !== undefined && found.price !== null && found.price !== '') {
+            var num = parseFloat(found.price);
+            if (!isNaN(num) && num > 0) return num;
+          }
+        }
+        return parseFloat(currentProduct.price_tnd) || 64;
+      }
+
+      function setSizeSelectionMode(mode) {
+        sizeSelectionMode = mode;
+        var btnSingle = document.getElementById('modeSingleBtn');
+        var btnMulti = document.getElementById('modeMultiBtn');
+        var singleBox = document.getElementById('singleSizeContainer');
+        var multiBox = document.getElementById('multiSizeContainer');
+        var singleQty = document.getElementById('singleQtyBox');
+        var bundlesCard = document.getElementById('bundlesCard');
+
+        if (mode === 'multi') {
+          if (btnSingle) btnSingle.classList.remove('active');
+          if (btnMulti) btnMulti.classList.add('active');
+          if (singleBox) singleBox.style.display = 'none';
+          if (multiBox) multiBox.style.display = 'block';
+          if (singleQty) singleQty.style.display = 'none';
+          if (bundlesCard) bundlesCard.style.display = 'none';
+
+          // Initialize multiSizeQuantities if all 0
+          var totalCount = 0;
+          Object.keys(multiSizeQuantities).forEach(function(k){ totalCount += multiSizeQuantities[k] || 0; });
+          if (totalCount === 0) {
+            multiSizeQuantities[selectedSizeName || 'M'] = 1;
+          }
+          renderMultiSizes();
+        } else {
+          if (btnSingle) btnSingle.classList.add('active');
+          if (btnMulti) btnMulti.classList.remove('active');
+          if (singleBox) singleBox.style.display = 'block';
+          if (multiBox) multiBox.style.display = 'none';
+          if (singleQty) singleQty.style.display = 'flex';
+          if (bundlesCard) bundlesCard.style.display = 'block';
+        }
+        updateBreakdown();
+      }
+
+      function renderSizes() {
+        var row = document.getElementById('sizesPillsRow');
+        var card = document.getElementById('sizesCard');
+        if (!currentProduct.sizes || !currentProduct.sizes.length) {
+          card.style.display = 'none';
+          return;
+        }
+        card.style.display = 'block';
+        row.innerHTML = '';
+
+        var hasDifferentPrices = currentProduct.has_size_pricing === true || currentProduct.sizes.some(function(s){
+          return typeof s === 'object' && s.price !== undefined && s.price !== null && s.price !== '';
+        });
+
+        currentProduct.sizes.forEach(function(s) {
+          var name = typeof s === 'string' ? s : (s.name || s.label);
+          var sPrice = (typeof s === 'object' && s.price !== undefined && s.price !== null && s.price !== '') ? parseFloat(s.price) : null;
+          var isSel = (selectedSizeName === name);
+
+          var btn = document.createElement('div');
+          btn.className = 'size-circle-btn' + (isSel ? ' selected' : '');
+          if (hasDifferentPrices && sPrice !== null && !isNaN(sPrice)) {
+            btn.classList.add('has-price');
+            btn.innerHTML = '<span class="sz-name">' + name + '</span><span class="sz-price">' + sPrice + ' DT</span>';
+          } else {
+            btn.textContent = name;
+          }
+          btn.onclick = function() {
+            selectedSizeName = name;
+            renderSizes();
+            updatePricingDisplays();
+            updateBreakdown();
+          };
+          row.appendChild(btn);
+        });
+
+        var activePrice = getActiveUnitPrice();
+        var labelSuffix = hasDifferentPrices ? ' (' + activePrice + ' DT)' : '';
+        document.getElementById('selectedSizeLabel').textContent = selectedSizeName + labelSuffix;
+
+        renderMultiSizes();
+      }
+
+      function renderMultiSizes() {
+        var list = document.getElementById('multiSizeList');
+        if (!list || !currentProduct.sizes) return;
+        list.innerHTML = '';
+
+        currentProduct.sizes.forEach(function(s) {
+          var name = typeof s === 'string' ? s : (s.name || s.label);
+          var price = getSizePrice(name);
+          var qty = multiSizeQuantities[name] || 0;
+
+          var row = document.createElement('div');
+          row.className = 'multi-size-row' + (qty > 0 ? ' has-qty' : '');
+          row.innerHTML = 
+            '<div>' +
+              '<div class="multi-size-title">مقاس ' + name + '</div>' +
+              '<div class="multi-size-price">' + price + ' DT <span style="font-size:11px;color:var(--text-muted);font-weight:normal">/ قطعة</span></div>' +
+            '</div>' +
+            '<div class="multi-size-stepper">' +
+              '<button type="button" class="multi-size-step-btn" onclick="stepMultiSizeQty(\'' + name + '\', -1)" aria-label="تنقيص">−</button>' +
+              '<span class="multi-size-step-val" id="msQty_' + name + '">' + qty + '</span>' +
+              '<button type="button" class="multi-size-step-btn" onclick="stepMultiSizeQty(\'' + name + '\', 1)" aria-label="زيادة">+</button>' +
+            '</div>';
+          list.appendChild(row);
+        });
+
+        updateMultiSummary();
+      }
+
+      function stepMultiSizeQty(szName, delta) {
+        var cur = multiSizeQuantities[szName] || 0;
+        var next = Math.max(0, Math.min(20, cur + delta));
+        multiSizeQuantities[szName] = next;
+
+        renderMultiSizes();
+        updateBreakdown();
+      }
+
+      function updateMultiSummary() {
+        var totalCount = 0;
+        var totalSum = 0;
+        Object.keys(multiSizeQuantities).forEach(function(k) {
+          var q = multiSizeQuantities[k] || 0;
+          totalCount += q;
+          totalSum += q * getSizePrice(k);
+        });
+
+        var countEl = document.getElementById('multiSummaryCountText');
+        var totalEl = document.getElementById('multiSummaryTotalText');
+        var hintEl = document.getElementById('multiSummaryDeliveryHint');
+
+        if (countEl) countEl.textContent = totalCount + ' ' + (totalCount === 1 ? 'قطعة محددة' : 'قطع محددة');
+        if (totalEl) totalEl.textContent = totalSum.toFixed(2) + ' DT';
+
+        if (hintEl) {
+          if (totalCount >= 2) {
+            hintEl.innerHTML = '<span style="color:#25D366;font-weight:bold">🎉 مبروك! مؤهل للتوصيل المجاني لكامل تراب الجمهورية</span>';
+          } else if (totalCount === 1) {
+            hintEl.textContent = 'أضف مقاساً آخر أو قطعة إضافية للحصول على التوصيل المجاني!';
+          } else {
+            hintEl.textContent = 'اختر الكميات المناسبة لكل مقاس (+/-) بالضغط على الأزرار أعلاه';
+          }
+        }
+      }
+
+      function selectBundle(bundleNum, price, orig, freeShip) {
+        selectedBundleNum = bundleNum;
+        document.getElementById('bundle1').classList.toggle('selected', bundleNum === 1);
+        document.getElementById('bundle2').classList.toggle('selected', bundleNum === 2);
+
+        orderQuantity = bundleNum;
+        document.getElementById('qtyValDisplay').textContent = orderQuantity;
+        updateBreakdown();
+      }
+
+      function stepQty(delta) {
+        var next = Math.max(1, Math.min(20, orderQuantity + delta));
+        orderQuantity = next;
+        document.getElementById('qtyValDisplay').textContent = orderQuantity;
+
+        if (next === 1) selectedBundleNum = 1;
+        else if (next === 2) selectedBundleNum = 2;
+        else selectedBundleNum = null;
+
+        document.getElementById('bundle1').classList.toggle('selected', selectedBundleNum === 1);
+        document.getElementById('bundle2').classList.toggle('selected', selectedBundleNum === 2);
+
+        updateBreakdown();
+      }
+
+      function updateBreakdown() {
+        var subtotal = 0;
+        var delivery = 7.00;
+
+        if (sizeSelectionMode === 'multi') {
+          var totalCount = 0;
+          Object.keys(multiSizeQuantities).forEach(function(k) {
+            var q = multiSizeQuantities[k] || 0;
+            totalCount += q;
+            subtotal += q * getSizePrice(k);
+          });
+
+          if (totalCount >= 2) {
+            delivery = 0.00;
+          } else if (totalCount === 0) {
+            delivery = 0.00;
+          } else {
+            delivery = 7.00;
+          }
+        } else {
+          var sale = getActiveUnitPrice();
+          if (orderQuantity === 2 && selectedBundleNum === 2) {
+            subtotal = Math.round(sale * 1.88);
+            delivery = 0.00;
+          } else if (orderQuantity >= 2) {
+            subtotal = sale * orderQuantity;
+            delivery = 0.00;
+          } else {
+            subtotal = sale * orderQuantity;
+            delivery = 7.00;
+          }
+        }
+
+        var total = subtotal + delivery;
+
+        document.getElementById('txtSubtotal').textContent = subtotal.toFixed(2) + ' DT';
+        document.getElementById('txtDelivery').textContent = delivery === 0 ? 'مجاني (توصيل لكامل تراب الجمهورية)' : delivery.toFixed(2) + ' DT';
+        document.getElementById('txtTotal').textContent = total.toFixed(2) + ' DT';
+      }
+
+      function handleAddToCartClick() {
+        if (!window.DarnaCart) {
+          alert('جاري تحميل السلة...');
+          return;
+        }
+
+        var colName = selectedColorObj ? selectedColorObj.name : 'أصيل';
+        var colHex = selectedColorObj ? selectedColorObj.hex : '#7a756b';
+
+        if (sizeSelectionMode === 'multi') {
+          var addedAny = false;
+          Object.keys(multiSizeQuantities).forEach(function(szName) {
+            var q = multiSizeQuantities[szName];
+            if (q > 0) {
+              var pr = getSizePrice(szName);
+              window.DarnaCart.addItem(currentProduct, {
+                size: szName,
+                color: colName,
+                colorHex: colHex,
+                quantity: q,
+                price: pr
+              });
+              addedAny = true;
+            }
+          });
+
+          if (!addedAny) {
+            alert('يرجى تحديد كمية لمقاس واحد على الأقل عبر الضغط على (+)');
+            return;
+          }
+        } else {
+          var sale = getActiveUnitPrice();
+          window.DarnaCart.addItem(currentProduct, {
+            size: selectedSizeName || 'M',
+            color: colName,
+            colorHex: colHex,
+            quantity: orderQuantity,
+            price: sale
+          });
+        }
+
+        window.DarnaCart.openCart();
+      }
+
+      function switchTab(tab, btn) {
+        document.querySelectorAll('.accordion-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        document.getElementById('paneDesc').style.display = tab === 'desc' ? 'block' : 'none';
+        document.getElementById('paneSpecs').style.display = tab === 'specs' ? 'block' : 'none';
+        document.getElementById('paneCare').style.display = tab === 'care' ? 'block' : 'none';
+      }
+
+      function scrollToOrderForm() {
+        var form = document.getElementById('directOrderForm');
+        if (form) {
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var input = document.getElementById('custName');
+          if (input) setTimeout(function(){ input.focus(); }, 400);
+        }
+      }
+
+      /* ============================================================
+         ORDER CREATION & DISPATCH
+         ============================================================ */
+      function handleDirectOrder(e) {
+        e.preventDefault();
+
+        var name = (document.getElementById('custName').value || '').trim();
+        var phone = (document.getElementById('custPhone').value || '').trim().replace(/\D/g, '');
+        var city = document.getElementById('custCity').value;
+        var addr = (document.getElementById('custAddress').value || '').trim();
+
+        if (!name || name.length < 2) { alert('يرجى إدخال الاسم واللقب'); return; }
+        if (!phone || phone.length < 8) { alert('يرجى إدخال رقم هاتف صحيح'); return; }
+        if (!city) { alert('يرجى اختيار الولاية'); return; }
+
+        var colorPicked = selectedColorObj ? selectedColorObj.name : 'طبيعي';
+        var localOrders = [];
+        try { localOrders = JSON.parse(localStorage.getItem('darna_orders') || '[]'); } catch(err) {}
+        var orderNum = 'DARNA-' + new Date().getFullYear() + '-' + String(localOrders.length + 1).padStart(3, '0');
+
+        var items = [];
+        var subtotal = 0;
+        var delivery = 7.00;
+        var total = 0;
+        var notesStr = '';
+
+        if (sizeSelectionMode === 'multi') {
+          var totalQty = 0;
+          var noteSizes = [];
+
+          Object.keys(multiSizeQuantities).forEach(function(sz) {
+            var q = multiSizeQuantities[sz];
+            if (q > 0) {
+              var pr = getSizePrice(sz);
+              var lineTot = pr * q;
+              subtotal += lineTot;
+              totalQty += q;
+              noteSizes.push(q + '× مقاس ' + sz);
+              items.push({
+                product_id: currentProduct.id || 'prod-mehres-core',
+                product_name_snapshot: currentProduct.name,
+                size: sz,
+                color: colorPicked,
+                quantity: q,
+                unit_price_tnd: pr.toFixed(2),
+                cost_price_tnd: parseFloat(currentProduct.cost_price_tnd) || 0,
+                line_total_tnd: lineTot
+              });
+            }
+          });
+
+          if (items.length === 0) {
+            alert('يرجى تحديد كمية لمقاس واحد على الأقل (+)');
+            return;
+          }
+
+          delivery = (totalQty >= 2) ? 0.00 : 7.00;
+          total = subtotal + delivery;
+          notesStr = 'مقاسات متعددة: ' + noteSizes.join(' + ') + ' | اللون: ' + colorPicked;
+        } else {
+          var sale = getActiveUnitPrice();
+          subtotal = (orderQuantity >= 2 && selectedBundleNum === 2) ? Math.round(sale * 1.88) : (sale * orderQuantity);
+          delivery = (orderQuantity >= 2) ? 0.00 : 7.00;
+          total = subtotal + delivery;
+          var sizePicked = selectedSizeName || 'M';
+          notesStr = 'المقاس: ' + sizePicked + ' | اللون: ' + colorPicked;
+
+          items.push({
+            product_id: currentProduct.id || 'prod-mehres-core',
+            product_name_snapshot: currentProduct.name,
+            size: sizePicked,
+            color: colorPicked,
+            quantity: orderQuantity,
+            unit_price_tnd: (subtotal / orderQuantity).toFixed(2),
+            cost_price_tnd: parseFloat(currentProduct.cost_price_tnd) || 0,
+            line_total_tnd: subtotal
+          });
+        }
+
+        var newOrder = {
+          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+          order_number: orderNum,
+          customer_name: name,
+          customer_phone: phone,
+          city: city,
+          delivery_address: (addr ? addr + '، ' : '') + city,
+          order_status: 'pending',
+          payment_status: 'pending',
+          delivery_fee_tnd: delivery,
+          subtotal_tnd: subtotal,
+          total_tnd: total,
+          customer_notes: notesStr,
+          internal_notes: 'طلب مسجل من صفحة المنتج',
+          order_items: items,
+          created_at: new Date().toISOString()
+        };
+
+        localOrders.unshift(newOrder);
+        localStorage.setItem('darna_orders', JSON.stringify(localOrders));
+        window.dispatchEvent(new Event('storage'));
+
+        // Background Netlify function call if online
+        try {
+          fetch('/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              city: city,
+              delivery_address: addr,
+              product: currentProduct.name,
+              qty: items.reduce(function(a, b){ return a + b.quantity; }, 0),
+              size: items.map(function(it){ return it.quantity + 'x ' + it.size; }).join(', '),
+              color: colorPicked,
+              total: total
+            })
+          }).catch(function(){});
+        } catch(err){}
+
+        // Show Confirmation Modal
+        showSuccessModal(newOrder);
+      }
+
+      function showSuccessModal(o) {
+        var box = document.getElementById('receiptSummaryBox');
+        var itemsHtml = '';
+        if (o.order_items && o.order_items.length) {
+          itemsHtml = o.order_items.map(function(it) {
+            return '<div style="display:flex;justify-content:space-between;margin-bottom:5px;padding:3px 0;border-bottom:1px dashed var(--border)">' +
+              '<span>' + it.quantity + '× ' + it.product_name_snapshot + ' (مقاس ' + it.size + ')</span>' +
+              '<b style="color:var(--accent)">' + parseFloat(it.line_total_tnd).toFixed(2) + ' DT</b>' +
+            '</div>';
+          }).join('');
+        }
+
+        box.innerHTML = 
+          '<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span>رقم الطلب:</span><b style="color:var(--accent)">' + o.order_number + '</b></div>' +
+          '<div style="margin-bottom:8px">' + itemsHtml + '</div>' +
+          '<div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>اللون:</span><b style="color:var(--accent)">' + (o.order_items[0] ? o.order_items[0].color : 'أصيل') + '</b></div>' +
+          '<div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>الوجهة:</span><span>' + o.city + '</span></div>' +
+          '<div style="display:flex;justify-content:space-between;border-top:1px dashed var(--border);padding-top:8px;margin-top:6px;font-size:15px;font-weight:900"><span>المجموع الكلي:</span><span style="color:var(--accent)">' + parseFloat(o.total_tnd).toFixed(2) + ' DT</span></div>';
+
+        document.getElementById('successModal').classList.add('open');
+      }
+
+      function closeSuccessModal() {
+        document.getElementById('successModal').classList.remove('open');
+        document.getElementById('directOrderForm').reset();
+      }
+
+      function openWhatsAppOrder() {
+        var col = selectedColorObj ? selectedColorObj.name : 'أصيل';
+        var text = '';
+
+        if (sizeSelectionMode === 'multi') {
+          var noteLines = [];
+          var totSum = 0;
+          var totPieces = 0;
+          Object.keys(multiSizeQuantities).forEach(function(sz) {
+            var q = multiSizeQuantities[sz];
+            if (q > 0) {
+              var pr = getSizePrice(sz);
+              noteLines.push('• ' + q + '× مقاس ' + sz + ' (' + pr + ' DT/قطعة)');
+              totSum += pr * q;
+              totPieces += q;
+            }
+          });
+
+          if (noteLines.length === 0) {
+            alert('يرجى تحديد كمية لمقاس واحد على الأقل عبر الضغط على (+)');
+            return;
+          }
+
+          var deliv = totPieces >= 2 ? 'توصيل مجاني' : '7 DT مصاريف توصيل';
+          text = 'سلام عليكم دارنا، أريد طلب ' + currentProduct.name + ':\n' +
+            noteLines.join('\n') + '\n' +
+            '• اللون/النموذج: ' + col + '\n' +
+            '• المجموع: ' + totSum.toFixed(2) + ' DT (' + deliv + ')\n' +
+            'الرجاء تأكيد الطلب وتحديد موعد التوصيل.';
+        } else {
+          var size = selectedSizeName || 'M';
+          var unitPrice = getActiveUnitPrice();
+          text = 'سلام عليكم دارنا، أريد طلب ' + currentProduct.name + ':\n' +
+            '• المقاس: ' + size + ' (' + unitPrice + ' DT)\n' +
+            '• النموذج/اللون: ' + col + '\n' +
+            '• الكمية: ' + orderQuantity + ' قطعة\n' +
+            'الرجاء تأكيد الطلب وموعد التوصيل.';
+        }
+
+        var waUrl = 'https://wa.me/21627900771?text=' + encodeURIComponent(text);
+        window.open(waUrl, '_blank');
+      }
+
+      /* ============================================================
+         TOUCH SWIPE FOR MOBILE GALLERY
+         ============================================================ */
+      function initSwipeGestures() {
+        var galleryCard = document.querySelector('.gallery-main-card');
+        if (!galleryCard) return;
+
+        var touchStartX = 0;
+        var touchEndX = 0;
+        var touchStartY = 0;
+        var touchEndY = 0;
+        var isSwiping = false;
+
+        galleryCard.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+          isSwiping = true;
+        }, { passive: true });
+
+        galleryCard.addEventListener('touchmove', function(e) {
+          if (!isSwiping) return;
+          var diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
+          var diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+          // If horizontal movement > vertical, prevent default scroll for smooth swipe
+          if (diffX > diffY && diffX > 10) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+
+        galleryCard.addEventListener('touchend', function(e) {
+          if (!isSwiping) return;
+          isSwiping = false;
+          touchEndX = e.changedTouches[0].screenX;
+          touchEndY = e.changedTouches[0].screenY;
+          var swipeDistX = touchEndX - touchStartX;
+          var swipeDistY = Math.abs(touchEndY - touchStartY);
+
+          // Only trigger if horizontal swipe > 50px and more horizontal than vertical
+          if (Math.abs(swipeDistX) > 50 && Math.abs(swipeDistX) > swipeDistY) {
+            if (swipeDistX > 0) {
+              // Swipe right (RTL = prev in visual order)
+              prevGalleryImage();
+            } else {
+              // Swipe left (RTL = next in visual order)
+              nextGalleryImage();
+            }
+          }
+        }, { passive: true });
+      }
+
+      // Footer year
+      var footerYearEl = document.getElementById('footerYear');
+      if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

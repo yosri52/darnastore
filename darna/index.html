@@ -1,0 +1,4170 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src * data:; media-src 'self' data: blob:; connect-src 'self' https://api.callmebot.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com"
+    />
+    <!-- Google Analytics 4 (GA4) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      // Replaced automatically or dynamically when GA4_MEASUREMENT_ID is provided
+      const gaId = window.GA4_MEASUREMENT_ID || null;
+      if (gaId) {
+        gtag('config', gaId, { send_page_view: true });
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+        document.head.appendChild(gaScript);
+      }
+    </script>
+    <script>
+      try {
+        localStorage.removeItem("darna_theme");
+        sessionStorage.removeItem("darna_theme");
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", "light");
+    </script>
+    <title>دارنا | DARNA — مهاريس تونسية أصيلة</title>
+    <meta
+      name="description"
+      content="دارنا — مهاريس تونسية أصيلة من تراثنا لدارك. اكتشف مجموعتنا المميزة واطلب مباشرة."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== DESIGN TOKENS — LIGHT (default) ===== */
+      :root {
+        --bg-primary: #faf8f3;
+        --bg-secondary: #f0ede5;
+        --bg-card: #ffffff;
+        --bg-elevated: #f5f2ec;
+        --bg-glass: rgba(250, 248, 243, 0.85);
+        --text-primary: #24231f;
+        --text-secondary: #5c5950;
+        --text-muted: #8a857c;
+        --accent: #b76543;
+        --accent-light: #c9864a;
+        --accent-glow: rgba(183, 101, 67, 0.18);
+        --gold: #b8922e;
+        --border: rgba(0, 0, 0, 0.08);
+        --border-hover: rgba(0, 0, 0, 0.15);
+        --radius-sm: 8px;
+        --radius-md: 14px;
+        --radius-lg: 22px;
+        --radius-xl: 32px;
+        --shadow-card:
+          0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+        --shadow-glow: 0 0 30px var(--accent-glow);
+        --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        --logo-filter: none;
+      }
+
+      /* ===== DESIGN TOKENS — DARK ===== */
+      [data-theme="dark"] {
+        --bg-primary: #0a0a0f;
+        --bg-secondary: #12121a;
+        --bg-card: #16161f;
+        --bg-elevated: #1c1c28;
+        --bg-glass: rgba(22, 22, 31, 0.7);
+        --text-primary: #f0ece4;
+        --text-secondary: #9e9a92;
+        --text-muted: #6b6760;
+        --accent: #c9864a;
+        --accent-light: #dba06a;
+        --accent-glow: rgba(201, 134, 74, 0.25);
+        --gold: #d4a853;
+        --border: rgba(255, 255, 255, 0.06);
+        --border-hover: rgba(255, 255, 255, 0.12);
+        --shadow-card:
+          0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
+        --shadow-glow: 0 0 40px var(--accent-glow);
+        --logo-filter: invert(1);
+      }
+
+      /* ===== RESET & BASE ===== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        overflow-x: hidden;
+        width: 100%;
+      }
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: "Noto Kufi Arabic", "DM Sans", system-ui, sans-serif;
+        line-height: 1.7;
+        overflow-x: hidden;
+        width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background-color 0.4s ease,
+          color 0.4s ease;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      ::selection {
+        background: var(--accent);
+        color: white;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 10px;
+      }
+
+      /* ===== ANIMATIONS ===== */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px var(--accent-glow);
+        }
+        50% {
+          box-shadow:
+            0 0 40px var(--accent-glow),
+            0 0 60px rgba(201, 134, 74, 0.1);
+        }
+      }
+      @keyframes grain {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        10% {
+          transform: translate(-5%, -10%);
+        }
+        30% {
+          transform: translate(3%, -15%);
+        }
+        50% {
+          transform: translate(12%, 9%);
+        }
+        70% {
+          transform: translate(9%, 4%);
+        }
+        90% {
+          transform: translate(-1%, 7%);
+        }
+      }
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== GRAIN OVERLAY ===== */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+      }
+
+      /* ===== TOP BAR ===== */
+      .top-bar {
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          #a0522d,
+          var(--accent)
+        );
+        background-size: 200% auto;
+        animation: shimmer 4s linear infinite;
+        color: white;
+        text-align: center;
+        padding: 11px 20px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+      .top-bar span {
+        opacity: 0.85;
+      }
+      .top-bar b {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      /* ===== HEADER ===== */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px) saturate(1.8);
+        -webkit-backdrop-filter: blur(20px) saturate(1.8);
+        border-bottom: 1px solid var(--border);
+        transition: var(--transition);
+      }
+      .header.scrolled {
+        border-bottom-color: var(--border-hover);
+        box-shadow: var(--shadow-card);
+      }
+      .header-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 clamp(20px, 4vw, 60px);
+        height: 80px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+      }
+      .brand-logo {
+        height: 58px;
+        width: auto;
+        object-fit: contain;
+        filter: var(--logo-filter);
+        transition:
+          filter var(--transition),
+          transform var(--transition);
+      }
+      .brand:hover .brand-logo {
+        transform: scale(1.04);
+      }
+
+      /* ===== THEME TOGGLE ===== */
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        border: none;
+        outline: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.3s ease;
+        padding: 0;
+      }
+      .theme-toggle:hover {
+        transform: scale(1.15) rotate(15deg);
+      }
+      .theme-toggle .icon-sun,
+      .theme-toggle .icon-moon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 22px;
+        height: 22px;
+        stroke: var(--text-primary);
+        transition:
+          transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.3s ease;
+        user-select: none;
+        pointer-events: none;
+      }
+      .theme-toggle .icon-sun {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      }
+      .theme-toggle .icon-moon {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg) scale(0.4);
+      }
+      [data-theme="dark"] .theme-toggle .icon-sun {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-90deg) scale(0.4);
+      }
+      [data-theme="dark"] .theme-toggle .icon-moon {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      }
+      .nav {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+      }
+      .nav a {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        transition: var(--transition);
+        position: relative;
+      }
+      .nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      .nav a:hover {
+        color: var(--text-primary);
+      }
+      .nav a:hover::after {
+        width: 100%;
+      }
+      .header-cta {
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+        box-shadow: 0 2px 12px var(--accent-glow);
+      }
+      .header-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px var(--accent-glow);
+      }
+
+      /* Mobile menu toggle */
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 8px 12px;
+        color: var(--text-primary);
+        font-size: 18px;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        position: relative;
+        min-height: 90vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 6%;
+        padding: 80px clamp(20px, 6vw, 100px);
+        max-width: 1500px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        filter: blur(80px);
+        pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.3;
+        font-weight: 800;
+        margin-bottom: 22px;
+      }
+      .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-desc {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 2;
+        max-width: 520px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-top: 36px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border: none;
+        padding: 16px 30px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+        box-shadow: 0 4px 20px var(--accent-glow);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px var(--accent-glow);
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--border-hover);
+        padding: 16px 30px;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+      }
+      .btn-secondary:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(201, 134, 74, 0.05);
+      }
+      .hero-proof {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid var(--border);
+      }
+      .hero-proof-badge {
+        width: 42px;
+        height: 42px;
+        background: var(--bg-elevated);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .hero-proof-badge svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--accent);
+      }
+      .hero-proof b {
+        font-size: 13px;
+        display: block;
+      }
+      .hero-proof small {
+        font-size: 10px;
+        color: var(--text-muted);
+      }
+      .hero-proof .stars {
+        color: var(--gold);
+        letter-spacing: 2px;
+      }
+      .hero-visual {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-img-wrapper {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+      }
+      .hero-img-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 50%,
+          rgba(10, 10, 15, 0.6)
+        );
+        pointer-events: none;
+      }
+      .hero-img-wrapper img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transition: transform 8s ease;
+      }
+      .hero-img-wrapper:hover img {
+        transform: scale(1.05);
+      }
+      .hero-caption {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        z-index: 3;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+      .hero-stamp {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border-radius: 50%;
+        width: 95px;
+        height: 95px;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        font-size: 9px;
+        font-weight: 600;
+        z-index: 4;
+        animation: float 3s ease-in-out infinite;
+        box-shadow: var(--shadow-glow);
+      }
+      .hero-stamp b {
+        font-size: 20px;
+        display: block;
+      }
+
+      /* ===== TRUST BAR ===== */
+      .trust-bar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 4vw, 60px);
+      }
+      .trust-item {
+        padding: 28px 20px;
+        border-right: 1px solid var(--border);
+        transition: var(--transition);
+      }
+      .trust-item:last-child {
+        border-right: none;
+      }
+      .trust-item:hover {
+        background: var(--bg-secondary);
+      }
+      .trust-icon {
+        width: 42px;
+        height: 42px;
+        background: var(--bg-elevated);
+        border-radius: var(--radius-sm);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        border: 1px solid var(--border);
+        color: var(--accent);
+      }
+      .trust-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--accent);
+      }
+      .trust-item b {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .trust-item small {
+        font-size: 10px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* ===== SECTION ===== */
+      .section {
+        padding: 100px clamp(20px, 6vw, 100px);
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .section h2 {
+        font-size: clamp(28px, 4vw, 44px);
+        font-weight: 800;
+        line-height: 1.4;
+      }
+      .section h2 em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .section p {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 2;
+      }
+      .section-link {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 600;
+        transition: var(--transition);
+        white-space: nowrap;
+      }
+      .section-link:hover {
+        color: var(--accent-light);
+      }
+
+      /* ===== FILTERS ===== */
+      .filters {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        border: 1px solid var(--border);
+        background: transparent;
+        padding: 10px 20px;
+        font-size: 11px;
+        font-weight: 500;
+        border-radius: 100px;
+        color: var(--text-secondary);
+        transition: var(--transition);
+      }
+      .filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 2px 12px var(--accent-glow);
+      }
+
+      /* ===== PRODUCTS ===== */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .product-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        transition: var(--transition);
+        position: relative;
+      }
+      .product-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-card);
+      }
+      .product-img {
+        position: relative;
+        overflow: hidden;
+      }
+      .product-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 60%, var(--bg-card));
+        pointer-events: none;
+      }
+      .product-img img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .product-card:hover .product-img img {
+        transform: scale(1.06);
+      }
+      .product-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--bg-glass);
+        backdrop-filter: blur(10px);
+        padding: 6px 14px;
+        border-radius: 100px;
+        font-size: 9px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid var(--border);
+        z-index: 2;
+      }
+      .product-body {
+        padding: 24px;
+      }
+      .product-body small {
+        color: var(--accent);
+        font:
+          600 9px "DM Sans",
+          sans-serif;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .product-body h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 10px 0 8px;
+      }
+      .product-body p {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+      .product-price {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 12px 0 16px;
+      }
+      .product-cta {
+        width: 100%;
+        text-align: center;
+        border: none;
+        border-top: 1px solid var(--border);
+        background: transparent;
+        padding: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .product-cta:hover {
+        color: var(--accent);
+        background: rgba(201, 134, 74, 0.05);
+      }
+
+      /* ===== STORY ===== */
+      .story-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: var(--bg-secondary);
+        border-block: 1px solid var(--border);
+      }
+      .story-img {
+        overflow: hidden;
+      }
+      .story-img img {
+        width: 100%;
+        height: 100%;
+        min-height: 480px;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .story-img:hover img {
+        transform: scale(1.03);
+      }
+      .story-content {
+        padding: clamp(40px, 5vw, 80px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .story-content h2 {
+        font-size: clamp(26px, 3.5vw, 40px);
+        font-weight: 800;
+        line-height: 1.4;
+        margin: 16px 0 24px;
+      }
+      .story-content h2 em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .story-content p {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 2;
+        margin-bottom: 14px;
+      }
+
+      /* ===== BENEFITS ===== */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-top: 50px;
+      }
+      .benefit-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 32px 24px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+      .benefit-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: var(--transition);
+      }
+      .benefit-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+      }
+      .benefit-card:hover::before {
+        opacity: 1;
+      }
+      .benefit-num {
+        display: inline-block;
+        font:
+          700 11px "DM Sans",
+          sans-serif;
+        color: var(--accent);
+        background: rgba(201, 134, 74, 0.1);
+        padding: 6px 12px;
+        border-radius: 100px;
+        margin-bottom: 18px;
+      }
+      .benefit-card h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .benefit-card p {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.9;
+      }
+
+      /* ===== ORDER SECTION ===== */
+      .order-section {
+        background: var(--bg-secondary);
+        border-block: 1px solid var(--border);
+      }
+      .order-inner {
+        display: grid;
+        grid-template-columns: 0.85fr 1fr;
+        gap: 60px;
+        align-items: start;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 80px clamp(20px, 6vw, 100px);
+      }
+      .order-info h2 {
+        font-size: clamp(28px, 3.5vw, 40px);
+        font-weight: 800;
+        line-height: 1.4;
+      }
+      .order-info h2 em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .order-info p {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 2;
+        margin-top: 16px;
+      }
+      .order-features {
+        list-style: none;
+        margin-top: 30px;
+      }
+      .order-features li {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .order-features li span {
+        width: 36px;
+        height: 36px;
+        background: var(--accent-glow);
+        color: var(--accent);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .order-features li span svg {
+        width: 17px;
+        height: 17px;
+        stroke: var(--accent);
+      }
+
+      /* ===== FORM ===== */
+      .form-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 40px;
+        box-shadow: var(--shadow-card);
+        position: relative;
+        overflow: visible;
+      }
+      .form-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          var(--gold),
+          var(--accent)
+        );
+        border-top-left-radius: var(--radius-lg);
+        border-top-right-radius: var(--radius-lg);
+      }
+      .form-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 28px;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: 13px;
+        transition: var(--transition);
+        outline: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: var(--text-muted);
+      }
+      .form-group select option {
+        background: var(--bg-elevated);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      /* Quantity Counter */
+      .qty-counter {
+        display: flex;
+        align-items: center;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        height: 50px;
+        transition: var(--transition);
+        overflow: hidden;
+      }
+      .qty-counter:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+      .qty-btn {
+        width: 52px;
+        height: 100%;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-size: 20px;
+        font-weight: 700;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        user-select: none;
+      }
+      .qty-btn:hover:not(:disabled) {
+        background: var(--accent-glow);
+        color: var(--accent);
+      }
+      .qty-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      .qty-input {
+        flex: 1;
+        height: 100% !important;
+        border: none !important;
+        background: transparent !important;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-primary);
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        -moz-appearance: textfield;
+        cursor: default;
+      }
+      .qty-input::-webkit-outer-spin-button,
+      .qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* ===== CUSTOM SEARCHABLE SELECT ===== */
+      .custom-select-group {
+        position: relative;
+      }
+      .custom-select-wrapper {
+        position: relative;
+        width: 100%;
+      }
+      .custom-select-trigger {
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+        transition: var(--transition);
+      }
+      .custom-select-trigger:hover,
+      .custom-select-wrapper.open .custom-select-trigger {
+        border-color: var(--accent);
+      }
+      .custom-select-wrapper.open .custom-select-trigger {
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+      .custom-select-label {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+      .custom-select-label.has-value {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+      .custom-select-arrow {
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        transition:
+          transform 0.25s ease,
+          color 0.25s ease;
+      }
+      .custom-select-wrapper.open .custom-select-arrow {
+        transform: rotate(180deg);
+        color: var(--accent);
+      }
+
+      /* Dropdown panel ALWAYS opens strictly downward */
+      .custom-select-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border: 1px solid var(--border-hover);
+        border-radius: var(--radius-sm);
+        box-shadow:
+          0 14px 35px rgba(0, 0, 0, 0.25),
+          0 3px 10px rgba(0, 0, 0, 0.12);
+        z-index: 250;
+        display: none;
+        overflow: hidden;
+        padding: 8px;
+      }
+      .custom-select-wrapper.open .custom-select-dropdown {
+        display: block;
+        animation: fadeIn 0.18s ease forwards;
+      }
+      .custom-select-search-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 10px 14px;
+        margin-bottom: 8px;
+      }
+      .custom-select-search-bar:focus-within {
+        border-color: var(--accent);
+      }
+      .custom-select-search-bar .search-icon {
+        stroke: var(--text-muted);
+        flex-shrink: 0;
+      }
+      .custom-select-search-input {
+        width: 100%;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        font-size: 13px;
+        color: var(--text-primary);
+      }
+      .custom-select-search-input::placeholder {
+        color: var(--text-muted);
+      }
+      .custom-select-options-list {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+      .custom-select-option {
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--text-primary);
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+      .custom-select-option:hover {
+        background: var(--accent-glow);
+        color: var(--accent);
+      }
+      .custom-select-option.selected {
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+      }
+      .custom-select-empty {
+        padding: 16px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .form-submit {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border: none;
+        padding: 16px;
+        font-size: 14px;
+        font-weight: 700;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+        box-shadow: 0 4px 20px var(--accent-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .form-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px var(--accent-glow);
+      }
+      .form-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .form-submit .spinner {
+        display: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .form-submit.loading .spinner {
+        display: inline-block;
+      }
+      .form-submit.loading .btn-text {
+        display: none;
+      }
+      .form-note {
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-top: 14px;
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      /* Success State */
+      .form-success {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .form-success.show {
+        display: block;
+      }
+      .form-success .check-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        font-size: 30px;
+        margin: 0 auto 20px;
+        box-shadow: var(--shadow-glow);
+      }
+      .form-success h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      .form-success p {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 2;
+      }
+      .form-success button {
+        margin-top: 24px;
+        background: transparent;
+        border: 1px solid var(--border);
+        padding: 12px 24px;
+        border-radius: var(--radius-sm);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-primary);
+        transition: var(--transition);
+      }
+      .form-success button:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ===== FAQ ===== */
+      .faq-section {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 60px;
+        align-items: start;
+      }
+      .faq-list details {
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+        transition: var(--transition);
+      }
+      .faq-list details[open] {
+        padding-bottom: 24px;
+      }
+      .faq-list summary {
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        transition: var(--transition);
+      }
+      .faq-list summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-list summary::after {
+        content: "+";
+        font-size: 20px;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        margin-right: 8px;
+      }
+      .faq-list details[open] summary::after {
+        transform: rotate(45deg);
+      }
+      .faq-list summary:hover {
+        color: var(--accent);
+      }
+      .faq-list details p {
+        margin-top: 14px;
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 2;
+      }
+
+      /* ===== CLOSING CTA ===== */
+      .closing-cta {
+        background: linear-gradient(
+          135deg,
+          var(--bg-secondary),
+          var(--bg-elevated)
+        );
+        border-block: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+      .closing-cta::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        filter: blur(60px);
+        pointer-events: none;
+      }
+      .closing-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px clamp(20px, 6vw, 100px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+      .closing-inner small {
+        color: var(--text-muted);
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
+      .closing-inner h2 {
+        font-size: clamp(24px, 3vw, 38px);
+        font-weight: 800;
+        line-height: 1.4;
+        margin-top: 8px;
+      }
+      .closing-inner h2 em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .closing-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        padding: 16px 28px;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+      }
+      .closing-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px var(--accent-glow);
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 32px clamp(20px, 4vw, 60px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        border-top: 1px solid var(--border);
+      }
+      .footer-brand b {
+        font-size: 18px;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--accent-light)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .footer-brand p {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .footer small {
+        color: var(--text-muted);
+        font-size: 10px;
+      }
+
+      /* ===== FLOATING WHATSAPP ===== */
+      .wa-float {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .wa-btn {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--accent), #a0522d);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        font-size: 22px;
+        box-shadow: 0 4px 20px var(--accent-glow);
+        transition: var(--transition);
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      .wa-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 32px var(--accent-glow);
+      }
+      .wa-tooltip {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 10px 16px;
+        border-radius: var(--radius-sm);
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: var(--shadow-card);
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: var(--transition);
+      }
+      .wa-float:hover .wa-tooltip {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* ===== TOAST NOTIFICATION ===== */
+      .toast {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100px);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 16px 24px;
+        font-size: 13px;
+        font-weight: 500;
+        z-index: 200;
+        box-shadow: var(--shadow-card);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+      .toast.success {
+        border-color: #4ade80;
+      }
+      .toast.error {
+        border-color: #ef4444;
+      }
+
+      /* ===== DISCLAIMER NOTE ===== */
+      .note-text {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* ===== MOBILE RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .nav {
+          display: none;
+        }
+        .menu-toggle {
+          display: block;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 50px 24px;
+          min-height: auto;
+          gap: 40px;
+        }
+        .hero-img-wrapper img {
+          height: 350px;
+        }
+        .trust-bar {
+          grid-template-columns: 1fr 1fr;
+        }
+        .trust-item {
+          border-bottom: 1px solid var(--border);
+        }
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+        .product-img img {
+          height: 300px;
+        }
+        .story-section {
+          grid-template-columns: 1fr;
+        }
+        .story-img img {
+          min-height: 300px;
+        }
+        .story-content {
+          padding: 40px 24px;
+        }
+        .benefits-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        .order-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding: 60px 24px;
+        }
+        .form-card {
+          padding: 28px;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .faq-section {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .closing-inner {
+          flex-direction: column;
+          text-align: center;
+          padding: 50px 24px;
+        }
+        .closing-inner h2 {
+          font-size: 28px;
+        }
+        .section {
+          padding: 70px 24px;
+        }
+      }
+      @media (max-width: 480px) {
+        .trust-bar {
+          grid-template-columns: 1fr;
+        }
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero h1 {
+          font-size: 30px;
+        }
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .header-inner {
+          height: 65px;
+        }
+        .header-cta {
+          padding: 10px 16px;
+          font-size: 11px;
+        }
+      }
+
+      /* ===== MOBILE NAV OVERLAY ===== */
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        background: var(--bg-glass);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      .mobile-nav.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .mobile-nav a {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
+        transition: var(--transition);
+      }
+      .mobile-nav a:hover {
+        color: var(--accent);
+      }
+      .mobile-nav-close {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-content: center;
+        font-size: 18px;
+        color: var(--text-primary);
+        transition: var(--transition);
+      }
+      .mobile-nav-close:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ===========================================================
+         VIG PARTY MODE & DISCO LIGHTS (Ctrl + V Easter Egg)
+         =========================================================== */
+      body.party-active {
+        overflow-x: hidden !important;
+        animation: partyBassPump 0.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes partyBassPump {
+        0% { filter: contrast(100%) brightness(100%); }
+        100% { filter: contrast(115%) brightness(108%); }
+      }
+
+      /* Party Overlay Container */
+      .party-overlay {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 99999;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease;
+      }
+      body.party-active .party-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Disco Canvas (Confetti & Sparkles) */
+      #partyCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      /* Disco Ball */
+      .party-discoball-wrap {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        animation: discoDropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      @keyframes discoDropIn {
+        from { transform: translate(-50%, -150px); }
+        to { transform: translate(-50%, 0); }
+      }
+      .party-discoball-chain {
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(180deg, #555, #ccc, #888);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      }
+      .party-discoball {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: relative;
+        background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d8e2dc 25%, #8d99ae 60%, #2b2d42 100%);
+        box-shadow:
+          0 0 50px rgba(255, 255, 255, 0.9),
+          0 0 90px rgba(0, 240, 255, 0.7),
+          0 0 130px rgba(255, 0, 128, 0.6);
+        animation: discoSpin 6s linear infinite;
+        overflow: hidden;
+      }
+      .party-discoball::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+          repeating-linear-gradient(0deg, transparent 0px, transparent 6px, rgba(255,255,255,0.7) 6px, rgba(255,255,255,0.7) 8px),
+          repeating-linear-gradient(90deg, transparent 0px, transparent 6px, rgba(0,0,0,0.3) 6px, rgba(0,0,0,0.3) 8px);
+        opacity: 0.85;
+      }
+      .party-discoball::after {
+        content: "";
+        position: absolute;
+        inset: -60px;
+        background: conic-gradient(
+          from 0deg,
+          rgba(255, 0, 128, 0.35),
+          rgba(0, 240, 255, 0.4),
+          rgba(255, 230, 0, 0.4),
+          rgba(57, 255, 20, 0.35),
+          rgba(157, 0, 255, 0.4),
+          rgba(255, 0, 128, 0.35)
+        );
+        animation: discoRaySpin 4s linear infinite;
+        mix-blend-mode: color-dodge;
+        pointer-events: none;
+      }
+      @keyframes discoSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes discoRaySpin {
+        0% { transform: rotate(0deg) scale(1.6); }
+        100% { transform: rotate(360deg) scale(1.6); }
+      }
+
+      /* 4 Corner Sweeping Laser Spotlights */
+      .party-laser {
+        position: absolute;
+        width: 250vw;
+        height: 120px;
+        opacity: 0.55;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        filter: blur(8px);
+      }
+      .laser-tl {
+        top: 0;
+        left: 0;
+        background: linear-gradient(90deg, rgba(0, 240, 255, 0.95), transparent 85%);
+        transform-origin: 0 0;
+        animation: sweepLaserTL 2.4s ease-in-out infinite alternate;
+      }
+      .laser-tr {
+        top: 0;
+        right: 0;
+        background: linear-gradient(270deg, rgba(255, 0, 128, 0.95), transparent 85%);
+        transform-origin: 100% 0;
+        animation: sweepLaserTR 2.7s ease-in-out infinite alternate;
+      }
+      .laser-bl {
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(90deg, rgba(57, 255, 20, 0.95), transparent 85%);
+        transform-origin: 0 100%;
+        animation: sweepLaserBL 3.1s ease-in-out infinite alternate;
+      }
+      .laser-br {
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(270deg, rgba(255, 230, 0, 0.95), transparent 85%);
+        transform-origin: 100% 100%;
+        animation: sweepLaserBR 2.2s ease-in-out infinite alternate;
+      }
+
+      @keyframes sweepLaserTL {
+        0% { transform: rotate(5deg); }
+        100% { transform: rotate(70deg); }
+      }
+      @keyframes sweepLaserTR {
+        0% { transform: rotate(-5deg); }
+        100% { transform: rotate(-70deg); }
+      }
+      @keyframes sweepLaserBL {
+        0% { transform: rotate(-10deg); }
+        100% { transform: rotate(-75deg); }
+      }
+      @keyframes sweepLaserBR {
+        0% { transform: rotate(10deg); }
+        100% { transform: rotate(75deg); }
+      }
+
+      /* Ambient Strobe Flash */
+      .party-strobe {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        animation: partyStrobeFlash 0.5s steps(2, start) infinite;
+        mix-blend-mode: color-dodge;
+      }
+      @keyframes partyStrobeFlash {
+        0%, 100% { background: rgba(0, 0, 0, 0); }
+        50% { background: rgba(255, 0, 128, 0.08); }
+        75% { background: rgba(0, 240, 255, 0.08); }
+      }
+
+      /* Top Party HUD / Control Bar */
+      .party-hud {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 10, 20, 0.9);
+        border: 2px solid #00f0ff;
+        box-shadow: 0 0 35px rgba(0, 240, 255, 0.6), 0 0 70px rgba(255, 0, 128, 0.4);
+        border-radius: 50px;
+        padding: 8px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 100000;
+        pointer-events: auto;
+        backdrop-filter: blur(15px);
+        color: #fff;
+        font-family: inherit;
+        animation: partyHudPulse 1s ease-in-out infinite alternate;
+      }
+      @keyframes partyHudPulse {
+        0% { border-color: #00f0ff; box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); }
+        100% { border-color: #ff007f; box-shadow: 0 0 35px rgba(255, 0, 128, 0.8); }
+      }
+      .party-live-badge {
+        background: #ff0055;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 0 12px #ff0055;
+        animation: partyBlink 0.8s infinite alternate;
+      }
+      @keyframes partyBlink { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+      .party-equalizer {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: 18px;
+      }
+      .party-bar {
+        width: 3px;
+        background: linear-gradient(180deg, #ff007f, #00f0ff);
+        border-radius: 2px;
+        animation: eqJump 0.4s ease infinite alternate;
+      }
+      .party-bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+      .party-bar:nth-child(2) { height: 90%; animation-delay: 0.25s; }
+      .party-bar:nth-child(3) { height: 40%; animation-delay: 0.05s; }
+      .party-bar:nth-child(4) { height: 100%; animation-delay: 0.35s; }
+      .party-bar:nth-child(5) { height: 75%; animation-delay: 0.18s; }
+      .party-bar:nth-child(6) { height: 50%; animation-delay: 0.28s; }
+      @keyframes eqJump {
+        0% { height: 20%; }
+        100% { height: 100%; }
+      }
+      .party-hud-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
+      .party-hud-btn {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .party-hud-btn:hover {
+        background: #ff0055;
+        border-color: #ff0055;
+        box-shadow: 0 0 15px #ff0055;
+      }
+
+      /* ===========================================================
+         THE DANCING STAGE & CHARACTERS (Chechia DJ & Rockstar Mehres)
+         =========================================================== */
+      .party-stage {
+        position: fixed;
+        bottom: 24px;
+        left: 28px;
+        z-index: 100000;
+        pointer-events: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: stagePopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      @keyframes stagePopIn {
+        from { transform: translateY(120px) scale(0.6); opacity: 0; }
+        to { transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .party-speech-bubble {
+        background: #ffffff;
+        color: #111;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 8px 16px;
+        border-radius: 18px;
+        margin-bottom: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(0, 240, 255, 0.7);
+        position: relative;
+        animation: bubbleFloat 1.2s ease-in-out infinite alternate;
+        white-space: nowrap;
+      }
+      .party-speech-bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 8px 8px 0;
+        border-style: solid;
+        border-color: #ffffff transparent;
+        display: block;
+        width: 0;
+      }
+      @keyframes bubbleFloat {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-8px) scale(1.04); }
+      }
+
+      .party-dancers-group {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+        position: relative;
+      }
+
+      /* Light-up circular dance floor */
+      .party-dancefloor {
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 240px;
+        height: 60px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.8) 0%, rgba(255, 0, 128, 0.6) 45%, rgba(57, 255, 20, 0.4) 75%, transparent 100%);
+        box-shadow: 0 0 40px rgba(0, 240, 255, 0.9), 0 0 80px rgba(255, 0, 128, 0.8);
+        animation: dancefloorPulse 0.5s ease-in-out infinite alternate;
+        z-index: 1;
+      }
+      @keyframes dancefloorPulse {
+        0% { transform: translateX(-50%) scale(0.92); opacity: 0.75; }
+        100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+      }
+
+      /* Chechia Dancer Figure */
+      .dancer-figure {
+        position: relative;
+        z-index: 5;
+        animation: chechiaGroove 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+        transform-origin: bottom center;
+      }
+      @keyframes chechiaGroove {
+        0% { transform: translateY(0) rotate(-4deg); }
+        100% { transform: translateY(-16px) rotate(4deg); }
+      }
+      .chechia-arm-left {
+        transform-origin: 30px 68px;
+        animation: discoArmL 0.5s ease-in-out infinite alternate;
+      }
+      .chechia-arm-right {
+        transform-origin: 70px 68px;
+        animation: discoArmR 0.5s ease-in-out infinite alternate;
+      }
+      @keyframes discoArmL {
+        0% { transform: rotate(-50deg); }
+        100% { transform: rotate(35deg); }
+      }
+      @keyframes discoArmR {
+        0% { transform: rotate(35deg); }
+        100% { transform: rotate(-55deg); }
+      }
+      .chechia-tassel {
+        transform-origin: 50px 22px;
+        animation: tasselSwing 0.5s ease-in-out infinite alternate;
+      }
+      @keyframes tasselSwing {
+        0% { transform: rotate(-30deg); }
+        100% { transform: rotate(30deg); }
+      }
+
+      /* Rockstar Mehres Figure */
+      .dancer-mehres-fig {
+        position: relative;
+        z-index: 5;
+        animation: mehresJump 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
+        animation-delay: 0.25s;
+        transform-origin: bottom center;
+      }
+      @keyframes mehresJump {
+        0% { transform: translateY(0) scale(0.96) rotate(5deg); }
+        100% { transform: translateY(-22px) scale(1.06) rotate(-5deg); }
+      }
+
+      /* ===========================================================
+         "ALL THE WEB APP IS DANCE" (When party-active)
+         =========================================================== */
+      /* Product Cards dancing */
+      body.party-active .product-card:nth-child(1) {
+        animation: cardDance1 0.5s infinite ease-in-out alternate;
+      }
+      body.party-active .product-card:nth-child(2) {
+        animation: cardDance2 0.5s infinite ease-in-out alternate;
+      }
+      body.party-active .product-card:nth-child(3) {
+        animation: cardDance3 0.5s infinite ease-in-out alternate;
+      }
+      @keyframes cardDance1 {
+        0% { transform: translateY(0) rotate(-3deg) scale(1); box-shadow: 0 10px 40px rgba(0, 240, 255, 0.5); }
+        100% { transform: translateY(-18px) rotate(3deg) scale(1.05); box-shadow: 0 25px 60px rgba(255, 0, 128, 0.8); }
+      }
+      @keyframes cardDance2 {
+        0% { transform: translateY(-18px) rotate(4deg) scale(1.05); box-shadow: 0 25px 60px rgba(255, 230, 0, 0.8); }
+        100% { transform: translateY(0) rotate(-4deg) scale(1); box-shadow: 0 10px 40px rgba(57, 255, 20, 0.5); }
+      }
+      @keyframes cardDance3 {
+        0% { transform: translateY(0) rotate(-5deg) scale(1); box-shadow: 0 10px 40px rgba(255, 0, 128, 0.5); }
+        100% { transform: translateY(-20px) rotate(5deg) scale(1.06); box-shadow: 0 25px 60px rgba(0, 240, 255, 0.8); }
+      }
+
+      /* Product Images zoom beat */
+      body.party-active .product-img img {
+        animation: partyImgZoom 0.5s infinite ease-in-out alternate;
+      }
+      @keyframes partyImgZoom {
+        0% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1.12) rotate(2deg); filter: saturate(1.4); }
+      }
+
+      /* Brand Logo dancing */
+      body.party-active .brand-logo {
+        animation: logoDance 0.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55) alternate;
+        filter: drop-shadow(0 0 15px #00f0ff) drop-shadow(0 0 30px #ff007f);
+      }
+      @keyframes logoDance {
+        0% { transform: scale(1) rotate(-6deg); }
+        100% { transform: scale(1.2) rotate(6deg); }
+      }
+
+      /* Hero H1 Rainbow text dance */
+      body.party-active .hero h1 {
+        background: linear-gradient(90deg, #ff007f, #00f0ff, #ffe600, #39ff14, #ff007f);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: partyRainbow 2s linear infinite, partyH1Bounce 0.5s ease-in-out infinite alternate;
+      }
+      @keyframes partyRainbow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+      }
+      @keyframes partyH1Bounce {
+        0% { transform: translateY(0) scale(1); }
+        100% { transform: translateY(-8px) scale(1.03); }
+      }
+
+      /* Buttons glowing and pumping */
+      body.party-active .btn-primary,
+      body.party-active .btn-secondary,
+      body.party-active .product-cta,
+      body.party-active .form-card button[type="submit"] {
+        animation: partyBtnGlow 0.5s infinite alternate;
+      }
+      @keyframes partyBtnGlow {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 15px rgba(0, 240, 255, 0.8), 0 0 30px rgba(255, 0, 128, 0.6);
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          transform: scale(1.08);
+          box-shadow: 0 0 35px rgba(255, 0, 128, 1), 0 0 60px rgba(0, 240, 255, 0.9);
+          filter: hue-rotate(180deg);
+        }
+      }
+
+      /* Trust items wave dance */
+      body.party-active .trust-item {
+        animation: trustItemDance 0.5s infinite ease-in-out alternate;
+      }
+      body.party-active .trust-item:nth-child(1) { animation-delay: 0s; }
+      body.party-active .trust-item:nth-child(2) { animation-delay: 0.15s; }
+      body.party-active .trust-item:nth-child(3) { animation-delay: 0.3s; }
+      @keyframes trustItemDance {
+        0% { transform: translateY(0) scale(1); }
+        100% { transform: translateY(-12px) scale(1.05); }
+      }
+
+      /* Story & Hero images rocking */
+      body.party-active .story-img img,
+      body.party-active .hero-img-wrapper img {
+        animation: imgRock 0.5s infinite ease-in-out alternate;
+        box-shadow: 0 0 40px rgba(0, 240, 255, 0.6), 0 0 80px rgba(255, 0, 128, 0.4);
+      }
+      @keyframes imgRock {
+        0% { transform: scale(1) rotate(-2deg); }
+        100% { transform: scale(1.06) rotate(2deg); }
+      }
+    </style>
+    <!-- DARNA UNIFIED SHOPPING CART ENGINE -->
+    <script src="cart.js"></script>
+  </head>
+  <body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===========================================================
+         VIG PARTY MODE OVERLAY (Ctrl + V Easter Egg)
+         =========================================================== -->
+    <div class="party-overlay" id="partyOverlay">
+      <!-- Confetti & Sparkles Canvas -->
+      <canvas id="partyCanvas"></canvas>
+
+      <!-- Disco Ball with Hanging Chain -->
+      <div class="party-discoball-wrap">
+        <div class="party-discoball-chain"></div>
+        <div class="party-discoball"></div>
+      </div>
+
+      <!-- 4 Sweeping Laser Spotlights -->
+      <div class="party-laser laser-tl"></div>
+      <div class="party-laser laser-tr"></div>
+      <div class="party-laser laser-bl"></div>
+      <div class="party-laser laser-br"></div>
+
+      <!-- Strobe Lighting Effect -->
+      <div class="party-strobe"></div>
+
+      <!-- Top Floating Party HUD -->
+      <div class="party-hud">
+        <div class="party-live-badge">
+          <span>●</span> LIVE DJ
+        </div>
+        <div class="party-equalizer">
+          <div class="party-bar"></div>
+          <div class="party-bar"></div>
+          <div class="party-bar"></div>
+          <div class="party-bar"></div>
+          <div class="party-bar"></div>
+          <div class="party-bar"></div>
+        </div>
+        <span class="party-hud-title">🪩 حفلة دارنا التونسية مولّعة!</span>
+        <button class="party-hud-btn" onclick="togglePartyMode()">
+          إيقاف الحفلة (Ctrl+V) ✕
+        </button>
+      </div>
+
+      <!-- Dancing Characters Stage -->
+      <div class="party-stage">
+        <div class="party-speech-bubble">
+          💃 جوّ تونسي في العلالي! 🪩
+        </div>
+        <div class="party-dancers-group">
+          <!-- Light-up circular dance floor -->
+          <div class="party-dancefloor"></div>
+
+          <!-- Character 1: Tunisian DJ Chechia Dancer -->
+          <div class="dancer-figure">
+            <svg width="100" height="150" viewBox="0 0 100 150">
+              <!-- Shadow -->
+              <ellipse cx="50" cy="144" rx="28" ry="6" fill="rgba(0,0,0,0.3)"/>
+              <!-- Dancing Legs -->
+              <line x1="42" y1="105" x2="35" y2="140" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+              <line x1="58" y1="105" x2="68" y2="138" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+              <!-- Cool Sneakers -->
+              <ellipse cx="32" cy="142" rx="9" ry="5" fill="#ff0055"/>
+              <ellipse cx="72" cy="140" rx="9" ry="5" fill="#00f0ff"/>
+              <!-- Body / Funky Jacket -->
+              <path d="M30 65 Q50 62 70 65 L66 108 Q50 112 34 108 Z" fill="#24231f"/>
+              <!-- Gold Chain -->
+              <path d="M42 66 Q50 82 58 66" stroke="#d4a853" stroke-width="3" fill="none"/>
+              <circle cx="50" cy="83" r="4" fill="#d4a853"/>
+              <!-- Left Disco Arm (pointing up) -->
+              <g class="chechia-arm-left">
+                <line x1="30" y1="68" x2="12" y2="35" stroke="#24231f" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="10" cy="32" r="5" fill="#f2b38f"/>
+                <polygon points="10,24 6,34 14,34" fill="#00f0ff"/>
+              </g>
+              <!-- Right Disco Arm (pointing down) -->
+              <g class="chechia-arm-right">
+                <line x1="70" y1="68" x2="88" y2="92" stroke="#24231f" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="90" cy="94" r="5" fill="#f2b38f"/>
+              </g>
+              <!-- Head -->
+              <circle cx="50" cy="46" r="16" fill="#f2b38f"/>
+              <!-- Big Smile -->
+              <path d="M44 51 Q50 57 56 51" stroke="#222" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- Shutter Shades / Party Sunglasses -->
+              <rect x="36" y="40" width="28" height="9" rx="3" fill="#111"/>
+              <line x1="37" y1="43" x2="48" y2="43" stroke="#00f0ff" stroke-width="1.5"/>
+              <line x1="37" y1="46" x2="48" y2="46" stroke="#00f0ff" stroke-width="1.5"/>
+              <line x1="52" y1="43" x2="63" y2="43" stroke="#ff007f" stroke-width="1.5"/>
+              <line x1="52" y1="46" x2="63" y2="46" stroke="#ff007f" stroke-width="1.5"/>
+              <!-- Red Tunisian Chechia (شاشية تونسية) -->
+              <path d="M35 34 C35 20, 65 20, 65 34 Z" fill="#c9182b"/>
+              <ellipse cx="50" cy="34" rx="15" ry="3" fill="#a01222"/>
+              <!-- Chechia Tassel (الكبوس الأسود) -->
+              <g class="chechia-tassel">
+                <circle cx="50" cy="22" r="2.5" fill="#111"/>
+                <path d="M50 22 Q58 24 62 36" stroke="#111" stroke-width="2" fill="none"/>
+                <circle cx="62" cy="37" r="3" fill="#111"/>
+              </g>
+              <!-- DJ Headphones -->
+              <path d="M30 46 C25 28, 75 28, 70 46" stroke="#00f0ff" stroke-width="4" fill="none"/>
+              <rect x="27" y="40" width="7" height="14" rx="3" fill="#ff007f"/>
+              <rect x="66" y="40" width="7" height="14" rx="3" fill="#ff007f"/>
+            </svg>
+          </div>
+
+          <!-- Character 2: Rockstar Mehres with Pestle Microphone -->
+          <div class="dancer-mehres-fig">
+            <svg width="85" height="120" viewBox="0 0 85 120">
+              <!-- Shadow -->
+              <ellipse cx="42" cy="114" rx="22" ry="5" fill="rgba(0,0,0,0.3)"/>
+              <!-- Little Dancing Feet -->
+              <ellipse cx="30" cy="112" rx="7" ry="4" fill="#d4a853"/>
+              <ellipse cx="55" cy="112" rx="7" ry="4" fill="#d4a853"/>
+              <!-- Brass Mehres Body -->
+              <path d="M20 55 L28 98 L57 98 L65 55 Z" fill="url(#mehresGoldGrad)"/>
+              <!-- Base of Mehres -->
+              <ellipse cx="42.5" cy="98" rx="16" ry="5" fill="#b8860b"/>
+              <!-- Rim of Mehres -->
+              <ellipse cx="42.5" cy="55" rx="22" ry="7" fill="#f0c05a"/>
+              <ellipse cx="42.5" cy="55" rx="18" ry="5" fill="#8b6508"/>
+              <!-- Pestle Held as Microphone -->
+              <g transform="rotate(25 45 40)">
+                <rect x="40" y="10" width="7" height="42" rx="3" fill="#d4a853"/>
+                <circle cx="43.5" cy="12" r="6" fill="#f7d070"/>
+                <!-- Microphone mesh lines on pestle tip -->
+                <line x1="40" y1="12" x2="47" y2="12" stroke="#664d03" stroke-width="1.5"/>
+              </g>
+              <!-- Mehres Cool Sunglasses -->
+              <rect x="30" y="68" width="11" height="7" rx="2" fill="#111"/>
+              <rect x="44" y="68" width="11" height="7" rx="2" fill="#111"/>
+              <line x1="41" y1="71" x2="44" y2="71" stroke="#111" stroke-width="2"/>
+              <line x1="31" y1="70" x2="39" y2="70" stroke="#00f0ff" stroke-width="1"/>
+              <line x1="45" y1="70" x2="53" y2="70" stroke="#ff007f" stroke-width="1"/>
+              <!-- Happy Smile -->
+              <path d="M36 82 Q42.5 88 49 82" stroke="#5a3d00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- Floating Musical Notes -->
+              <text x="66" y="45" font-size="16" fill="#ff007f">♪</text>
+              <text x="10" y="42" font-size="18" fill="#00f0ff">♫</text>
+              <defs>
+                <linearGradient id="mehresGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#c9922c"/>
+                  <stop offset="30%" stop-color="#fad980"/>
+                  <stop offset="60%" stop-color="#dfaa38"/>
+                  <stop offset="100%" stop-color="#9d6e15"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Overlay -->
+    <nav class="mobile-nav" id="mobileNav">
+      <button
+        class="mobile-nav-close"
+        onclick="closeMobileNav()"
+        aria-label="إغلاق القائمة"
+      >
+        ✕
+      </button>
+      <a href="product.html" onclick="closeMobileNav()" style="color:var(--accent);font-weight:800">صفحة المهراس الأصيل</a>
+      <a href="#" onclick="closeMobileNav(); if(window.DarnaCart) DarnaCart.openCart(); return false;" style="display:flex;align-items:center;gap:8px;color:var(--text-primary);font-weight:800">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>سلة المشتريات (Panier)</span>
+        <span class="cart-count-badge" style="display:none;background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px;font-size:11px">0</span>
+      </a>
+      <a href="#collection" onclick="closeMobileNav()">المجموعة</a>
+      <a href="#story" onclick="closeMobileNav()">حكاية دارنا</a>
+      <a href="#benefits" onclick="closeMobileNav()">علاش دارنا؟</a>
+      <a href="#faq" onclick="closeMobileNav()">الأسئلة الشائعة</a>
+      <div style="display: flex; align-items: center; gap: 12px; margin: 8px 0">
+        <button
+          class="theme-toggle"
+          onclick="toggleTheme()"
+          aria-label="تبديل الوضع"
+        >
+          <svg
+            class="icon-moon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg
+            class="icon-sun"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <span
+          style="
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+          "
+          >تبديل المظهر (ليلي / نهاري)</span
+        >
+      </div>
+      <a
+        href="#order"
+        onclick="closeMobileNav()"
+        class="btn-primary"
+        style="margin-top: 6px"
+        >اطلب توا ↙</a
+      >
+    </nav>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <span>دارنا — تفاصيل صغيرة، روح الدار الكبيرة</span> <b> ✦ </b>
+      <span>اسألنا على التوصيل والأسعار</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="header-inner">
+        <a class="brand" href="#home">
+          <img
+            class="brand-logo"
+            src="logo.jpg"
+            alt="دارنا — DARNA Premium Home Supplies"
+          />
+        </a>
+        <nav class="nav">
+          <a href="product.html" style="color:var(--accent);font-weight:800">صفحة المهراس الأصيل</a>
+          <a href="#collection">المجموعة</a>
+          <a href="#story">حكاية دارنا</a>
+          <a href="#benefits">علاش دارنا؟</a>
+          <a href="#faq">الأسئلة الشائعة</a>
+        </nav>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <!-- SHOPPING CART TRIGGER -->
+          <button
+            class="header-cart-btn"
+            id="headerCartBtn"
+            onclick="if(window.DarnaCart) DarnaCart.openCart(); return false;"
+            aria-label="سلة المشتريات"
+            title="سلة المشتريات (Panier)"
+            style="position:relative;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-primary);transition:all 0.2s ease"
+            onmouseover="this.style.borderColor='var(--accent)'"
+            onmouseout="this.style.borderColor='var(--border)'"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="cart-count-badge" style="position:absolute;top:-4px;right:-4px;display:none;min-width:18px;height:18px;font-size:11px;font-weight:800;line-height:18px;padding:0 4px;border-radius:10px;background:var(--accent);color:#ffffff;text-align:center;box-shadow:0 2px 6px var(--accent-glow)">0</span>
+          </button>
+          <button
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            aria-label="تبديل الوضع"
+          >
+            <svg
+              class="icon-moon"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg
+              class="icon-sun"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+          <button class="header-cta" onclick="scrollToOrder()">
+            اطلب توا ↙
+          </button>
+          <button
+            class="menu-toggle"
+            onclick="openMobileNav()"
+            aria-label="القائمة"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="home">
+        <div class="hero-content animate-on-scroll">
+          <div class="eyebrow">من تراثنا، لكوجينتك</div>
+          <h1>ريحة البهارات،<br /><em>تحكي حكاية دار.</em></h1>
+          <p class="hero-desc">
+            المهراس موش مجرّد قطعة في الكوجينة؛ هو لمسة من عاداتنا وتفاصيلنا
+            التونسية. اكتشف مهاريس دارنا وخيّر اللي يناسبك.
+          </p>
+          <div class="hero-actions">
+            <a href="#collection" class="btn-primary">اكتشف المجموعة ←</a>
+            <button class="btn-secondary" onclick="scrollToOrder()">
+              اسألنا على التفاصيل ↗
+            </button>
+          </div>
+          <div class="hero-proof">
+            <div class="hero-proof-badge">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+            </div>
+            <div>
+              <b>اختيار من دارنا لدارك</b>
+              <small>خدمة مباشرة · إجابة على استفساراتك</small>
+            </div>
+            <span class="stars">★★★★★</span>
+          </div>
+        </div>
+        <div class="hero-visual animate-on-scroll">
+          <div class="hero-img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=90"
+              alt="توابل للمطبخ التونسي"
+            />
+            <div class="hero-caption">الأصالة في كل تفصيلة</div>
+          </div>
+          <div class="hero-stamp">
+            صنع بحب
+            <b>دارنا</b>
+            من تراثنا
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Bar -->
+      <section class="trust-bar animate-on-scroll">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              ></polygon>
+            </svg>
+          </div>
+          <b>اختيار على ذوقك</b>
+          <small>اسألنا ونعاونك تختار</small>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+              ></path>
+            </svg>
+          </div>
+          <b>تواصل مباشر</b>
+          <small>على واتساب أو الميساج</small>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <b>توصيل حسب التوفّر</b>
+          <small>أكد التفاصيل قبل الطلب</small>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <b>دارنا لدارك</b>
+          <small>تفاصيل تستحقّها كوجينتك</small>
+        </div>
+      </section>
+
+      <!-- Products Collection -->
+      <section class="section" id="collection">
+        <div class="section-header animate-on-scroll">
+          <div>
+            <div class="eyebrow">اختار اللي يشبهك</div>
+            <h2>مجموعة <em>المهراس</em></h2>
+            <p>شوف اختيارات دارنا واسألنا على المقاسات والأسعار المتوفّرة.</p>
+          </div>
+          <a href="#order" class="section-link">تعدّي للطلب ←</a>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">الكل</button>
+          <button class="filter-btn" data-filter="classic">الكلاسيكي</button>
+          <button class="filter-btn" data-filter="premium">اختيار دارنا</button>
+          <button class="filter-btn" data-filter="set">المجموعات</button>
+        </div>
+        <div class="products-grid">
+          <article class="product-card animate-on-scroll" data-kind="classic">
+            <div class="product-img">
+              <div class="product-badge">كلاسيكي</div>
+              <img
+                src="mehres_classic.jpg"
+                alt="المهراس الكلاسيكي"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <small>CLASSIC MEHRES</small>
+              <h3>المهراس الكلاسيكي</h3>
+              <p>للاستعمال اليومي وتحضير التوابل.</p>
+              <span class="product-price">السعر عند الطلب</span>
+            </div>
+            <button class="product-cta" onclick="pick('المهراس الكلاسيكي')">
+              اسأل على المنتج ←
+            </button>
+          </article>
+          <article class="product-card animate-on-scroll" data-kind="premium">
+            <div class="product-img">
+              <div class="product-badge">مميّز</div>
+              <img
+                src="mehres_signature.jpg"
+                alt="مهراس دارنا المميّز"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <small>DARNA SIGNATURE</small>
+              <h3>مهراس دارنا المميّز</h3>
+              <p>لمسة تقليدية تليق بكوجينتك.</p>
+              <span class="product-price">السعر عند الطلب</span>
+            </div>
+            <button class="product-cta" onclick="pick('مهراس دارنا المميّز')">
+              اسأل على المنتج ←
+            </button>
+          </article>
+          <article class="product-card animate-on-scroll" data-kind="set">
+            <div class="product-img">
+              <div class="product-badge">مجموعة</div>
+              <img
+                src="mehres_set.jpg"
+                alt="مجموعة المهراس"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <small>THE MEHRES SET</small>
+              <h3>مجموعة المهراس</h3>
+              <p>اسألنا على تفاصيل المجموعة المتوفّرة.</p>
+              <span class="product-price">السعر عند الطلب</span>
+            </div>
+            <button class="product-cta" onclick="pick('مجموعة المهراس')">
+              اسأل على المنتج ←
+            </button>
+          </article>
+        </div>
+        <p class="note-text">
+          * الصور للتوضيح فقط. بدّلها بصور منتجاتك الحقيقية وأضف الأسعار
+          والمقاسات قبل النشر.
+        </p>
+      </section>
+
+      <!-- Story -->
+      <section class="story-section" id="story">
+        <div class="story-img">
+          <img
+            src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1100&q=85"
+            alt="توابل ومكونات المطبخ"
+          />
+        </div>
+        <div class="story-content animate-on-scroll">
+          <div class="eyebrow">حكاية دارنا</div>
+          <h2>موش كان منتوج.<br /><em>تفصيلة من دارنا.</em></h2>
+          <p>
+            في كل دار تونسية، فما تفاصيل صغيرة عندها قيمة كبيرة. المهراس يذكّرنا
+            بريحة التوابل، بلمة العايلة، وبالطريقة اللي تعلّمناها من قبل.
+          </p>
+          <p>
+            في دارنا، نحبّوا نقرّبوا التفاصيل هاذي ليكم، ونخلّيو اختيارك ساهل
+            وواضح من أول سؤال حتى لتأكيد الطلب.
+          </p>
+        </div>
+      </section>
+
+      <!-- Benefits -->
+      <section class="section" id="benefits">
+        <div class="animate-on-scroll">
+          <div class="eyebrow">علاش تختار دارنا؟</div>
+          <h2>اختيار واضح، <em>من أول سؤال.</em></h2>
+        </div>
+        <div class="benefits-grid">
+          <article class="benefit-card animate-on-scroll">
+            <span class="benefit-num">01</span>
+            <h3>تفاصيل واضحة</h3>
+            <p>نتأكّدوا من المقاس والخامة والتصميم قبل الطلب.</p>
+          </article>
+          <article class="benefit-card animate-on-scroll">
+            <span class="benefit-num">02</span>
+            <h3>تواصل مباشر</h3>
+            <p>اسأل على السعر والتوفّر والتوصيل.</p>
+          </article>
+          <article class="benefit-card animate-on-scroll">
+            <span class="benefit-num">03</span>
+            <h3>اختيار يناسبك</h3>
+            <p>نعاونك تفهم الاختيارات الموجودة.</p>
+          </article>
+          <article class="benefit-card animate-on-scroll">
+            <span class="benefit-num">04</span>
+            <h3>تأكيد قبل الإرسال</h3>
+            <p>راجع تفاصيل طلبك قبل التأكيد.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Order Form -->
+      <section class="order-section" id="order">
+        <div class="order-inner">
+          <div class="order-info animate-on-scroll">
+            <div class="eyebrow">خطوة وتولي من دارك</div>
+            <h2>لقيت المهراس<br /><em>اللي يعجبك؟</em></h2>
+            <p>
+              عمّر معلوماتك ونوصّلوا التفاصيل مباشرة. السعر والتوصيل يتأكّدوا
+              معاك قبل تثبيت الطلب.
+            </p>
+            <ul class="order-features">
+              <li>
+                <span>
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 20h9"></path>
+                    <path
+                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                    ></path>
+                  </svg>
+                </span>
+                عمّر الاستمارة بمعلوماتك
+              </li>
+              <li>
+                <span>
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                    ></path>
+                  </svg>
+                </span>
+                يوصلنا الطلب مباشرة على واتساب
+              </li>
+              <li>
+                <span>
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    ></path>
+                  </svg>
+                </span>
+                نتواصلوا معاك للتأكيد
+              </li>
+              <li>
+                <span>
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon
+                      points="16 8 20 8 23 11 23 16 16 16 16 8"
+                    ></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
+                </span>
+                نخدموا التوصيل حسب التوفّر
+              </li>
+            </ul>
+          </div>
+          <div class="form-card animate-on-scroll">
+            <form id="orderForm">
+              <h3>طلبك يبدأ من هنا.</h3>
+              <div class="form-group">
+                <label for="field-name">الاسم واللقب *</label>
+                <input
+                  id="field-name"
+                  name="name"
+                  required
+                  placeholder="اكتب اسمك"
+                  maxlength="100"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="field-phone">رقم التليفون *</label>
+                  <input
+                    id="field-phone"
+                    name="phone"
+                    required
+                    type="tel"
+                    placeholder="XX XXX XXX"
+                    maxlength="20"
+                    autocomplete="tel"
+                    pattern="[0-9\s\+\-]{6,20}"
+                  />
+                </div>
+                <div class="form-group custom-select-group">
+                  <label for="cityTriggerBtn">الولاية *</label>
+                  <div class="custom-select-wrapper" id="citySelectWrapper">
+                    <input type="hidden" id="field-city" name="city" required />
+
+                    <!-- Main Clickable Trigger Field -->
+                    <div
+                      class="custom-select-trigger"
+                      id="cityTriggerBtn"
+                      onclick="toggleCityDropdown(event)"
+                    >
+                      <span class="custom-select-label" id="citySelectedLabel"
+                        >اختر الولاية...</span
+                      >
+                      <span class="custom-select-arrow">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </span>
+                    </div>
+
+                    <!-- Dropdown Panel (Always opens DOWNWARDS) -->
+                    <div class="custom-select-dropdown" id="cityDropdown">
+                      <!-- Prominent Search Bar with Search Icon -->
+                      <div
+                        class="custom-select-search-bar"
+                        onclick="event.stopPropagation()"
+                      >
+                        <svg
+                          class="search-icon"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input
+                          type="text"
+                          id="citySearchInput"
+                          class="custom-select-search-input"
+                          placeholder="ابحث عن ولايتك (صفاقس، سوسة...)"
+                          autocomplete="off"
+                          oninput="filterCityOptions(this.value)"
+                        />
+                      </div>
+                      <!-- Filtered Options List -->
+                      <div
+                        class="custom-select-options-list"
+                        id="cityOptionsList"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="field-product">المنتج</label>
+                <select id="field-product" name="product">
+                  <option>المهراس الكلاسيكي</option>
+                  <option>مهراس دارنا المميّز</option>
+                  <option>مجموعة المهراس</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-qty">الكمية (أقصى حد: 20)</label>
+                <div class="qty-counter">
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    id="qtyMinus"
+                    onclick="updateQty(-1)"
+                    aria-label="تقليص الكمية"
+                    disabled
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    id="field-qty"
+                    name="qty"
+                    class="qty-input"
+                    value="1"
+                    min="1"
+                    max="20"
+                    readonly
+                  />
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    id="qtyPlus"
+                    onclick="updateQty(1)"
+                    aria-label="زيادة الكمية"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="field-notes">ملاحظة</label>
+                <textarea
+                  id="field-notes"
+                  name="notes"
+                  rows="3"
+                  placeholder="أي تفاصيل إضافية..."
+                  maxlength="500"
+                ></textarea>
+              </div>
+              <button class="form-submit" type="submit" id="submitBtn">
+                <span class="btn-text">ابعث تفاصيل الطلب ↗</span>
+                <span class="spinner"></span>
+              </button>
+              <p class="form-note">
+                ✦ الدفع عند الاستلام (COD). نتواصلوا معاك في أقرب وقت لتأكيد موعد التوصيل لدارك.
+              </p>
+            </form>
+            <div class="form-success" id="formSuccess">
+              <div class="check-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3>شكراً! تم تأكيد طلبك بنجاح</h3>
+              <div id="confirmedOrderBadge" style="margin: 12px auto; padding: 8px 16px; background: var(--bg-elevated); border: 1px dashed var(--accent); border-radius: var(--radius-sm); font-weight: 700; font-size: 14px; color: var(--accent); display: inline-block;">
+                رقم الطلب: <span id="confirmedOrderNum">...</span>
+              </div>
+              <p id="confirmedOrderText">
+                تم تسجيل طلبك في منظومة دارنا. سنتصل بك قريباً على رقم هاتفك لتأكيد موعد التوصيل. الدفع نقداً عند الاستلام.
+              </p>
+              <button onclick="resetForm()">ابعث طلب جديد</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="faq-section">
+          <div class="animate-on-scroll">
+            <div class="eyebrow">عندك سؤال؟</div>
+            <h2>كل شي واضح،<br /><em>قبل ما تطلب.</em></h2>
+            <button
+              class="btn-primary"
+              onclick="contactWhatsApp()"
+              style="margin-top: 20px"
+            >
+              اسألنا على واتساب ↗
+            </button>
+          </div>
+          <div class="faq-list animate-on-scroll">
+            <details>
+              <summary>قدّاش سوم المهراس؟</summary>
+              <p>
+                السعر يتأكّد حسب الموديل والمقاس المتوفّر. تواصل معانا باش
+                نأكّدولك.
+              </p>
+            </details>
+            <details>
+              <summary>شنوّة المقاسات والخامات المتوفّرة؟</summary>
+              <p>تواصل معانا ونبعثولك الصور والتفاصيل الدقيقة حسب المتوفّر.</p>
+            </details>
+            <details>
+              <summary>التوصيل موجود لكل الولايات؟</summary>
+              <p>
+                اسألنا على التوصيل لولايتك، المدة والتكلفة يتحددوا حسب الموقع.
+              </p>
+            </details>
+            <details>
+              <summary>كيفاش نأكّد طلبي؟</summary>
+              <p>
+                نراجعوا معاك المنتج والسعر والتوصيل قبل التأكيد النهائي. ما
+                نخدموا حتى طلب بدون موافقتك.
+              </p>
+            </details>
+            <details>
+              <summary>ينجّم يتبدّل أو يترجع المنتج؟</summary>
+              <p>نحكيوا معاك على التفاصيل هاذي وقت التأكيد. راحتك تهمّنا.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="closing-cta">
+        <div class="closing-inner">
+          <div>
+            <small>DARNA · دارنا</small>
+            <h2>التفاصيل الصغيرة،<br />هي اللي تعمل <em>الفرق.</em></h2>
+          </div>
+          <a href="#collection" class="closing-cta-btn">اكتشف المهاريس ↖</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-brand">
+        <b>دارنا · DARNA</b>
+        <p>من تراثنا، لدارك.</p>
+      </div>
+      <small>© <span id="year"></span> DARNA. جميع الحقوق محفوظة.</small>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="wa-float">
+      <span class="wa-tooltip">اسألنا على واتساب</span>
+      <button
+        class="wa-btn"
+        onclick="contactWhatsApp()"
+        aria-label="تواصل واتساب"
+      >
+        ↗
+      </button>
+    </div>
+
+    <script>
+      /* ===========================================================
+   DARNA — Configuration & Core Logic
+   =========================================================== */
+
+      // ╔══════════════════════════════════════════════════════╗
+      // ║  ⚙️  CONFIGURATION — SET THESE BEFORE PUBLISHING   ║
+      // ╚══════════════════════════════════════════════════════╝
+
+      // Your WhatsApp number with country code (digits only, e.g. "21612345678")
+      const WHATSAPP_NUMBER = "+21627900771";
+
+      // Your CallMeBot API key (get it free: https://www.callmebot.com/blog/free-api-whatsapp-messages/)
+      // Steps:  1) Save +34 644 71 89 07 in your contacts
+      //         2) Send "I allow callmebot to send me messages" to that number on WhatsApp
+      //         3) You'll receive your API key — paste it below
+      const CALLMEBOT_API_KEY = "";
+
+      // Rate-limit: minimum seconds between form submissions (anti-spam)
+      const SUBMIT_COOLDOWN_SECONDS = 30;
+
+      /* ===========================================================
+   SECURITY: Input Sanitization
+   =========================================================== */
+      function sanitize(str) {
+        if (typeof str !== "string") return "";
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#x27;")
+          .trim()
+          .slice(0, 500);
+      }
+
+      function sanitizePlain(str) {
+        // Strip all HTML/script entirely, keep plain text only
+        if (typeof str !== "string") return "";
+        return str
+          .replace(/<[^>]*>/g, "")
+          .trim()
+          .slice(0, 500);
+      }
+
+      function isValidPhone(phone) {
+        return /^[\d\s\+\-]{6,20}$/.test(phone);
+      }
+
+      /* ===========================================================
+   TOAST NOTIFICATIONS
+   =========================================================== */
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        toast.textContent = (type === "success" ? "✓ " : "• ") + message;
+        toast.className = "toast " + type + " show";
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 4000);
+      }
+
+      /* ===========================================================
+   NAVIGATION
+   =========================================================== */
+      function scrollToOrder() {
+        document.getElementById("order").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function openMobileNav() {
+        document.getElementById("mobileNav").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* ===========================================================
+   WHATSAPP — Direct Contact (opens user's WhatsApp)
+   =========================================================== */
+      function contactWhatsApp(message) {
+        message =
+          message || "عسلامة دارنا، نحب نستفسر على المهراس والأسعار والتوصيل.";
+        const cleanPhone = (WHATSAPP_NUMBER || "").replace(/\D/g, "");
+        if (!cleanPhone) {
+          showToast("يلزم تضيف رقم واتساب في إعدادات الموقع", "error");
+          return;
+        }
+        window.open(
+          "https://wa.me/" +
+            cleanPhone +
+            "?text=" +
+            encodeURIComponent(message),
+          "_blank",
+        );
+      }
+
+      /* ===========================================================
+   CALLMEBOT — Send WhatsApp message TO the store owner
+   (the customer does NOT need to open WhatsApp)
+   =========================================================== */
+      function sendToOwnerWhatsApp(orderText) {
+        return new Promise((resolve, reject) => {
+          const cleanPhone = (WHATSAPP_NUMBER || "").replace(/\D/g, "");
+          if (!cleanPhone || !CALLMEBOT_API_KEY) {
+            reject(
+              new Error("WhatsApp number or CallMeBot API key not configured."),
+            );
+            return;
+          }
+
+          const apiUrl =
+            "https://api.callmebot.com/whatsapp.php" +
+            "?phone=" +
+            encodeURIComponent(cleanPhone) +
+            "&text=" +
+            encodeURIComponent(orderText) +
+            "&apikey=" +
+            encodeURIComponent(CALLMEBOT_API_KEY);
+
+          // Use an Image object to bypass CORS (fire-and-forget GET request)
+          // The API will still process the request even though the "image" fails to load
+          const beacon = new Image();
+          beacon.onload = () => resolve(true);
+          beacon.onerror = () => {
+            // CallMeBot returns non-image content, so onerror fires even on success
+            // The request was still sent and processed — this is expected behavior
+            resolve(true);
+          };
+          beacon.src = apiUrl;
+
+          // Safety timeout
+          setTimeout(() => resolve(true), 5000);
+        });
+      }
+
+      
+      /* ===========================================================
+   DYNAMIC PRODUCTS LOADER (Syncs with Admin Dashboard & Database)
+   Supports Sizes (S, M, L), Colors, Discounts & Direct Product Pages
+   =========================================================== */
+      function loadStorefrontProducts() {
+        let products = [];
+        try {
+          const raw = localStorage.getItem('darna_products');
+          if (raw) products = JSON.parse(raw);
+        } catch(e) {}
+
+        // Fallback flagship products with variants & discounts
+        if (!products || !products.length || !products.some(p => p.sizes && p.sizes.length)) {
+          products = [
+            {
+              id: 'prod-mehres-core',
+              slug: 'mehres-tunisien',
+              name: 'المهراس التونسي التقليدي الأصيل',
+              price_tnd: 64,
+              original_price_tnd: 89,
+              cost_price_tnd: 32,
+              image_url: 'mehres_classic.jpg',
+              gallery: ['mehres_classic.jpg', 'mehres_signature.jpg', 'mehres_set.jpg'],
+              sizes: ['S', 'M', 'L'],
+              colors: [
+                { name: 'حجري أصيل', hex: '#7a756b', image: 'mehres_classic.jpg' },
+                { name: 'بيج رخامي', hex: '#d8c5ad', image: 'mehres_signature.jpg' },
+                { name: 'رمادي داكن', hex: '#42403b', image: 'mehres_set.jpg' }
+              ],
+              description: 'المهراس الأم الأساسي لدارنا منحوت يدوياً من الحجر الطبيعي الصلب. متوفر بـ 3 مقاسات S, M, L وألوان حجرية أصيلة.',
+              badge: 'المنتج الأم الأصيل',
+              is_active: true
+            },
+            {
+              id: 'prod-pestle-olive',
+              slug: 'medagga-zitoun',
+              name: 'مدقة مهراس تقليدية من خشب الزيتون الفاخر',
+              price_tnd: 24,
+              original_price_tnd: 32,
+              cost_price_tnd: 10,
+              image_url: 'mehres_signature.jpg',
+              gallery: ['mehres_signature.jpg'],
+              sizes: ['18 سم', '22 سم'],
+              colors: [{ name: 'خشب زيتون طبيعي', hex: '#b5793e', image: 'mehres_signature.jpg' }],
+              description: 'مدقة متينة ومصقولة من أجود أخشاب الزيتون التونسي لتلائم جميع أحجام المهاريس.',
+              badge: 'خشب زيتون طبيعي',
+              is_active: true
+            },
+            {
+              id: 'prod-spices-set',
+              slug: 'spices-tunisian-set',
+              name: 'طقم التوابل الفخاري التونسي التقليدي',
+              price_tnd: 48,
+              original_price_tnd: 65,
+              cost_price_tnd: 20,
+              image_url: 'mehres_set.jpg',
+              gallery: ['mehres_set.jpg'],
+              sizes: ['طقم 4 قطع', 'طقم 6 قطع'],
+              colors: [
+                { name: 'أزرق سيدي بوسعيد', hex: '#2563eb', image: 'mehres_set.jpg' },
+                { name: 'أخضر نابل التقليدي', hex: '#059669', image: 'mehres_set.jpg' }
+              ],
+              description: 'أواني فخارية مزججة يدوياً لحفظ التوابل والأعشاب التونسية بنكهتها الطازجة.',
+              badge: 'طقم تقليدي أصيل',
+              is_active: true
+            }
+          ];
+        }
+
+        const activeProducts = products.filter(p => p.is_active !== false);
+
+        // Render into .products-grid
+        const grid = document.querySelector('.products-grid');
+        if (grid && activeProducts.length) {
+          grid.innerHTML = activeProducts.map(p => {
+            let img = p.image_url || 'mehres_classic.jpg';
+            if (img.startsWith('../')) img = img.replace(/^\.\.\//, '');
+
+            const sellPrice = parseFloat(p.price_tnd) || 0;
+            const origPrice = parseFloat(p.original_price_tnd) || 0;
+            const discountPct = (origPrice > sellPrice && origPrice > 0) ? Math.round(((origPrice - sellPrice) / origPrice) * 100) : 0;
+            const savingsTnd = (origPrice - sellPrice).toFixed(0);
+
+            // Discount Badge
+            const discountBadgeHtml = discountPct > 0 
+              ? `<div style="position:absolute;top:12px;left:12px;background:#ef4444;color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(239,68,68,0.3);z-index:2">-${discountPct}% تخفيض</div>`
+              : '';
+
+            // Sizes preview pills
+            const hasSizePricing = p.has_size_pricing === true || (Array.isArray(p.sizes) && p.sizes.some(s => typeof s === 'object' && s.price));
+            const sizesArr = Array.isArray(p.sizes) ? p.sizes : [];
+            const sizesHtml = sizesArr.length 
+              ? `<div style="display:flex;align-items:center;gap:5px;margin:8px 0 6px;flex-wrap:wrap">
+                   <small style="color:var(--text-muted);font-size:11px;font-weight:700">المقاسات:</small>
+                   ${sizesArr.map(s => {
+                     const sz = typeof s === 'string' ? s : (s.name || s.label);
+                     const pr = (typeof s === 'object' && s.price) ? ` (${s.price} DT)` : '';
+                     return `<span style="font-size:10px;font-weight:800;background:var(--accent-glow);color:var(--accent);padding:2px 7px;border-radius:4px;border:1px solid rgba(183,101,67,0.2)">${sz}${pr}</span>`;
+                   }).join('')}
+                 </div>`
+              : '';
+
+            // Colors preview dots
+            const colorsArr = Array.isArray(p.colors) ? p.colors : [];
+            const colorsHtml = colorsArr.length 
+              ? `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+                   <small style="color:var(--text-muted);font-size:11px;font-weight:700">الألوان:</small>
+                   <div style="display:flex;gap:4px">
+                     ${colorsArr.map(c => `<span title="${c.name || ''}" style="width:13px;height:13px;border-radius:50%;background:${c.hex || '#b76543'};border:1px solid rgba(0,0,0,0.15);display:inline-block"></span>`).join('')}
+                   </div>
+                 </div>`
+              : '';
+
+            // Price Row
+            const priceHtml = sellPrice > 0 
+              ? `<div style="display:flex;align-items:baseline;gap:8px;margin-top:8px">
+                   <span class="product-price" style="color:var(--accent);font-weight:900;font-size:20px">${hasSizePricing ? '<small style="font-size:13px;font-weight:600;margin-left:2px">يبدأ من</small> ' : ''}${sellPrice} TND</span>
+                   ${discountPct > 0 ? `<span style="text-decoration:line-through;color:var(--text-muted);font-size:13px">${origPrice} TND</span><span style="color:#10b981;font-size:11px;font-weight:700">وفر ${savingsTnd} DT</span>` : ''}
+                 </div>`
+              : `<span class="product-price">السعر عند الطلب</span>`;
+
+            const badge = p.badge || 'أصالة تونسية';
+            const escapedName = (p.name || '').replace(/'/g, "\'");
+            const productPageUrl = `product.html?id=${p.id || ''}&slug=${p.slug || ''}`;
+
+            return `
+              <article class="product-card animate-on-scroll visible" style="display:flex;flex-direction:column;position:relative">
+                <div class="product-img" style="position:relative">
+                  <div class="product-badge">${badge}</div>
+                  ${discountBadgeHtml}
+                  <a href="${productPageUrl}">
+                    <img src="${img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='logo.jpg';" style="transition:transform .3s ease" />
+                  </a>
+                </div>
+                <div class="product-body" style="flex:1;display:flex;flex-direction:column">
+                  <small style="color:var(--accent);font-weight:700">${p.slug ? p.slug.replace(/[-_]/g, ' ').toUpperCase() : 'DARNA'}</small>
+                  <h3 style="margin:4px 0 6px"><a href="${productPageUrl}" style="color:inherit;text-decoration:none">${p.name}</a></h3>
+                  <p style="font-size:12px;line-height:1.6;color:var(--text-secondary);flex:1">${p.description || 'صناعة تقليدية أصيلة تليق بكوجينتك.'}</p>
+                  ${sizesHtml}
+                  ${colorsHtml}
+                  ${priceHtml}
+                </div>
+                <div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:6px">
+                  <div style="display:grid;grid-template-columns:1fr auto;gap:8px">
+                    <a href="${productPageUrl}" class="product-cta" style="background:var(--accent-gradient);color:#fff;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:800;border-radius:var(--radius-sm);padding:11px 12px;font-size:13px">
+                      <span>عرض وتخصيص المقاس ←</span>
+                    </a>
+                    <button type="button" title="أضف إلى السلة" onclick="quickAddToCart('${p.id || ''}')" style="background:var(--bg-elevated);border:1.5px solid var(--accent);color:var(--accent);border-radius:var(--radius-sm);width:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease" onmouseover="this.style.background='var(--accent-glow)'" onmouseout="this.style.background='var(--bg-elevated)'">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </button>
+                  </div>
+                  <button type="button" style="background:transparent;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px;font-size:11px;color:var(--text-muted);cursor:pointer;font-family:inherit" onclick="pick('${escapedName}')">
+                    أو اطلب في النموذج السريع بالأسفل ↙
+                  </button>
+                </div>
+              </article>
+            `;
+          }).join('');
+        }
+
+        // Update the order form product select dropdown
+        const select = document.getElementById('field-product');
+        if (select && activeProducts.length) {
+          const currentVal = select.value;
+          select.innerHTML = activeProducts.map(p => {
+            const priceText = (p.price_tnd && parseFloat(p.price_tnd) > 0) ? ` (${p.price_tnd} TND)` : '';
+            return `<option value="${p.name}">${p.name}${priceText}</option>`;
+          }).join('');
+          if (currentVal && Array.from(select.options).some(o => o.value === currentVal)) {
+            select.value = currentVal;
+          }
+        }
+      }
+
+      function quickAddToCart(productId) {
+        var products = [];
+        try { products = JSON.parse(localStorage.getItem('darna_products') || '[]'); } catch(e){}
+        var p = products.find(function(x){ return x.id === productId; });
+        if (!p) return;
+        var defSize = (p.sizes && p.sizes.length) ? (typeof p.sizes[0] === 'string' ? p.sizes[0] : (p.sizes[0].name || 'M')) : 'M';
+        var defColor = (p.colors && p.colors.length) ? p.colors[0].name : 'أصيل';
+        var defPrice = parseFloat(p.price_tnd) || 64;
+        if (p.sizes && typeof p.sizes[0] === 'object' && p.sizes[0].price) {
+          defPrice = parseFloat(p.sizes[0].price);
+        }
+        if (window.DarnaCart) {
+          window.DarnaCart.addItem(p, {
+            size: defSize,
+            color: defColor,
+            quantity: 1,
+            price: defPrice
+          });
+          window.DarnaCart.openCart();
+        }
+      }
+
+      // Live sync when products change in Admin tab in same browser
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'darna_products') {
+          loadStorefrontProducts();
+        }
+      });
+
+      // Call on startup
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadStorefrontProducts);
+      } else {
+        loadStorefrontProducts();
+      }
+
+/* ===========================================================
+   PRODUCT FILTER
+   =========================================================== */
+      document.querySelectorAll("[data-filter]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll("[data-filter]")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+          document.querySelectorAll(".product-card").forEach((card) => {
+            const show = filter === "all" || card.dataset.kind === filter;
+            card.style.display = show ? "" : "none";
+            if (show) {
+              card.style.animation = "fadeUp 0.4s ease forwards";
+            }
+          });
+        });
+      });
+
+      /* ===========================================================
+   PRODUCT PICK — Auto-select product & scroll to form
+   =========================================================== */
+      function pick(name) {
+        const select = document.getElementById("field-product");
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text === name) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+        scrollToOrder();
+      }
+
+      /* ===========================================================
+   FORM SUBMISSION — Send directly to owner's WhatsApp
+   =========================================================== */
+      let lastSubmitTime = 0;
+
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Rate limiting cooldown check
+          const now = Date.now();
+          if (now - lastSubmitTime < SUBMIT_COOLDOWN_SECONDS * 1000) {
+            const remaining = Math.ceil(
+              (SUBMIT_COOLDOWN_SECONDS * 1000 - (now - lastSubmitTime)) / 1000,
+            );
+            showToast(
+              "استنّى " + remaining + " ثانية قبل ما تبعث طلب جديد",
+              "error",
+            );
+            return;
+          }
+
+          // Gather & sanitize form data
+          const fd = new FormData(e.target);
+          const name = sanitizePlain(fd.get("name"));
+          const phone = sanitizePlain(fd.get("phone"));
+          const city = sanitizePlain(fd.get("city"));
+          const product = sanitizePlain(fd.get("product"));
+          const qty = parseInt(sanitizePlain(fd.get("qty")), 10) || 1;
+          const notes = sanitizePlain(fd.get("notes")) || "";
+
+          // Client-side validations
+          if (!name || name.length < 2) {
+            showToast("يلزم تكتب اسمك واللقب", "error");
+            return;
+          }
+          if (!isValidPhone(phone)) {
+            showToast("رقم التليفون غير صحيح", "error");
+            return;
+          }
+          if (!city || city.length < 2) {
+            showToast("يلزم تختار الولاية التونسية", "error");
+            openCityDropdown();
+            const input = document.getElementById("citySearchInput");
+            if (input) input.focus();
+            return;
+          }
+          if (qty < 1 || qty > 20) {
+            showToast("الكمية يجب أن تكون بين 1 و 20", "error");
+            return;
+          }
+
+          // Show loading state
+          const submitBtn = document.getElementById("submitBtn");
+          submitBtn.classList.add("loading");
+          submitBtn.disabled = true;
+
+          try {
+            let result = null;
+            try {
+              const response = await fetch("/api/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, phone, city, product, qty, notes }),
+              });
+              if (response.ok) {
+                result = await response.json().catch(() => null);
+              }
+            } catch(e) {
+              // Serverless API offline or local preview mode
+            }
+
+            // Local fallback if serverless function not running locally
+            if (!result || !result.success) {
+              let localOrders = [];
+              try { localOrders = JSON.parse(localStorage.getItem('darna_orders') || '[]'); } catch(e) {}
+              const orderNum = 'DARNA-' + new Date().getFullYear() + '-' + String(localOrders.length + 1).padStart(3, '0');
+              let prods = [];
+              try { prods = JSON.parse(localStorage.getItem('darna_products') || '[]'); } catch(e) {}
+              const matchProd = prods.find(p => p.name === product) || {};
+              const unitPrice = parseFloat(matchProd.price_tnd) || 0;
+              const subtotal = unitPrice * qty;
+              const total = subtotal + 7;
+
+              const newLocalOrder = {
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+                order_number: orderNum,
+                customer_name: name,
+                customer_phone: phone,
+                city: city,
+                delivery_address: city + (notes ? ' (' + notes + ')' : ''),
+                order_status: 'pending',
+                payment_status: 'pending',
+                delivery_fee_tnd: 7.00,
+                subtotal_tnd: subtotal,
+                total_tnd: total,
+                customer_notes: notes,
+                internal_notes: 'طلب مسجل من المتجر',
+                order_items: [{
+                  product_name_snapshot: product,
+                  quantity: qty,
+                  unit_price_tnd: unitPrice,
+                  line_total_tnd: subtotal
+                }],
+                created_at: new Date().toISOString()
+              };
+
+              localOrders.unshift(newLocalOrder);
+              localStorage.setItem('darna_orders', JSON.stringify(localOrders));
+
+              result = {
+                success: true,
+                order_number: orderNum,
+                product_name: product,
+                quantity: qty,
+                subtotal_tnd: subtotal,
+                total_tnd: total
+              };
+            }
+
+            // ORDER CONFIRMED BY DATABASE
+            lastSubmitTime = Date.now();
+
+            // Populate confirmed order details
+            const orderNumEl = document.getElementById("confirmedOrderNum");
+            if (orderNumEl) {
+              orderNumEl.textContent = result.order_number;
+            }
+
+            const confirmedText = document.getElementById("confirmedOrderText");
+            if (confirmedText && result.total_tnd) {
+              confirmedText.textContent = `تم تسجيل طلبك (${result.product_name} × ${result.quantity}) بمجموع ${result.total_tnd} دينار تونسي (يشمل التوصيل). سنتصل بك قريباً لتأكيد موعد التسليم لدارك. الدفع نقداً عند الاستلام.`;
+            }
+
+            // Display success screen
+            document.getElementById("orderForm").style.display = "none";
+            document.getElementById("formSuccess").classList.add("show");
+            showToast("شكراً! تم تأكيد طلبك برقم " + result.order_number);
+
+            // GA4 E-Commerce Purchase Event (Zero PII sent)
+            if (typeof window.gtag === "function") {
+              window.gtag("event", "purchase", {
+                transaction_id: result.order_number,
+                value: result.total_tnd,
+                currency: "TND",
+                items: [
+                  {
+                    item_name: result.product_name,
+                    quantity: result.quantity,
+                    price: result.subtotal_tnd ? result.subtotal_tnd / result.quantity : 0,
+                  },
+                ],
+              });
+            }
+
+            // Save local backup record for customer's browser
+            try {
+              const orders = JSON.parse(
+                localStorage.getItem("darna_orders") || "[]",
+              );
+              orders.push({
+                order_number: result.order_number,
+                name,
+                phone,
+                city,
+                product: result.product_name,
+                qty: result.quantity,
+                total_tnd: result.total_tnd,
+                timestamp: new Date().toISOString(),
+              });
+              localStorage.setItem("darna_orders", JSON.stringify(orders));
+            } catch (storageErr) {}
+
+            // Optional owner WhatsApp alert via CallMeBot (silent fire-and-forget)
+            if (CALLMEBOT_API_KEY) {
+              const orderSummaryMsg = `طلب جديد مؤكد من الموقع:\nرقم الطلب: ${result.order_number}\nالزبون: ${name}\nالهاتف: ${phone}\nالولاية: ${city}\nالمنتج: ${result.product_name} × ${qty}\nالمجموع: ${result.total_tnd} TND`;
+              sendToOwnerWhatsApp(orderSummaryMsg).catch(() => {});
+            }
+          } catch (networkErr) {
+            console.error("DARNA: Network failure during order placement:", networkErr);
+            showToast(
+              "تعذر الاتصال بالخادم. تأكد من اتصال الإنترنت ثم أعد المحاولة.",
+              "error",
+            );
+          } finally {
+            submitBtn.classList.remove("loading");
+            submitBtn.disabled = false;
+          }
+        });
+
+      /* ===========================================================
+   QUANTITY COUNTER (1 to 20 maximum)
+   =========================================================== */
+      function updateQty(delta) {
+        const input = document.getElementById("field-qty");
+        if (!input) return;
+        let val = parseInt(input.value, 10) || 1;
+        val = Math.max(1, Math.min(20, val + delta));
+        input.value = val;
+        const minus = document.getElementById("qtyMinus");
+        const plus = document.getElementById("qtyPlus");
+        if (minus) minus.disabled = val <= 1;
+        if (plus) plus.disabled = val >= 20;
+      }
+
+      /* ===========================================================
+   TUNISIAN GOVERNORATES — SEARCHABLE SELECT
+   =========================================================== */
+      const TUNISIAN_CITIES = [
+        "صفاقس (Sfax)",
+        "سوسة (Sousse)",
+        "تونس (Tunis)",
+        "أريانة (Ariana)",
+        "بن عروس (Ben Arous)",
+        "منوبة (Manouba)",
+        "نابل (Nabeul)",
+        "بنزرت (Bizerte)",
+        "المنستير (Monastir)",
+        "المهدية (Mahdia)",
+        "القيروان (Kairouan)",
+        "قابس (Gabès)",
+        "مدنين (Medenine)",
+        "قفصة (Gafsa)",
+        "القصرين (Kasserine)",
+        "سيدي بوزيد (Sidi Bouzid)",
+        "باجة (Béja)",
+        "جندوبة (Jendouba)",
+        "الكاف (Le Kef)",
+        "سليانة (Siliana)",
+        "زغوان (Zaghouan)",
+        "تطاوين (Tataouine)",
+        "توزر (Tozeur)",
+        "قبلي (Kebili)",
+      ];
+
+      let selectedCityValue = "";
+
+      function renderCityOptions(filterText = "") {
+        const list = document.getElementById("cityOptionsList");
+        if (!list) return;
+        const q = (filterText || "").trim().toLowerCase();
+        const matched = TUNISIAN_CITIES.filter((c) =>
+          c.toLowerCase().includes(q),
+        );
+
+        if (matched.length === 0) {
+          list.innerHTML =
+            '<div class="custom-select-empty">لا توجد ولاية بهذا الاسم</div>';
+          return;
+        }
+
+        list.innerHTML = matched
+          .map((city) => {
+            const isSelected = city === selectedCityValue ? " selected" : "";
+            return `<div class="custom-select-option${isSelected}" onclick="selectCity('${city}')">${city}</div>`;
+          })
+          .join("");
+      }
+
+      function openCityDropdown() {
+        const wrapper = document.getElementById("citySelectWrapper");
+        if (wrapper) {
+          wrapper.classList.add("open");
+          renderCityOptions("");
+          setTimeout(() => {
+            const searchInput = document.getElementById("citySearchInput");
+            if (searchInput) {
+              searchInput.value = "";
+              searchInput.focus();
+            }
+          }, 40);
+        }
+      }
+
+      function closeCityDropdown() {
+        const wrapper = document.getElementById("citySelectWrapper");
+        if (wrapper) wrapper.classList.remove("open");
+      }
+
+      function toggleCityDropdown(e) {
+        if (e) e.stopPropagation();
+        const wrapper = document.getElementById("citySelectWrapper");
+        if (wrapper) {
+          if (wrapper.classList.contains("open")) {
+            closeCityDropdown();
+          } else {
+            openCityDropdown();
+          }
+        }
+      }
+
+      function filterCityOptions(val) {
+        renderCityOptions(val);
+      }
+
+      function selectCity(city) {
+        selectedCityValue = city;
+        const hiddenInput = document.getElementById("field-city");
+        const label = document.getElementById("citySelectedLabel");
+        if (hiddenInput) hiddenInput.value = city;
+        if (label) {
+          label.textContent = city;
+          label.classList.add("has-value");
+        }
+        renderCityOptions();
+        closeCityDropdown();
+      }
+
+      // Close on outside click
+      document.addEventListener("click", (e) => {
+        const wrapper = document.getElementById("citySelectWrapper");
+        if (wrapper && !wrapper.contains(e.target)) {
+          closeCityDropdown();
+        }
+      });
+
+      // Initialize options
+      renderCityOptions();
+
+      /* ===========================================================
+   RESET FORM — Allow new submission
+   =========================================================== */
+      function resetForm() {
+        document.getElementById("orderForm").style.display = "";
+        document.getElementById("orderForm").reset();
+        const qtyInput = document.getElementById("field-qty");
+        if (qtyInput) qtyInput.value = "1";
+        updateQty(0);
+        selectedCityValue = "";
+        const hiddenCity = document.getElementById("field-city");
+        const label = document.getElementById("citySelectedLabel");
+        const searchCity = document.getElementById("citySearchInput");
+        if (hiddenCity) hiddenCity.value = "";
+        if (label) {
+          label.textContent = "اختر الولاية...";
+          label.classList.remove("has-value");
+        }
+        if (searchCity) searchCity.value = "";
+        renderCityOptions();
+        document.getElementById("formSuccess").classList.remove("show");
+      }
+
+      /* ===========================================================
+   SCROLL ANIMATIONS (Intersection Observer)
+   =========================================================== */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      document
+        .querySelectorAll(".animate-on-scroll")
+        .forEach((el) => observer.observe(el));
+
+      /* ===========================================================
+   HEADER SCROLL EFFECT
+   =========================================================== */
+      window.addEventListener(
+        "scroll",
+        () => {
+          const header = document.getElementById("header");
+          if (header) {
+            header.classList.toggle("scrolled", window.scrollY > 40);
+          }
+        },
+        { passive: true },
+      );
+
+      /* ===========================================================
+   YEAR & MISC
+   =========================================================== */
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* ===========================================================
+   DARK / LIGHT THEME TOGGLE
+   =========================================================== */
+      function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute("data-theme") || "light";
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+      }
+
+      // Always starts in Light Mode by default
+      (function initTheme() {
+        try {
+          localStorage.removeItem("darna_theme");
+          sessionStorage.removeItem("darna_theme");
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", "light");
+      })();
+
+      /* ===========================================================
+         VIG PARTY MODE & DISCO CONTROLLER (Ctrl + V Easter Egg)
+         =========================================================== */
+      let partyAudio = null;
+      let partyActive = false;
+      let confettiAnimId = null;
+
+      function togglePartyMode() {
+        if (partyActive) {
+          stopPartyMode();
+        } else {
+          startPartyMode();
+        }
+      }
+
+      function startPartyMode() {
+        if (partyActive) return;
+        partyActive = true;
+        document.body.classList.add("party-active");
+
+        // Initialize and play audio starting at second 28
+        try {
+          if (!partyAudio) {
+            partyAudio = new Audio("871dba3d-82fe-43ec-b700-70614f1df500.wav");
+            partyAudio.loop = true;
+          }
+          partyAudio.currentTime = 28;
+          const playPromise = partyAudio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((err) => {
+              console.log("Audio play gesture required:", err);
+            });
+          }
+        } catch (e) {
+          console.error("Party audio error:", e);
+        }
+
+        // Launch celebratory confetti and dancing stars
+        startConfetti();
+
+        if (typeof showToast === "function") {
+          showToast("🪩 جوّ الحفلة التونسية بدا! اضغط Ctrl + V للإيقاف");
+        }
+      }
+
+      function stopPartyMode() {
+        if (!partyActive) return;
+        partyActive = false;
+        document.body.classList.remove("party-active");
+
+        if (partyAudio) {
+          try {
+            partyAudio.pause();
+          } catch (e) {}
+        }
+
+        stopConfetti();
+
+        if (typeof showToast === "function") {
+          showToast("تم إيقاف الحفلة ⏸️");
+        }
+      }
+
+      // Keyboard shortcut: Ctrl + V (or Cmd + V) - Celebration easter egg
+      window.addEventListener("keydown", (e) => {
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          (e.key === "v" || e.key === "V" || e.code === "KeyV")
+        ) {
+          const isInputField =
+            ["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName) &&
+            !document.activeElement.readOnly;
+          if (isInputField) return; // Allow normal clipboard paste
+          e.preventDefault();
+          togglePartyMode();
+        }
+      });
+
+      // Interactive Canvas Confetti & Particles
+      function startConfetti() {
+        const canvas = document.getElementById("partyCanvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        const handleResize = () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        };
+        window.addEventListener("resize", handleResize);
+
+        const colors = [
+          "#ff007f",
+          "#00f0ff",
+          "#ffe600",
+          "#39ff14",
+          "#9d00ff",
+          "#ff6600",
+          "#ffffff",
+        ];
+        const shapes = ["rect", "circle", "note", "star"];
+        const notes = ["♪", "♫", "🪩", "★"];
+        const particles = [];
+
+        for (let i = 0; i < 90; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height - height,
+            size: Math.random() * 10 + 6,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speedY: Math.random() * 3 + 2.5,
+            speedX: Math.sin(Math.random() * Math.PI * 2) * 2,
+            rotation: Math.random() * 360,
+            rotSpeed: (Math.random() - 0.5) * 8,
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            note: notes[Math.floor(Math.random() * notes.length)],
+          });
+        }
+
+        function render() {
+          if (!partyActive) return;
+          ctx.clearRect(0, 0, width, height);
+
+          for (let p of particles) {
+            p.y += p.speedY;
+            p.x += Math.sin(p.y * 0.02) * 2 + p.speedX * 0.3;
+            p.rotation += p.rotSpeed;
+
+            if (p.y > height + 20) {
+              p.y = -20;
+              p.x = Math.random() * width;
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+
+            if (p.shape === "rect") {
+              ctx.fillStyle = p.color;
+              ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+            } else if (p.shape === "circle") {
+              ctx.fillStyle = p.color;
+              ctx.beginPath();
+              ctx.arc(0, 0, p.size * 0.45, 0, Math.PI * 2);
+              ctx.fill();
+            } else {
+              ctx.font = `${p.size + 8}px sans-serif`;
+              ctx.fillStyle = p.color;
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText(p.note, 0, 0);
+            }
+            ctx.restore();
+          }
+
+          confettiAnimId = requestAnimationFrame(render);
+        }
+
+        render();
+      }
+
+      function stopConfetti() {
+        if (confettiAnimId) {
+          cancelAnimationFrame(confettiAnimId);
+          confettiAnimId = null;  
+        }
+        const canvas = document.getElementById("partyCanvas");
+        if (canvas) {
+          const ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Local Netlify
+.netlify/
+
+# Local Environment Variables
+.env
+.env.local
+
+# Scratch and OS files
+scratch/
+.DS_Store
+Thumbs.db

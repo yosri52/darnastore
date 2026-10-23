@@ -1,0 +1,13 @@
+{
+  "name": "darna-mehres-store",
+  "version": "1.0.0",
+  "description": "DARNA — Premium Home Supplies E-Commerce System with Supabase & Netlify Functions",
+  "private": true,
+  "scripts": {
+    "build": "echo 'DARNA static build ready'",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  }
+}
