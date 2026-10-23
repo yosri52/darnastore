@@ -10,5 +10,7 @@ node_modules/
 
 # Scratch and OS files
 scratch/
+Project/
+darna/Project/
 .DS_Store
 Thumbs.db

@@ -830,6 +830,13 @@
                 <span>المصاريف والأرباح</span>
               </div>
             </button>
+            <button class="nav-item" onclick="openAiCallSettingsModal()" style="margin-top:6px;border-top:1px dashed var(--border);padding-top:12px">
+              <div class="nav-item-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>المكالمة الذكية (مريم)</span>
+              </div>
+              <span class="nav-item-badge" id="sidebarAiCallBadge" style="background:#10b981;color:#fff">AI</span>
+            </button>
           </nav>
         </div>
         <div class="sidebar-footer">
@@ -861,6 +868,11 @@
               <p>متابعة دقيقة لمبيعات المتجر، رأس المال، الأرباح الصافية، والطلبات عبر الفترات الزمنية</p>
             </div>
             <div class="admin-header-actions">
+              <button class="btn-secondary" onclick="openAiCallSettingsModal()" style="display:inline-flex;align-items:center;gap:7px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                <span>المكالمة الذكية (مريم)</span>
+                <span id="aiCallHeaderBadge" style="font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(16,185,129,0.15);color:#10b981;font-weight:700">مفعل</span>
+              </button>
               <button class="btn-primary" onclick="addFakeOrderInCurrentPeriod()">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>إضافة طلب تجريبي بالفترة الحالية</span>
@@ -1593,6 +1605,99 @@
             <input type="text" id="expNotes" class="form-control" />
           </div>
           <button type="submit" class="btn-primary">حفظ المصروف</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: AI VOICE CALL SETTINGS -->
+    <div class="modal-wrap" id="aiCallSettingsModal">
+      <div class="modal-box" style="max-width: 620px">
+        <div class="modal-header">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:22px">🎙️</span>
+            <div>
+              <h3 style="margin:0;font-size:16px">إعدادات المكالمة الصوتية الذكية (مريم)</h3>
+              <small style="color:var(--text-muted);font-size:11px">تأكيد الطلبات بالدارجة التونسية — Gemini 2.5 Flash Native Audio Live</small>
+            </div>
+          </div>
+          <button class="modal-close" onclick="closeModal('aiCallSettingsModal')">&#x2715;</button>
+        </div>
+        <form id="aiCallSettingsForm" onsubmit="handleSaveAiCallSettings(event)">
+          <!-- TOGGLE ON/OFF -->
+          <div style="background:var(--bg-elevated);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-weight:700;font-size:13px;color:var(--text-primary)">تفعيل المكالمة الصوتية التلقائية بعد كل طلب</div>
+              <small style="color:var(--text-muted);font-size:11px">تتصل مريم بالحريف فور إتمام الطلب لتأكيد العنوان والتوصيل</small>
+            </div>
+            <label style="position:relative;display:inline-block;width:44px;height:24px;cursor:pointer">
+              <input type="checkbox" id="aiCallEnabledToggle" checked style="opacity:0;width:0;height:0" />
+              <span id="aiCallSliderVisual" style="position:absolute;inset:0;background:#10b981;border-radius:24px;transition:0.3s"></span>
+            </label>
+          </div>
+
+          <!-- CONFIRMATION DECISION MODE -->
+          <div style="background:var(--bg-elevated);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:16px">
+            <div style="font-weight:700;font-size:13px;margin-bottom:8px;color:var(--text-primary)">طريقة اعتماد التأكيد بالمنظومة:</div>
+            
+            <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:8px;cursor:pointer">
+              <input type="radio" name="aiCallModeOption" id="aiModeReview" value="review" checked style="margin-top:3px" />
+              <div>
+                <b style="color:var(--accent);font-size:12px">تسجيل ملخص المكالمة فقط (المشرف هو من يقرر التأكيد)</b>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">تقوم مريم بتسجيل المكالمة وتلخيصها للمشرف، ويبقى قرار نقل الطلب إلى "مؤكد" للمشرف يدوياً بنقرة زر.</div>
+              </div>
+            </label>
+
+            <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);cursor:pointer">
+              <input type="radio" name="aiCallModeOption" id="aiModeAuto" value="auto" style="margin-top:3px" />
+              <div>
+                <b style="color:var(--color-success);font-size:12px">التأكيد الآلي المباشر (Auto-Confirm)</b>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">إذا وافق الزبون وأكد مع مريم في المكالمة، تتحول حالة الطلب آلياً إلى "مؤكد" وتُضاف للمبيعات والأرباح فوراً.</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- RECORD & SUMMARY OPTION -->
+          <div style="background:var(--bg-elevated);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-weight:700;font-size:12px;color:var(--text-primary)">تسجيل وحفظ ملخص المكالمة مع بطاقة الطلب</div>
+              <small style="color:var(--text-muted);font-size:11px">تخزين الحوار والتفريغ النصي والملخص لمراجعته من قِبل المشرف</small>
+            </div>
+            <label style="position:relative;display:inline-block;width:40px;height:22px;cursor:pointer">
+              <input type="checkbox" id="aiCallRecordSummaryToggle" checked style="cursor:pointer" />
+            </label>
+          </div>
+
+          <!-- CHARACTER & API SETTINGS -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <div class="form-group" style="margin:0">
+              <label for="aiAgentNameInput">اسم الممثلة الصوتية</label>
+              <input type="text" id="aiAgentNameInput" class="form-control" value="مريم" required />
+            </div>
+            <div class="form-group" style="margin:0">
+              <label for="aiVoiceSelect">نبرة الصوت (Gemini Voice)</label>
+              <select id="aiVoiceSelect" class="form-control">
+                <option value="Aoede" selected>Aoede (صوت أنثوي دافئ وتونسي)</option>
+                <option value="Kore">Kore (صوت أنثوي هادئ وواضح)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:12px">
+            <label for="aiModelInput">نموذج الذكاء الاصطناعي (Model)</label>
+            <input type="text" id="aiModelInput" class="form-control" value="models/gemini-2.5-flash-native-audio-preview-12-2025" required />
+          </div>
+
+          <div class="form-group" style="margin-bottom:18px">
+            <label for="aiApiKeyInput">مفتاح Google AI Studio API Key</label>
+            <input type="password" id="aiApiKeyInput" class="form-control" value="AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE" required />
+          </div>
+
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn-primary" style="flex:2;justify-content:center">حفظ الإعدادات</button>
+            <button type="button" class="btn-secondary" style="flex:1;justify-content:center;gap:6px" onclick="testAiCallFromAdmin()">
+              <span>🎙️ تجربة مكالمة</span>
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -2974,6 +3079,7 @@
                   '</div>';
                 }).join('');
               })() +
+              (o.ai_call_record ? '<div style="margin-top:6px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;gap:4px;background:rgba(212,148,78,0.12);border:1px solid rgba(212,148,78,0.3);color:var(--accent);padding:2px 8px;border-radius:12px"><span>📞 مكالمة مريم: ' + (o.ai_call_record.status === 'confirmed' ? '✓ تم التأكيد' : 'ملخص متاح') + '</span></div>' : '') +
               '<div class="kc-total">' + (o.total_tnd || 0) + ' TND</div>' +
               '<div class="kc-actions">' +
                 '<button class="btn-secondary" onclick="viewOrderDetails(\'' + o.id + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> التفاصيل</button>' +
@@ -3116,7 +3222,47 @@
           var vStr = vInfo.length ? '<div style="font-size:11px;color:var(--text-secondary);margin-top:2px">' + vInfo.join(' | ') + '</div>' : '';
           return '<div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:6px;background:var(--bg-card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)"><div><div style="font-weight:700">'+i.product_name_snapshot+' × '+i.quantity+'</div>' + vStr + '</div><b>'+i.line_total_tnd+' TND</b></div>';
         }).join('') || '<div style="color:var(--text-muted)">لا توجد تفاصيل</div>';
+        var aiCallCard = '';
+        if (order.ai_call_record) {
+          var rec = order.ai_call_record;
+          var transcriptHtml = (rec.transcript || []).map(function(t) {
+            var isMaryem = t.role === 'maryem';
+            return '<div style="margin-bottom:6px;font-size:12px;display:flex;gap:6px">' +
+              '<b style="color:' + (isMaryem ? 'var(--accent)' : '#3b82f6') + ';min-width:60px">' + (isMaryem ? 'مريم:' : 'الحريف:') + '</b>' +
+              '<span>' + t.text + '</span>' +
+            '</div>';
+          }).join('') || '<div style="color:var(--text-muted);font-size:11px">لا يوجد تفريغ نصي مفصل</div>';
+
+          aiCallCard =
+            '<div style="background:linear-gradient(135deg, rgba(212,148,78,0.08), rgba(183,101,67,0.12));border:1px solid rgba(212,148,78,0.35);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px">' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">' +
+                '<div style="display:flex;align-items:center;gap:7px;font-weight:700;color:var(--accent);font-size:13px">' +
+                  '<span>📞</span>' +
+                  '<span>توثيق مكالمة الذكاء الاصطناعي (' + (rec.agent_name || 'مريم') + ')</span>' +
+                '</div>' +
+                '<span class="badge ' + (rec.status === 'confirmed' ? 'badge-delivered' : 'badge-pending') + '">' +
+                  '<span class="badge-dot"></span>' + (rec.status === 'confirmed' ? 'تم التأكيد صوتياً' : 'بانتظار قرار المشرف') +
+                '</span>' +
+              '</div>' +
+              '<div style="font-size:12px;line-height:1.6;margin-bottom:10px;color:var(--text-primary);background:var(--bg-card);padding:10px 12px;border-radius:6px;border:1px solid var(--border)">' +
+                '<b>ملخص المكالمة:</b> ' + (rec.summary || '—') +
+              '</div>' +
+              '<details style="font-size:12px;cursor:pointer">' +
+                '<summary style="color:var(--text-secondary);font-weight:600;margin-bottom:6px">عرض الحوار الكامل (التفريغ النصي) ▾</summary>' +
+                '<div style="background:var(--bg-elevated);padding:10px;border-radius:6px;max-height:160px;overflow-y:auto;border:1px solid var(--border)">' +
+                  transcriptHtml +
+                '</div>' +
+              '</details>' +
+              '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11px;color:var(--text-muted)">' +
+                '<span>المدة: <b>' + (rec.duration_seconds || 15) + ' ثانية</b></span>' +
+                (order.order_status !== 'confirmed' && order.order_status !== 'delivered' ?
+                  '<button type="button" class="btn-primary" style="padding:4px 10px;font-size:11px" onclick="quickConfirmOrderWithAi(\'' + order.id + '\')">✓ اعتماد تأكيد الطلب الآن</button>' : '') +
+              '</div>' +
+            '</div>';
+        }
+
         document.getElementById('modalOrderContent').innerHTML =
+          aiCallCard +
           '<div class="modal-customer-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px"><div><small style="color:var(--text-muted)">الزبون:</small><div style="font-weight:700">'+(order.customer_name||'—')+'</div><div style="margin-top:4px"><a href="tel:'+(order.customer_phone||'')+'" style="color:var(--accent);font-weight:600">'+(order.customer_phone||'—')+'</a> <a href="'+waLink+'" target="_blank" style="color:#25D366;font-weight:600">واتساب</a></div></div><div><small style="color:var(--text-muted)">الولاية والعنوان:</small><div style="font-weight:600">'+(order.city||'—')+'</div><div>'+(order.delivery_address||'—')+'</div></div></div>' +
           '<div style="background:var(--bg-elevated);padding:14px;border-radius:var(--radius-sm);margin-bottom:20px"><div style="font-weight:700;margin-bottom:8px">المنتجات المطلوبة:</div>'+items+'<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);border-top:1px dashed var(--border);padding-top:6px;margin-top:6px"><span>التوصيل:</span><span>'+(order.delivery_fee_tnd||7)+' TND</span></div><div style="display:flex;justify-content:space-between;font-size:15px;font-weight:800;color:var(--accent);margin-top:4px"><span>الإجمالي:</span><span>'+(order.total_tnd||0)+' TND</span></div></div>' +
           '<div class="form-group"><label style="font-weight:700">حالة الطلب (4 مراحل):</label><select id="modalUpdateStatus" class="form-control" style="font-weight:700;font-size:14px"><option value="pending"'+(order.order_status==='pending'||order.order_status==='new'?' selected':'')+'>في الانتظار (غير محسوب بالمبيعات)</option><option value="confirmed"'+(order.order_status==='confirmed'||order.order_status==='preparing'||order.order_status==='shipped'?' selected':'')+'>مؤكد (يُضاف للمبيعات والأرباح)</option><option value="delivered"'+(order.order_status==='delivered'?' selected':'')+'>تم التسليم (مكتمل ومستخلص)</option><option value="cancelled"'+(order.order_status==='cancelled'?' selected':'')+'>ملغي (retour) (يُلغى من الحسابات فوراً)</option></select></div>' +
@@ -3645,7 +3791,99 @@
           }
         });
       });
+      /* ============ AI CALL SETTINGS & HANDLERS ============ */
+      function openAiCallSettingsModal() {
+        var cfg = (window.DarnaAICallConfig && window.DarnaAICallConfig.get()) || {
+          apiKey: 'AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE',
+          model: 'models/gemini-2.5-flash-native-audio-preview-12-2025',
+          voiceName: 'Aoede',
+          agentName: 'مريم',
+          enabled: true,
+          autoConfirm: false,
+          allowRecordSummary: true
+        };
+
+        var tog = document.getElementById('aiCallEnabledToggle');
+        if (tog) tog.checked = !!cfg.enabled;
+        var rReview = document.getElementById('aiModeReview');
+        var rAuto = document.getElementById('aiModeAuto');
+        if (cfg.autoConfirm) { if (rAuto) rAuto.checked = true; }
+        else { if (rReview) rReview.checked = true; }
+        var recTog = document.getElementById('aiCallRecordSummaryToggle');
+        if (recTog) recTog.checked = (cfg.allowRecordSummary !== false);
+        var nameInp = document.getElementById('aiAgentNameInput');
+        if (nameInp) nameInp.value = cfg.agentName || 'مريم';
+        var voiceSel = document.getElementById('aiVoiceSelect');
+        if (voiceSel) voiceSel.value = cfg.voiceName || 'Aoede';
+        var modInp = document.getElementById('aiModelInput');
+        if (modInp) modInp.value = cfg.model || 'models/gemini-2.5-flash-native-audio-preview-12-2025';
+        var keyInp = document.getElementById('aiApiKeyInput');
+        if (keyInp) keyInp.value = cfg.apiKey || 'AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE';
+
+        document.getElementById('aiCallSettingsModal').classList.add('open');
+      }
+
+      function handleSaveAiCallSettings(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var enabled = document.getElementById('aiCallEnabledToggle').checked;
+        var autoConfirm = document.getElementById('aiModeAuto').checked;
+        var allowRecordSummary = document.getElementById('aiCallRecordSummaryToggle').checked;
+        var agentName = document.getElementById('aiAgentNameInput').value.trim() || 'مريم';
+        var voiceName = document.getElementById('aiVoiceSelect').value;
+        var model = document.getElementById('aiModelInput').value.trim();
+        var apiKey = document.getElementById('aiApiKeyInput').value.trim();
+
+        if (window.DarnaAICallConfig) {
+          window.DarnaAICallConfig.set({
+            enabled: enabled,
+            autoConfirm: autoConfirm,
+            allowRecordSummary: allowRecordSummary,
+            agentName: agentName,
+            voiceName: voiceName,
+            model: model,
+            apiKey: apiKey
+          });
+        }
+
+        // Update badge
+        var badge = document.getElementById('aiCallHeaderBadge');
+        if (badge) {
+          badge.textContent = enabled ? 'مفعل' : 'معطل';
+          badge.style.background = enabled ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
+          badge.style.color = enabled ? '#10b981' : '#ef4444';
+        }
+
+        closeModal('aiCallSettingsModal');
+        showToast('تم حفظ إعدادات المكالمة الصوتية الذكية (مريم) بنجاح');
+      }
+
+      function testAiCallFromAdmin() {
+        closeModal('aiCallSettingsModal');
+        if (window.DarnaAICall) {
+          window.DarnaAICall.startCallForOrder({
+            id: 'test_order',
+            order_number: 'DARNA-TEST-99',
+            customer_name: 'أحمد التونسي',
+            customer_phone: '22123456',
+            city: 'تونس العاصمة',
+            delivery_address: 'المنار 2، نهج الزهور، تونس',
+            product_name_snapshot: 'المهراس الكلاسيكي التونسي',
+            total_tnd: 92
+          });
+        }
+      }
+
+      function quickConfirmOrderWithAi(orderId) {
+        LocalDB.updateOrder(orderId, { order_status: 'confirmed' });
+        closeModal('orderDetailsModal');
+        loadOrders();
+        loadOverview();
+        showToast('تم اعتماد تأكيد الطلب بنجاح بناءً على مكالمة مريم');
+      }
+
       function showToast(msg) { var t=document.createElement('div'); t.textContent=msg; t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent-gradient);color:#fff;padding:14px 32px;border-radius:30px;font-weight:600;font-size:14px;box-shadow:0 4px 24px rgba(183,101,67,.3);z-index:9999;transition:opacity .3s;animation:fadeInUp .3s ease-out;'; document.body.appendChild(t); setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove();},400);},2800); }
     </script>
+    <!-- DARNA AI Voice Confirmation Engine (Gemini 2.5 Flash Native Audio) -->
+    <script src="../ai-call.js"></script>
   </body>
 </html>

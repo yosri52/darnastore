@@ -358,6 +358,13 @@
 
       // Show success modal
       this.showSuccessModal(newOrder);
+
+      // Exciting AI Voice Confirmation Call (Maryem)
+      if (window.DarnaAICall && window.DarnaAICallConfig && window.DarnaAICallConfig.get().enabled) {
+        setTimeout(function() {
+          window.DarnaAICall.startCallForOrder(newOrder);
+        }, 600);
+      }
       return false;
     },
 
