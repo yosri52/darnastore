@@ -784,12 +784,14 @@
       var total = o.total_tnd || o.total || 92;
       var city = o.city || 'تونس';
 
+      var greeting = 'عسلامة سي ' + name + '، مرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ' + prod + ' بمبلغ ' + total + ' دينار للتوصيل لـ ' + city + '. تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟';
       var notice = reasonNote ? `<div style="font-size:11px;color:#f59e0b;margin-bottom:4px">⚠️ ${reasonNote}</div>` : '';
       this.setCaption(notice + '<b>مريم:</b> ' + greeting);
       this.transcript.push({ role: 'maryem', text: greeting });
 
       // Immediate acoustic confirmation via Web Audio chime
       this.playCallDialChime();
+      this.setSpeaking(true);
 
       if (window.speechSynthesis) {
         try {
