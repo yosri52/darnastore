@@ -522,6 +522,66 @@
       .filters-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
       .search-box { flex: 1; min-width: 220px; }
 
+      /* ORDERS FILTER TOOLBAR */
+      .orders-filter-toolbar {
+        display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+        flex-wrap: wrap; animation: fadeInUp 0.3s ease-out;
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: var(--radius-md); padding: 12px 16px;
+        box-shadow: var(--shadow-sm);
+      }
+      .orders-filter-toolbar .orders-search-wrap {
+        flex: 1; min-width: 200px; position: relative; display: flex; align-items: center;
+      }
+      .orders-filter-toolbar .orders-search-icon {
+        position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+        color: var(--text-muted); pointer-events: none;
+      }
+      .orders-filter-toolbar .orders-search-wrap input {
+        padding-right: 36px; padding-left: 32px; background: var(--bg-elevated); width: 100%;
+      }
+      .orders-filter-toolbar .orders-search-clear {
+        position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+        background: none; border: none; color: var(--text-muted); cursor: pointer;
+        padding: 4px; font-size: 13px; line-height: 1; border-radius: 50%;
+        display: none; transition: var(--transition-fast);
+      }
+      .orders-filter-toolbar .orders-search-clear:hover {
+        color: var(--text-primary); background: var(--border);
+      }
+      .orders-date-filter {
+        display: inline-flex; gap: 2px; background: var(--bg-elevated);
+        padding: 3px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+      }
+      .orders-date-btn {
+        padding: 6px 14px; border-radius: 6px; border: none; background: transparent;
+        color: var(--text-muted); font-family: inherit; font-size: 12px;
+        font-weight: 600; cursor: pointer; transition: var(--transition-fast);
+        white-space: nowrap;
+      }
+      .orders-date-btn:hover { color: var(--text-primary); background: var(--bg-card); }
+      .orders-date-btn.active {
+        background: var(--bg-card); color: var(--accent); font-weight: 700;
+        box-shadow: var(--shadow-sm);
+      }
+      .orders-filter-count {
+        font-size: 12px; font-weight: 600; color: var(--text-muted);
+        white-space: nowrap; display: inline-flex; align-items: center; gap: 5px;
+        padding: 5px 12px; background: var(--bg-elevated); border-radius: 20px;
+        border: 1px solid var(--border);
+      }
+      .orders-filter-count b { color: var(--accent); font-weight: 800; font-size: 14px; }
+
+      @media (max-width: 680px) {
+        .orders-filter-toolbar {
+          flex-direction: column; align-items: stretch; gap: 10px; padding: 12px;
+        }
+        .orders-filter-toolbar .orders-search-wrap { width: 100%; min-width: 0; }
+        .orders-date-filter { width: 100%; display: flex; }
+        .orders-date-btn { flex: 1; text-align: center; padding: 7px 4px; font-size: 11px; }
+        .orders-filter-count { align-self: flex-start; }
+      }
+
       /* VIEW TOGGLE */
       .view-toggle { display: inline-flex; gap: 2px; background: var(--bg-elevated); padding: 3px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
       .view-toggle-btn { padding: 5px 12px; border-radius: 6px; border: none; background: transparent; color: var(--text-muted); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: var(--transition-fast); display: inline-flex; align-items: center; gap: 5px; }
@@ -1167,7 +1227,7 @@
               </div>
               <button class="btn-primary" onclick="addFakeOrder()" style="padding:7px 14px;font-size:12px">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>طلب تجريبي</span>
+                <span>+ طلب تجريبي</span>
               </button>
               <button class="btn-secondary" onclick="exportOrdersCSV()">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
@@ -1177,6 +1237,22 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
               </button>
             </div>
+          </div>
+
+          <!-- ORDERS FILTER TOOLBAR -->
+          <div class="orders-filter-toolbar" id="ordersFilterToolbar">
+            <div class="orders-search-wrap">
+              <svg class="orders-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="ordersGlobalSearch" class="form-control" placeholder="ابحث برقم الطلب، الاسم، الهاتف أو الولاية..." oninput="debouncedOrdersGlobalSearch()" />
+              <button type="button" id="ordersSearchClearBtn" class="orders-search-clear" onclick="clearOrdersSearch()" title="مسح البحث">✕</button>
+            </div>
+            <div class="orders-date-filter" id="ordersDateFilterBar">
+              <button class="orders-date-btn active" data-mode="all" onclick="setOrdersDateFilter('all', this)">الكل</button>
+              <button class="orders-date-btn" data-mode="month" onclick="setOrdersDateFilter('month', this)">هذا الشهر</button>
+              <button class="orders-date-btn" data-mode="week" onclick="setOrdersDateFilter('week', this)">هذا الأسبوع</button>
+              <button class="orders-date-btn" data-mode="today" onclick="setOrdersDateFilter('today', this)">اليوم</button>
+            </div>
+            <span class="orders-filter-count" id="ordersFilterCount"><b>0</b> طلب</span>
           </div>
 
           <!-- KANBAN VIEW -->
@@ -1473,16 +1549,24 @@
               <div id="sizePricingTable" style="display:none">
                 <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
                   <span style="font-size:12px;color:var(--text-secondary)">أضف مقاس:</span>
-                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('S', '')">+ S</button>
-                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('M', '')">+ M</button>
-                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('L', '')">+ L</button>
-                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('XL', '')">+ XL</button>
-                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('', '')">+ مخصص</button>
+                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('S', '', '')">+ S</button>
+                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('M', '', '')">+ M</button>
+                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('L', '', '')">+ L</button>
+                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('XL', '', '')">+ XL</button>
+                  <button type="button" class="btn-secondary" style="font-size:11px;padding:3px 8px" onclick="addSizePriceRow('', '', '')">+ مخصص</button>
+                </div>
+                <!-- Column Headers -->
+                <div style="display:grid;grid-template-columns:1fr 95px 95px 1.4fr 32px;gap:8px;font-size:11px;font-weight:700;color:var(--text-muted);padding:4px 8px;margin-bottom:2px">
+                  <span>المقاس</span>
+                  <span>سعر البيع</span>
+                  <span>سعر التكلفة</span>
+                  <span style="text-align:center">صافي الربح</span>
+                  <span></span>
                 </div>
                 <div id="sizePriceRows" style="display:flex;flex-direction:column;gap:6px">
                   <!-- Dynamic rows here -->
                 </div>
-                <small style="color:var(--text-muted);font-size:11px;display:block;margin-top:6px">حدد اسم المقاس وسعره — مثال: S = 55 DT, M = 64 DT, L = 75 DT</small>
+                <small style="color:var(--text-muted);font-size:11px;display:block;margin-top:6px">حدد اسم المقاس، سعر بيعه وسعر تكلفته — يحسب النظام فورياً صافي الربح وهامش الربح لكل مقاس.</small>
               </div>
             </div>
           </div>
@@ -1700,8 +1784,8 @@
             <div id="aiAdvancedSection" style="display:none;margin-top:8px;padding:12px;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);border:1px dashed var(--border)">
               <div class="form-group" style="margin-bottom:10px">
                 <label for="aiApiKeyInput" style="font-size:11px">مفتاح Google AI Studio API Key</label>
-                <input type="password" id="aiApiKeyInput" class="form-control" style="font-size:12px" placeholder="AIzaSy..." />
-                <small style="font-size:10px;color:var(--text-muted);display:block;margin-top:2px">في حال تم إيقاف المفتاح السابق من Google، يمكنك لصق مفتاحك الجديد هنا</small>
+                <input type="password" id="aiApiKeyInput" class="form-control" style="font-size:12px" placeholder="AQ.Ab8RN6..." />
+                <small style="font-size:10px;color:var(--text-muted);display:block;margin-top:2px">المفتاح النشط من ملف .env (GEMINI_API_KEY) — مريم تتحدث بالصوت الحي للدارجة التونسية</small>
               </div>
               <div class="form-group" style="margin:0">
                 <label for="aiModelInput" style="font-size:11px">نموذج الذكاء الاصطناعي (Model)</label>
@@ -2136,9 +2220,9 @@
               gallery: ['../mehres_classic.jpg', '../mehres_signature.jpg', '../mehres_set.jpg'],
               has_size_pricing: true,
               sizes: [
-                { name: 'S', price: 54 },
-                { name: 'M', price: 64 },
-                { name: 'L', price: 79 }
+                { name: 'S', price: 54, cost_price: 26, net_profit: 28 },
+                { name: 'M', price: 64, cost_price: 32, net_profit: 32 },
+                { name: 'L', price: 79, cost_price: 40, net_profit: 39 }
               ],
               colors: [
                 { name: 'حجري أصيل (Gris Pierre)', hex: '#7a756b', image: '../mehres_classic.jpg' },
@@ -2190,6 +2274,23 @@
           DB.set('products', products);
           DB.set('products_seeded', true);
           console.log("DARNA: Seeded products with variants & discounts successfully.");
+        } else {
+          // Migration: upgrade prod-mehres-core sizes if they don't have cost_price or are strings
+          var needsSave = false;
+          products.forEach(function(p) {
+            if (p.id === 'prod-mehres-core') {
+              if (!Array.isArray(p.sizes) || typeof p.sizes[0] === 'string' || (p.sizes[0] && p.sizes[0].cost_price === undefined)) {
+                p.has_size_pricing = true;
+                p.sizes = [
+                  { name: 'S', price: 54, cost_price: 26, net_profit: 28 },
+                  { name: 'M', price: 64, cost_price: 32, net_profit: 32 },
+                  { name: 'L', price: 79, cost_price: 40, net_profit: 39 }
+                ];
+                needsSave = true;
+              }
+            }
+          });
+          if (needsSave) DB.set('products', products);
         }
       }
 
@@ -2351,14 +2452,22 @@
           return o.order_status === 'confirmed' || o.order_status === 'delivered';
         });
 
+        // Cancelled orders (retours) charge a 3 DT penalty!
+        var cancelledOrders = orders.filter(function(o) {
+          return o.order_status === 'cancelled';
+        });
+
         var perProduct = {};
         products.forEach(function(p) {
           perProduct[p.id] = {
             product_id: p.id,
             name: p.name,
             units_sold: 0,
+            retours_count: 0,
+            retour_loss: 0,
             total_selling_revenue: 0,
             total_capital_cost: 0,
+            gross_profit: 0,
             net_profit: 0
           };
         });
@@ -2379,8 +2488,23 @@
               return p.id === item.product_id || pName === itemName || itemName.includes(pName) || pName.includes(itemName) || (pSlug && itemName.includes(pSlug));
             });
 
-            var sellPrice = parseFloat(item.unit_price_tnd) || (matchedProd ? parseFloat(matchedProd.price_tnd) : 0) || 0;
-            var costPrice = (item.cost_price_tnd > 0) ? parseFloat(item.cost_price_tnd) : (matchedProd ? (parseFloat(matchedProd.cost_price_tnd) || 0) : 0);
+            // Detect per-size price and cost
+            var sizePrice = 0;
+            var sizeCost = 0;
+            if (matchedProd && Array.isArray(matchedProd.sizes)) {
+              var itemSizeClean = (item.size || '').toString().trim().toLowerCase();
+              var sMatch = matchedProd.sizes.find(function(s) {
+                var sName = typeof s === 'string' ? s : (s.name || s.label);
+                return sName && itemSizeClean && sName.toString().trim().toLowerCase() === itemSizeClean;
+              });
+              if (sMatch && typeof sMatch === 'object') {
+                if (sMatch.price !== undefined && sMatch.price !== null && sMatch.price !== '') sizePrice = parseFloat(sMatch.price) || 0;
+                if (sMatch.cost_price !== undefined && sMatch.cost_price !== null && sMatch.cost_price !== '') sizeCost = parseFloat(sMatch.cost_price) || 0;
+              }
+            }
+
+            var sellPrice = parseFloat(item.unit_price_tnd) || sizePrice || (matchedProd ? parseFloat(matchedProd.price_tnd) : 0) || 0;
+            var costPrice = (parseFloat(item.cost_price_tnd) > 0) ? parseFloat(item.cost_price_tnd) : (sizeCost > 0 ? sizeCost : (matchedProd ? (parseFloat(matchedProd.cost_price_tnd) || 0) : 0));
             var lineRevenue = sellPrice * qty;
             var lineCost = costPrice * qty;
 
@@ -2392,9 +2516,34 @@
               perProduct[matchedProd.id].units_sold += qty;
               perProduct[matchedProd.id].total_selling_revenue += lineRevenue;
               perProduct[matchedProd.id].total_capital_cost += lineCost;
-              perProduct[matchedProd.id].net_profit = perProduct[matchedProd.id].total_selling_revenue - perProduct[matchedProd.id].total_capital_cost;
+              perProduct[matchedProd.id].gross_profit = perProduct[matchedProd.id].total_selling_revenue - perProduct[matchedProd.id].total_capital_cost;
             }
           });
+        });
+
+        // Track Retours (Cancelled Orders: -3 DT penalty per order)
+        var storeRetourLoss = 0;
+        cancelledOrders.forEach(function(o) {
+          storeRetourLoss += 3.00; // -3 DT per cancelled/returned order
+          (o.order_items || []).forEach(function(item) {
+            var itemName = (item.product_name_snapshot || '').trim().toLowerCase();
+            var matchedProd = products.find(function(p) {
+              var pName = (p.name || '').trim().toLowerCase();
+              var pSlug = (p.slug || '').trim().toLowerCase();
+              return p.id === item.product_id || pName === itemName || itemName.includes(pName) || pName.includes(itemName) || (pSlug && itemName.includes(pSlug));
+            });
+            if (matchedProd && perProduct[matchedProd.id]) {
+              perProduct[matchedProd.id].retours_count += 1;
+              perProduct[matchedProd.id].retour_loss += 3.00;
+            }
+          });
+        });
+
+        // Compute net profit for each product taking into account retour losses
+        products.forEach(function(p) {
+          if (perProduct[p.id]) {
+            perProduct[p.id].net_profit = (perProduct[p.id].total_selling_revenue - perProduct[p.id].total_capital_cost) - perProduct[p.id].retour_loss;
+          }
         });
 
         return {
@@ -2402,7 +2551,9 @@
           total_units_sold: storeTotalUnitsSold,
           total_selling_revenue: storeTotalSellingRevenue,
           total_capital_cost: storeTotalCapitalCost,
-          gross_profit: storeTotalSellingRevenue - storeTotalCapitalCost
+          gross_profit: storeTotalSellingRevenue - storeTotalCapitalCost,
+          store_retour_count: cancelledOrders.length,
+          store_retour_loss: storeRetourLoss
         };
       }
 
@@ -2422,7 +2573,8 @@
 
           var totalExpenses = filteredExpenses.reduce(function(s,e){ return s + (parseFloat(e.amount_tnd)||0); }, 0);
           var stats = getProductSalesStats(range);
-          var netProfit = stats.gross_profit - totalExpenses;
+          var retourLoss = stats.store_retour_loss;
+          var netProfit = stats.gross_profit - totalExpenses - retourLoss;
           var confirmedTotal = confirmedOrders.length + deliveredOrders.length;
           var aov = confirmedTotal > 0 ? (stats.total_selling_revenue / confirmedTotal).toFixed(2) : '0.00';
           var profitMargin = stats.total_selling_revenue > 0 ? ((netProfit / stats.total_selling_revenue) * 100).toFixed(1) : '0';
@@ -2443,6 +2595,7 @@
               total_capital_cost_tnd: stats.total_capital_cost.toFixed(2),
               net_profit_tnd: netProfit.toFixed(2),
               total_expenses_tnd: totalExpenses.toFixed(2),
+              retour_loss_tnd: retourLoss.toFixed(2),
               aov: aov,
               profit_margin: profitMargin
             },
@@ -2456,6 +2609,8 @@
         deleteProduct: function(id) { DB.set('products', DB.get('products',[]).filter(function(p){ return p.id!==id; })); return {success:true}; },
         getOrders: function(q,status,payment) { q=q||''; status=status||'all'; payment=payment||'all'; var orders=DB.get('orders',[]); if(q){var ql=q.toLowerCase(); orders=orders.filter(function(o){ return (o.order_number||'').toLowerCase().includes(ql)||(o.customer_name||'').toLowerCase().includes(ql)||(o.customer_phone||'').includes(q); });} if(status!=='all') orders=orders.filter(function(o){ return o.order_status===status; }); if(payment!=='all') orders=orders.filter(function(o){ return o.payment_status===payment; }); return {success:true, orders:orders.slice().sort(function(a,b){ return b.created_at.localeCompare(a.created_at); })}; },
         updateOrder: function(id,data) { var orders=DB.get('orders',[]); var idx=orders.findIndex(function(o){ return o.id===id; }); if(idx===-1) return {success:false}; orders[idx]=Object.assign({},orders[idx],data); DB.set('orders',orders); return {success:true}; },
+        deleteOrder: function(id) { DB.set('orders', DB.get('orders',[]).filter(function(o){ return o.id!==id; })); return {success:true}; },
+        clearDemoOrders: function() { DB.set('orders', DB.get('orders',[]).filter(function(o){ return !o.is_demo && !['DARNA-2025-001','DARNA-2025-002','DARNA-2025-003'].includes(o.order_number); })); return {success:true}; },
         getTasks: function() { var tasks=DB.get('tasks',[]); return {success:true, tasks:tasks.slice().sort(function(a,b){ return b.created_at.localeCompare(a.created_at); })}; },
         addTask: function(data) { var tasks=DB.get('tasks',[]); tasks.push(Object.assign({id:DB.uid(),status:'todo',priority:'normal',created_at:new Date().toISOString()},data)); DB.set('tasks',tasks); return {success:true}; },
         updateTask: function(id,data) { var tasks=DB.get('tasks',[]); var idx=tasks.findIndex(function(t){ return t.id===id; }); if(idx===-1) return {success:false}; tasks[idx]=Object.assign({},tasks[idx],data); DB.set('tasks',tasks); return {success:true}; },
@@ -2572,7 +2727,7 @@
           el = document.getElementById('metricOrdersAwaiting'); if (el) el.textContent = m.orders_pending + ' انتظار';
           el = document.getElementById('metricOrdersConfirmedOnly'); if (el) el.textContent = m.orders_confirmed + ' مؤكد';
           el = document.getElementById('metricOrdersDeliveredOnly'); if (el) el.textContent = m.orders_delivered + ' مسلّم';
-          el = document.getElementById('metricOrdersCancelled'); if (el) el.textContent = m.orders_cancelled + ' retour';
+          el = document.getElementById('metricOrdersCancelled'); if (el) el.textContent = m.orders_cancelled + ' retour' + (parseFloat(m.retour_loss_tnd) > 0 ? ' (-' + m.retour_loss_tnd + ' DT)' : '');
 
           el = document.getElementById('metricTotalSales'); if (el) el.innerHTML = m.total_selling_revenue_tnd + ' <span>TND</span>';
           el = document.getElementById('metricConfirmedOrdersCount'); if (el) el.textContent = (m.orders_confirmed + m.orders_delivered) + ' طلب مؤكد ومسلّم';
@@ -2587,7 +2742,10 @@
             el.innerHTML = (netVal >= 0 ? '+' : '') + m.net_profit_tnd + ' <span>TND</span>';
             el.style.color = netVal >= 0 ? '#10b981' : '#ef4444';
           }
-          el = document.getElementById('metricExpenses'); if (el) el.textContent = 'المصاريف: ' + m.total_expenses_tnd + ' TND';
+          el = document.getElementById('metricExpenses'); 
+          if (el) {
+            el.textContent = 'المصاريف: ' + m.total_expenses_tnd + ' TND' + (parseFloat(m.retour_loss_tnd) > 0 ? ' | خسارة Retour: -' + m.retour_loss_tnd + ' TND' : '');
+          }
           el = document.getElementById('metricProfitMarginBadge');
           if (el) {
             el.textContent = (parseFloat(m.profit_margin) >= 0 ? '+' : '') + m.profit_margin + '% هامش ربح';
@@ -2968,7 +3126,106 @@
 
       /* ============ ORDERS: KANBAN + TABLE ============ */
       var searchTimeout;
-      function debouncedLoadOrders() { clearTimeout(searchTimeout); searchTimeout = setTimeout(loadOrders, 300); }
+      var ordersDateMode = 'all';
+      var ordersGlobalSearchTimer;
+
+      function clearOrdersSearch() {
+        var input = document.getElementById('ordersGlobalSearch');
+        if (input) input.value = '';
+        var tableInput = document.getElementById('ordersSearchInput');
+        if (tableInput) tableInput.value = '';
+        var clearBtn = document.getElementById('ordersSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        loadOrders();
+      }
+
+      function debouncedLoadOrders() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
+          var tableVal = (document.getElementById('ordersSearchInput') || {}).value || '';
+          var globalInput = document.getElementById('ordersGlobalSearch');
+          if (globalInput && globalInput.value !== tableVal) {
+            globalInput.value = tableVal;
+            var clearBtn = document.getElementById('ordersSearchClearBtn');
+            if (clearBtn) clearBtn.style.display = tableVal.length > 0 ? 'block' : 'none';
+          }
+          loadOrders();
+        }, 250);
+      }
+
+      function debouncedOrdersGlobalSearch() {
+        var input = document.getElementById('ordersGlobalSearch');
+        var val = input ? input.value : '';
+        var clearBtn = document.getElementById('ordersSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = val.length > 0 ? 'block' : 'none';
+
+        clearTimeout(ordersGlobalSearchTimer);
+        ordersGlobalSearchTimer = setTimeout(function() {
+          var tableInput = document.getElementById('ordersSearchInput');
+          if (tableInput) tableInput.value = val;
+          loadOrders();
+        }, 250);
+      }
+
+      function setOrdersDateFilter(mode, el) {
+        ordersDateMode = mode;
+        document.querySelectorAll('#ordersDateFilterBar .orders-date-btn').forEach(function(b) { b.classList.remove('active'); });
+        if (el) el.classList.add('active');
+        loadOrders();
+        var labels = { all: 'كل الطلبات', today: 'طلبات اليوم', week: 'طلبات الأسبوع', month: 'طلبات الشهر' };
+        showToast('عرض: ' + (labels[mode] || 'الكل'));
+      }
+
+      function getOrdersDateRange() {
+        var now = new Date();
+        if (ordersDateMode === 'today') {
+          var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+          var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+          return { start: start, end: end };
+        }
+        if (ordersDateMode === 'week') {
+          var day = now.getDay();
+          var diffToMon = (day === 0 ? -6 : 1) - day;
+          var mon = new Date(now); mon.setDate(now.getDate() + diffToMon); mon.setHours(0, 0, 0, 0);
+          var sun = new Date(mon); sun.setDate(mon.getDate() + 6); sun.setHours(23, 59, 59, 999);
+          return { start: mon, end: sun };
+        }
+        if (ordersDateMode === 'month') {
+          var start = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
+          var end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+          return { start: start, end: end };
+        }
+        return null;
+      }
+
+      function filterOrdersByDateRange(orders) {
+        var range = getOrdersDateRange();
+        if (!range) return orders;
+        return orders.filter(function(o) {
+          if (!o.created_at) return false;
+          var d = new Date(o.created_at);
+          if (isNaN(d.getTime())) return false;
+          return d >= range.start && d <= range.end;
+        });
+      }
+
+      function filterOrdersBySearch(orders, q) {
+        if (!q) return orders;
+        var ql = q.toLowerCase();
+        return orders.filter(function(o) {
+          return (o.order_number || '').toLowerCase().indexOf(ql) !== -1 ||
+                 (o.customer_name || '').toLowerCase().indexOf(ql) !== -1 ||
+                 (o.customer_phone || '').indexOf(q) !== -1 ||
+                 (o.city || '').toLowerCase().indexOf(ql) !== -1;
+        });
+      }
+
+      function updateOrdersFilterCount(count) {
+        var el = document.getElementById('ordersFilterCount');
+        if (!el) return;
+        var labels = { all: 'الكل', today: 'اليوم', week: 'الأسبوع', month: 'الشهر' };
+        el.innerHTML = '<b>' + count + '</b> طلب' + (ordersDateMode !== 'all' ? ' — ' + (labels[ordersDateMode] || '') : '');
+      }
 
       function setOrdersView(view, el) {
         currentOrdersView = view;
@@ -2980,17 +3237,29 @@
       }
 
       function loadOrders() {
-        var q = (document.getElementById('ordersSearchInput')||{}).value||'';
-        var status = (document.getElementById('ordersStatusFilter')||{}).value||'all';
-        var payment = (document.getElementById('ordersPaymentFilter')||{}).value||'all';
-        var res = LocalDB.getOrders(q, status, payment);
-        cachedOrders = res.orders||[];
-        var nb = document.getElementById('navOrdersBadge'); if (nb) nb.textContent = cachedOrders.length;
-        var bnb = document.getElementById('bottomNavOrdersBadge'); if (bnb) { bnb.textContent = cachedOrders.length; bnb.style.display = cachedOrders.length > 0 ? 'flex' : 'none'; }
+        var q = ((document.getElementById('ordersGlobalSearch') || {}).value || (document.getElementById('ordersSearchInput') || {}).value || '').trim();
+
+        var allOrders = DB.get('orders', []);
+        var totalCount = allOrders.length;
+
+        allOrders = filterOrdersByDateRange(allOrders);
+        allOrders = filterOrdersBySearch(allOrders, q);
+        allOrders.sort(function(a, b) { return (b.created_at || '').localeCompare(a.created_at || ''); });
+
+        var nb = document.getElementById('navOrdersBadge'); if (nb) nb.textContent = totalCount;
+        var bnb = document.getElementById('bottomNavOrdersBadge'); if (bnb) { bnb.textContent = totalCount; bnb.style.display = totalCount > 0 ? 'flex' : 'none'; }
 
         if (currentOrdersView === 'kanban') {
-          renderKanban();
+          cachedOrders = allOrders;
+          updateOrdersFilterCount(allOrders.length);
+          renderKanban(allOrders);
         } else {
+          var status = (document.getElementById('ordersStatusFilter') || {}).value || 'all';
+          var payment = (document.getElementById('ordersPaymentFilter') || {}).value || 'all';
+          if (status !== 'all') allOrders = allOrders.filter(function(o) { return o.order_status === status; });
+          if (payment !== 'all') allOrders = allOrders.filter(function(o) { return o.payment_status === payment; });
+          cachedOrders = allOrders;
+          updateOrdersFilterCount(allOrders.length);
           renderOrdersTable();
         }
       }
@@ -3036,8 +3305,8 @@
         });
       }
 
-      function renderKanban() {
-        var allOrders = DB.get('orders', []).sort(function(a,b){ return (b.created_at||'').localeCompare(a.created_at||''); });
+      function renderKanban(filteredOrders) {
+        var allOrders = (filteredOrders || DB.get('orders', [])).slice().sort(function(a,b){ return (b.created_at||'').localeCompare(a.created_at||''); });
         var groups = { pending: [], confirmed: [], delivered: [], cancelled: [] };
         allOrders.forEach(function(o) {
           var s = o.order_status || 'pending';
@@ -3069,9 +3338,11 @@
             var dateStr = d.toLocaleDateString('ar-TN', { month: 'short', day: 'numeric' });
             var curStatus = o.order_status || 'pending';
 
+            var isDemo = o.is_demo || ['DARNA-2025-001','DARNA-2025-002','DARNA-2025-003'].includes(o.order_number);
+
             return '<div class="kanban-card" data-order-id="' + o.id + '">' +
               '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
-                '<span class="kc-order">#' + o.order_number + '</span>' +
+                '<span class="kc-order">#' + o.order_number + (isDemo ? ' <span style="background:rgba(217,119,6,0.12);color:#d97706;padding:1px 5px;border-radius:4px;font-size:10px;font-weight:700">تجريبي (Demo)</span>' : '') + '</span>' +
                 '<select class="kc-quick-select" onchange="quickMoveOrder(\'' + o.id + '\', this.value)" title="نقل سريع للحالة">' +
                   '<option value="" disabled selected>نقل الحالة ▾</option>' +
                   '<option value="pending"' + (curStatus==='pending'?' disabled':'') + '>في الانتظار</option>' +
@@ -3288,8 +3559,28 @@
           '<div class="form-group"><label style="font-weight:700">حالة الطلب (4 مراحل):</label><select id="modalUpdateStatus" class="form-control" style="font-weight:700;font-size:14px"><option value="pending"'+(order.order_status==='pending'||order.order_status==='new'?' selected':'')+'>في الانتظار (غير محسوب بالمبيعات)</option><option value="confirmed"'+(order.order_status==='confirmed'||order.order_status==='preparing'||order.order_status==='shipped'?' selected':'')+'>مؤكد (يُضاف للمبيعات والأرباح)</option><option value="delivered"'+(order.order_status==='delivered'?' selected':'')+'>تم التسليم (مكتمل ومستخلص)</option><option value="cancelled"'+(order.order_status==='cancelled'?' selected':'')+'>ملغي (retour) (يُلغى من الحسابات فوراً)</option></select></div>' +
           '<div class="form-group"><label>حالة الدفع:</label><select id="modalUpdatePayment" class="form-control"><option value="pending"'+(order.payment_status==='pending'?' selected':'')+'>معلق</option><option value="paid"'+(order.payment_status==='paid'?' selected':'')+'>تم الاستخلاص</option></select></div>' +
           '<div class="form-group"><label>ملاحظات داخلية:</label><textarea id="modalUpdateNotes" class="form-control" rows="2">'+(order.internal_notes||'')+'</textarea></div>' +
-          '<button class="btn-primary" onclick="saveOrderUpdates(\'' + order.id + '\')">حفظ التعديلات</button>';
+          '<div style="display:flex;gap:10px;margin-top:14px">' +
+            '<button class="btn-primary" style="flex:1" onclick="saveOrderUpdates(\'' + order.id + '\')">حفظ التعديلات</button>' +
+            '<button class="btn-secondary" style="color:var(--color-danger);border-color:var(--color-danger);padding:8px 16px" onclick="deleteOrderPrompt(\'' + order.id + '\')">حذف الطلب 🗑️</button>' +
+          '</div>';
         document.getElementById('orderDetailsModal').classList.add('open');
+      }
+
+      function deleteOrderPrompt(orderId) {
+        if (!confirm('هل أنت متأكد من حذف هذا الطلب نهائياً من اللوحة؟')) return;
+        LocalDB.deleteOrder(orderId);
+        closeModal('orderDetailsModal');
+        loadOrders();
+        loadOverview();
+        showToast('تم حذف الطلب بنجاح');
+      }
+
+      function clearDemoOrdersPrompt() {
+        if (!confirm('هل تريد حذف جميع الطلبات التجريبية (Demo) لتنظيف اللوحة وإبقاء طلباتك الحقيقية فقط؟')) return;
+        LocalDB.clearDemoOrders();
+        loadOrders();
+        loadOverview();
+        showToast('تم تنظيف الطلبات التجريبية بنجاح');
       }
 
       function saveOrderUpdates(orderId) {
@@ -3298,7 +3589,7 @@
       }
 
       function exportOrdersCSV() {
-        var allOrders = DB.get('orders', []);
+        var allOrders = (typeof cachedOrders !== 'undefined' && cachedOrders.length) ? cachedOrders : DB.get('orders', []);
         if (!allOrders.length) { alert('لا توجد طلبات'); return; }
         var headers = ['Order Number','Date','Customer','Phone','City','Total','Status','Payment'];
         var rows = allOrders.map(function(o){ return [o.order_number,new Date(o.created_at).toISOString().split('T')[0],'"'+(o.customer_name||'')+'"','"'+(o.customer_phone||'')+'"','"'+(o.city||'')+'"',o.total_tnd,o.order_status,o.payment_status]; });
@@ -3337,33 +3628,80 @@
             var simpleSizes = (document.getElementById('prodSizesInput').value || '')
               .split(',').map(function(s){ return s.trim(); }).filter(Boolean);
             var mainPrice = document.getElementById('prodPrice').value || '';
+            var mainCost = document.getElementById('prodCostPrice').value || '';
             simpleSizes.forEach(function(sz) {
-              addSizePriceRow(sz, mainPrice);
+              addSizePriceRow(sz, mainPrice, mainCost);
             });
           }
         }
       }
 
-      function addSizePriceRow(name, price) {
+      function updateRowProfit(input) {
+        var row = input.closest('.size-price-row');
+        if (!row) return;
+        var pInput = row.querySelector('.sp-price');
+        var cInput = row.querySelector('.sp-cost');
+        var profitEl = row.querySelector('.sp-profit');
+        if (!profitEl) return;
+
+        var price = parseFloat(pInput ? pInput.value : 0) || 0;
+        var cost = parseFloat(cInput ? cInput.value : 0) || 0;
+
+        if (price > 0 || cost > 0) {
+          var profit = price - cost;
+          var margin = cost > 0 ? Math.round((profit / cost) * 100) : 0;
+          var isPos = profit >= 0;
+          profitEl.style.color = isPos ? 'var(--color-success)' : 'var(--color-danger)';
+          profitEl.style.background = isPos ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)';
+          profitEl.textContent = (isPos ? '+' : '') + profit.toFixed(2) + ' DT (' + (margin >= 0 ? '+' : '') + margin + '%)';
+        } else {
+          profitEl.textContent = '—';
+          profitEl.style.color = 'var(--text-muted)';
+          profitEl.style.background = 'transparent';
+        }
+      }
+
+      function addSizePriceRow(name, price, cost) {
         var container = document.getElementById('sizePriceRows');
         if (!container) return;
+
+        var defaultPrice = price !== undefined && price !== '' ? price : (document.getElementById('prodPrice').value || '');
+        var defaultCost = cost !== undefined && cost !== '' ? cost : (document.getElementById('prodCostPrice').value || '');
 
         // Check if size already exists
         var existing = container.querySelectorAll('.size-price-row');
         for (var i = 0; i < existing.length; i++) {
           var existingName = existing[i].querySelector('.sp-name').value.trim();
-          if (name && existingName === name) return; // skip duplicate
+          if (name && existingName.toLowerCase() === name.toLowerCase()) return; // skip duplicate
         }
+
+        var pNum = parseFloat(defaultPrice) || 0;
+        var cNum = parseFloat(defaultCost) || 0;
+        var profit = pNum - cNum;
+        var margin = cNum > 0 ? Math.round((profit / cNum) * 100) : 0;
+        var hasVals = pNum > 0 || cNum > 0;
+        var isPos = profit >= 0;
+        var profitText = hasVals ? ((isPos ? '+' : '') + profit.toFixed(2) + ' DT (' + (margin >= 0 ? '+' : '') + margin + '%)') : '—';
+        var profitColor = isPos ? 'var(--color-success)' : 'var(--color-danger)';
+        var profitBg = hasVals ? (isPos ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)') : 'transparent';
 
         var row = document.createElement('div');
         row.className = 'size-price-row';
-        row.style.cssText = 'display:flex;gap:8px;align-items:center;background:var(--bg-card);padding:8px 10px;border-radius:6px;border:1px solid var(--border)';
+        row.style.cssText = 'display:grid;grid-template-columns:1fr 95px 95px 1.4fr 32px;gap:8px;align-items:center;background:var(--bg-card);padding:8px 10px;border-radius:6px;border:1px solid var(--border)';
         row.innerHTML =
-          '<input type="text" class="form-control sp-name" value="' + (name || '') + '" placeholder="المقاس (مثال: S)" style="flex:1;min-width:60px" />' +
-          '<span style="font-size:12px;font-weight:700;color:var(--text-secondary);white-space:nowrap">السعر:</span>' +
-          '<input type="number" class="form-control sp-price" value="' + (price || '') + '" placeholder="0" style="width:90px" step="0.01" />' +
-          '<span style="font-size:11px;color:var(--text-muted)">DT</span>' +
-          '<button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--color-danger);cursor:pointer;font-size:14px;padding:4px" title="حذف">&#x2715;</button>';
+          '<input type="text" class="form-control sp-name" value="' + (name || '') + '" placeholder="المقاس (مثال: M)" style="font-weight:700;font-size:12px;padding:6px 8px" />' +
+          '<div style="position:relative">' +
+            '<input type="number" class="form-control sp-price" value="' + defaultPrice + '" placeholder="البيع" step="0.5" min="0" oninput="updateRowProfit(this)" style="padding-left:24px;font-weight:700;color:var(--accent);font-size:12px;padding-right:6px" />' +
+            '<span style="position:absolute;left:5px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--text-muted);pointer-events:none">DT</span>' +
+          '</div>' +
+          '<div style="position:relative">' +
+            '<input type="number" class="form-control sp-cost" value="' + defaultCost + '" placeholder="التكلفة" step="0.5" min="0" oninput="updateRowProfit(this)" style="padding-left:24px;font-size:12px;padding-right:6px" />' +
+            '<span style="position:absolute;left:5px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--text-muted);pointer-events:none">DT</span>' +
+          '</div>' +
+          '<div class="sp-profit" style="font-size:11px;font-weight:700;color:' + profitColor + ';white-space:nowrap;background:' + profitBg + ';padding:5px 6px;border-radius:4px;text-align:center;overflow:hidden;text-overflow:ellipsis" title="صافي الربح = سعر البيع - التكلفة">' +
+            profitText +
+          '</div>' +
+          '<button type="button" class="btn-secondary" onclick="this.closest(\'.size-price-row\').remove()" style="color:var(--color-danger);padding:4px;font-size:13px;display:flex;align-items:center;justify-content:center;height:32px" title="حذف">&#x2715;</button>';
         container.appendChild(row);
       }
       function toggleColorsSection(show) {
@@ -3470,8 +3808,15 @@
           var sizesHtml = sizesArr.length 
             ? '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px">' + sizesArr.map(function(s){
                 var sName = typeof s === 'string' ? s : (s.name || s.label);
-                var sPrice = (typeof s === 'object' && s.price) ? ' (' + s.price + ' DT)' : '';
-                return '<span style="font-size:10px;font-weight:800;background:var(--accent-glow);color:var(--accent);padding:1px 6px;border-radius:4px">' + sName + sPrice + '</span>';
+                var sPrice = (typeof s === 'object' && s.price !== undefined) ? s.price + ' DT' : '';
+                var sCost = (typeof s === 'object' && s.cost_price !== undefined) ? 'تكلفة: ' + s.cost_price + ' DT' : '';
+                var profitVal = (typeof s === 'object' && s.price !== undefined && s.cost_price !== undefined) ? (s.price - s.cost_price) : null;
+                var sProfit = (profitVal !== null) ? 'ربح: +' + profitVal.toFixed(1) + ' DT' : '';
+                var titleStr = [sPrice, sCost, sProfit].filter(Boolean).join(' | ');
+                return '<span title="' + titleStr + '" style="font-size:10px;font-weight:800;background:var(--accent-glow);color:var(--accent);padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;gap:3px">' +
+                  sName + (sPrice ? ' (' + sPrice + ')' : '') +
+                  (profitVal !== null ? ' <small style="color:var(--color-success);font-weight:800">+' + profitVal.toFixed(0) + '</small>' : '') +
+                '</span>';
               }).join('') + '</div>'
             : '<span style="color:var(--text-muted);font-size:11px">بدون مقاسات</span>';
 
@@ -3486,9 +3831,10 @@
           var salesStatsHtml = 
             '<div style="background:var(--bg-elevated);padding:6px 10px;border-radius:8px;border:1px solid var(--border);min-width:170px">' +
               '<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span style="color:var(--text-muted)">القطع المباعة:</span><b style="color:var(--accent)">' + pStats.units_sold + ' قطعة</b></div>' +
+              (pStats.retours_count > 0 ? '<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;color:var(--color-danger)"><span>المرتجع (Retour):</span><b>' + pStats.retours_count + ' (-' + pStats.retour_loss.toFixed(2) + ' DT)</b></div>' : '') +
               '<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span>المبيعات:</span><b>' + pStats.total_selling_revenue.toFixed(2) + ' TND</b></div>' +
               '<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;color:var(--text-muted)"><span>رأس المال:</span><span>' + pStats.total_capital_cost.toFixed(2) + ' TND</span></div>' +
-              '<div style="display:flex;justify-content:space-between;font-size:11px;border-top:1px dashed var(--border);padding-top:3px;margin-top:2px"><span style="font-weight:700">الصافي:</span><b style="color:' + (pStats.net_profit >= 0 ? 'var(--color-success)' : 'var(--color-danger)') + '">' + (pStats.net_profit >= 0 ? '+' : '') + pStats.net_profit.toFixed(2) + ' TND</b></div>' +
+              '<div style="display:flex;justify-content:space-between;font-size:11px;border-top:1px dashed var(--border);padding-top:3px;margin-top:2px"><span style="font-weight:700">صافي الربح:</span><b style="color:' + (pStats.net_profit >= 0 ? 'var(--color-success)' : 'var(--color-danger)') + '">' + (pStats.net_profit >= 0 ? '+' : '') + pStats.net_profit.toFixed(2) + ' TND</b></div>' +
             '</div>';
 
           var imgSrc = p.image_url || '../logo.jpg';
@@ -3586,9 +3932,9 @@
           if (isPerSize) {
             prod.sizes.forEach(function(s) {
               if (typeof s === 'object') {
-                addSizePriceRow(s.name || s.label || '', s.price !== undefined ? s.price : prod.price_tnd);
+                addSizePriceRow(s.name || s.label || '', s.price !== undefined ? s.price : prod.price_tnd, s.cost_price !== undefined ? s.cost_price : prod.cost_price_tnd);
               } else {
-                addSizePriceRow(s, prod.price_tnd);
+                addSizePriceRow(s, prod.price_tnd, prod.cost_price_tnd);
               }
             });
             document.getElementById('prodSizesInput').value = prod.sizes.map(function(s){ return typeof s === 'string' ? s : (s.name || s.label); }).join(', ');
@@ -3665,7 +4011,7 @@
         var origPrice = parseFloat(document.getElementById('prodOriginalPrice').value) || 0;
         var costPrice = parseFloat(document.getElementById('prodCostPrice').value) || 0;
 
-        // Parse Sizes (supports both per-size pricing and uniform pricing)
+        // Parse Sizes (supports both per-size pricing/cost and uniform pricing)
         var hasSizes = document.getElementById('prodHasSizes').checked;
         var useSizePricing = document.getElementById('prodSizePricing') ? document.getElementById('prodSizePricing').checked : false;
         var sizes = [];
@@ -3674,10 +4020,15 @@
             document.querySelectorAll('#sizePriceRows .size-price-row').forEach(function(row) {
               var sName = (row.querySelector('.sp-name').value || '').trim();
               var sPrice = parseFloat(row.querySelector('.sp-price').value);
+              var sCost = parseFloat(row.querySelector('.sp-cost').value);
+              if (isNaN(sPrice)) sPrice = sellPrice || 0;
+              if (isNaN(sCost)) sCost = costPrice || 0;
               if (sName) {
                 sizes.push({
                   name: sName,
-                  price: (!isNaN(sPrice) && sPrice > 0) ? sPrice : (sellPrice || 0)
+                  price: sPrice,
+                  cost_price: sCost,
+                  net_profit: sPrice - sCost
                 });
               }
             });
@@ -3687,18 +4038,29 @@
                 .split(',')
                 .map(function(s){ return s.trim(); })
                 .filter(Boolean)
-                .map(function(s){ return { name: s, price: sellPrice }; });
+                .map(function(s){ return { name: s, price: sellPrice, cost_price: costPrice, net_profit: sellPrice - costPrice }; });
             }
             // If primary sell price was left empty, take first size's price
             if ((!sellPrice || sellPrice <= 0) && sizes.length > 0 && sizes[0].price) {
               sellPrice = sizes[0].price;
             }
+            if ((!costPrice || costPrice <= 0) && sizes.length > 0 && sizes[0].cost_price) {
+              costPrice = sizes[0].cost_price;
+            }
           } else {
-            // Uniform price for all sizes: array of strings
+            // Uniform price for all sizes: array of size objects
             sizes = (document.getElementById('prodSizesInput').value || '')
               .split(',')
               .map(function(s){ return s.trim(); })
-              .filter(Boolean);
+              .filter(Boolean)
+              .map(function(s){
+                return {
+                  name: s,
+                  price: sellPrice,
+                  cost_price: costPrice,
+                  net_profit: sellPrice - costPrice
+                };
+              });
           }
         }
 
@@ -3849,7 +4211,9 @@
           agentName: 'مريم',
           enabled: true,
           autoConfirm: false,
-          allowRecordSummary: true
+          allowRecordSummary: true,
+          apiKey: '',
+          model: 'models/gemini-2.5-flash-native-audio-preview-12-2025'
         };
 
         var tog = document.getElementById('aiCallEnabledToggle');
@@ -3928,6 +4292,6 @@
       function showToast(msg) { var t=document.createElement('div'); t.textContent=msg; t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent-gradient);color:#fff;padding:14px 32px;border-radius:30px;font-weight:600;font-size:14px;box-shadow:0 4px 24px rgba(183,101,67,.3);z-index:9999;transition:opacity .3s;animation:fadeInUp .3s ease-out;'; document.body.appendChild(t); setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove();},400);},2800); }
     </script>
     <!-- DARNA AI Voice Confirmation Engine (Gemini 2.5 Flash Native Audio) -->
-    <script src="../ai-call.js?v=20261023_rev4"></script>
+    <script src="../ai-call.js?v=20261111_autohangup"></script>
   </body>
 </html>

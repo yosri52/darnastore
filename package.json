@@ -4,8 +4,10 @@
   "description": "DARNA — Premium Home Supplies E-Commerce System with Supabase & Netlify Functions",
   "private": true,
   "scripts": {
-    "build": "echo 'DARNA static build ready'",
-    "dev": "netlify dev"
+    "start": "node dev-server.js",
+    "dev:local": "node dev-server.js",
+    "dev": "netlify dev",
+    "build": "echo 'DARNA static build ready'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1"

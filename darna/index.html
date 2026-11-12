@@ -3692,9 +3692,11 @@
                 customer_notes: notes,
                 internal_notes: 'طلب مسجل من المتجر',
                 order_items: [{
+                  product_id: matchProd.id || 'prod-mehres-core',
                   product_name_snapshot: product,
                   quantity: qty,
                   unit_price_tnd: unitPrice,
+                  cost_price_tnd: parseFloat(matchProd.cost_price_tnd) || 0,
                   line_total_tnd: subtotal
                 }],
                 created_at: new Date().toISOString()
@@ -4186,6 +4188,6 @@
       }
     </script>
     <!-- DARNA AI Voice Confirmation Engine (Gemini 2.5 Flash Native Audio) -->
-    <script src="ai-call.js?v=20261023_rev4"></script>
+    <script src="ai-call.js?v=20261111_autohangup"></script>
   </body>
 </html>

@@ -9,7 +9,7 @@
   'use strict';
 
   var DEFAULT_CONFIG = {
-    apiKey: 'AIzaSyApchRatIVX2N88tYmPwOb1SN1FF4CtBsE',
+    apiKey: '',
     model: 'models/gemini-2.5-flash-native-audio-preview-12-2025',
     voiceName: 'Aoede', // Warm, expressive female voice
     agentName: 'مريم',
@@ -18,11 +18,32 @@
     allowRecordSummary: true
   };
 
+  // Sync with Netlify serverless environment variables (/api/ai-config)
+  (function syncEnvConfig() {
+    if (typeof fetch === 'function') {
+      fetch('/api/ai-config')
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (data && data.apiKey) {
+            DEFAULT_CONFIG.apiKey = data.apiKey;
+            if (data.model) DEFAULT_CONFIG.model = data.model;
+          }
+        })
+        .catch(function () {});
+    }
+  })();
+
   function getConfig() {
     var saved = {};
     try {
       var s = localStorage.getItem('darna_ai_call_config');
       if (s) saved = JSON.parse(s);
+      // Automatically clean up stale or placeholder keys from localStorage
+      if (saved.apiKey && (saved.apiKey.startsWith('AIzaSyApchRatIVX2N88') || saved.apiKey.length < 30)) {
+        delete saved.apiKey;
+        delete saved.model;
+        localStorage.setItem('darna_ai_call_config', JSON.stringify(saved));
+      }
     } catch(e) {}
     return Object.assign({}, DEFAULT_CONFIG, saved);
   }
@@ -67,28 +88,32 @@
   }
 
 
-  // Text helper: extract pure spoken Arabic dialogue and strip thoughts/meta commentary
+  // Text helper: extract pure spoken Tunisian Arabic dialogue and strip thoughts/meta commentary
   function extractSpokenDialogue(raw) {
     if (!raw) return '';
     var text = String(raw).trim();
     // 1. Quoted speech
     var quoteMatch = text.match(/["“]([\u0600-\u06FF\s\d،؟!.A-Za-z]+)["”]/);
     if (quoteMatch && /[\u0600-\u06FF]/.test(quoteMatch[1])) {
-      return quoteMatch[1].trim();
+      text = quoteMatch[1].trim();
     }
-    // 2. Strip thoughts, asterisks, brackets
+    // 2. Strip thoughts, asterisks, brackets, English thoughts
     text = text.replace(/\*\*[\s\S]*?\*\*/g, '');
     text = text.replace(/\[[\s\S]*?\]/g, '');
+    text = text.replace(/I have[\s\S]*$/i, '');
+    text = text.replace(/I've[\s\S]*$/i, '');
     text = text.replace(/I believe[\s\S]*$/i, '');
     text = text.replace(/Here is[\s\S]*$/i, '');
     text = text.replace(/Initiating[\s\S]*?:/i, '');
     text = text.replace(/Confirming[\s\S]*?:/i, '');
-    // 3. Filter lines with Arabic
-    var lines = text.split('\n').filter(function(line) {
-      return /[\u0600-\u06FF]/.test(line);
+    // 3. Keep ONLY lines with Arabic characters
+    var lines = text.split('\n').map(function(l){ return l.trim(); }).filter(function(line) {
+      return /[\u0600-\u06FF]/.test(line) && !/^[A-Za-z\s:*,."'-]+$/.test(line);
     });
     if (lines.length) {
       text = lines.join(' ');
+    } else {
+      return '';
     }
     // 4. Strip English prefixes/suffixes
     text = text.replace(/^[A-Za-z\s:*,."'-]+(?=[\u0600-\u06FF])/, '');
@@ -421,6 +446,15 @@
       this.isSpeaking = false;
       this.nextPlayTime = 0;
       this.isMuted = false;
+      this.customerHasSpoken = false;
+      this.userSpeechCount = 0;
+      this.maryemPostCustomerTurnStarted = false;
+      this.autoHangupScheduled = false;
+      this.detectedDecision = 'confirmed';
+      if (this.autoCloseTimer) {
+        clearTimeout(this.autoCloseTimer);
+        this.autoCloseTimer = null;
+      }
 
       var overlay = document.getElementById('darnaAiCallOverlay');
       if (overlay) overlay.classList.add('active');
@@ -475,25 +509,17 @@
       // Play soft calling chime to ensure speakers are active and give immediate acoustic feedback
       this.playCallDialChime();
 
-      // Guard: if connection takes more than 4.5 seconds, automatically kick off fallback voice!
-      if (this.connectionTimeout) clearTimeout(this.connectionTimeout);
-      this.connectionTimeout = setTimeout(function () {
-        if (!self.setupComplete && self.isOpen) {
-          console.warn('[DarnaAICall] WebSocket setup timeout, switching to resilient voice fallback.');
-          self.fallbackInteractiveSpeech();
-        }
-      }, 4500);
-
       try {
         this.ws = new WebSocket(url);
       } catch (e) {
         console.error('[DarnaAICall] WebSocket creation error:', e);
-        this.fallbackInteractiveSpeech();
+        self.setCaption('<span style="color:#f87171">تعذر إنشاء اتصال الصوت المباشر. يرجى التحقق من الشبكة أو إنهاء المكالمة.</span>');
         return;
       }
 
       this.ws.onopen = function () {
         console.log('[DarnaAICall] WebSocket connected to Gemini Live.');
+        self.setCaption('<span>متصل بالصوت الحي... مريم تبدأ بالترحيب بك.</span>');
         self.sendSetup();
       };
 
@@ -508,19 +534,16 @@
       };
 
       this.ws.onerror = function (err) {
-        console.warn('[DarnaAICall] WebSocket error, switching to resilient fallback:', err);
+        console.warn('[DarnaAICall] WebSocket error:', err);
         if (!self.setupComplete && self.isOpen) {
-          self.fallbackInteractiveSpeech();
+          self.setCaption('<span style="color:#f87171">تعذر الاتصال بخادم الصوت الحي المباشر لـ Gemini. يرجى التحقق من اتصال الإنترنت.</span>');
         }
       };
 
       this.ws.onclose = function (event) {
         console.log('[DarnaAICall] WebSocket closed:', event.code, event.reason);
-        if (!self.setupComplete && self.isOpen) {
-          if (event.code === 1008) {
-            console.warn('[DarnaAICall] API key was blocked or leaked by Google.');
-          }
-          self.fallbackInteractiveSpeech();
+        if (self.isOpen && !self.setupComplete) {
+          self.setCaption('<span style="color:#f87171">انقطع اتصال الصوت الحي المباشر (رمز: ' + event.code + '). يمكنك الضغط على إنهاء المكالمة.</span>');
         }
       };
     },
@@ -535,9 +558,15 @@
       var address = o.delivery_address || '';
       var productName = o.product_name_snapshot || (o.order_items && o.order_items[0] && o.order_items[0].product_name_snapshot) || 'المهراس التونسي التقليدي الأصيل';
 
-      var systemPrompt = `
-أنتِ "مريم" (Maryem)، ممثلة خدمة الحرفاء لمتجر "دارنا" (DARNA) للمهاريس والأواني التقليدية الفاخرة في تونس.
-تتحدثين عبر مكالمة هاتفية حية بالدارجة التونسية الأصيلة، المهذبة والسريعة لتأكيد الطلب مباشرة وإرسال التوصيل.
+      var systemPrompt = `أنتِ "مريم" (Maryem)، مسؤولة خدمة الحرفاء الرسمية لمتجر "دارنا" (DARNA) للمهاريس والأواني التقليدية الفاخرة في تونس.
+تتحدثين عبر مكالمة هاتفية حية بصوت أنثوي ودود وواضح بالدارجة التونسية العامية الأصيلة بنسبة 100%.
+
+قواعد لغوية صارمة جداً ونهائية:
+1. التحدث حصرياً وفقط بالدارجة التونسية (العامية التونسية اليومية).
+2. ممنوع منعاً باتاً نطق أو قول أو كتابة أي كلمة باللغة الإنجليزية تحت أي ظرف من الظروف.
+3. ممنوع التفكير بصوت عالٍ أو كتابة أي شروحات أو أفكار مسبقة بالإنجليزية. كلامكِ منطوق مباشرة للحريف فقط.
+4. ادخلي في صلب الموضوع مباشرة: رحبي بالحريف، واذكري طلبه ومبلغه، واسأليه فوراً لتأكيد إرسال التوصيل بدون أي مقدمات طويلة.
+5. كلماتك التونسية الأصيلة: "عسلامة"، "يعيشك"، "مرحبا بيك في عائلة دارنا"، "نكلم فيك لتأكيد الكوموند"، "يوصلك ديراكت لدارك"، "باهي"، "مريقل"، "صحة وبالشفاء"، "نهارك زين".
 
 بيانات الحريف والطلب:
 - اسم الحريف: "${customerName}"
@@ -547,26 +576,23 @@
 - ولاية التوصيل: "${city}"
 - العنوان: "${address}"
 
-سيناريو المحادثة الصارم والمباشر:
-1. الجملة الافتتاحية الأولى (قوليها كاملة فور فتح المكالمة في نفس النفس):
-"عسلامة سي/للا ${customerName}، يعيشك ومرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ${productName} بمبلغ ${total} دينار للتوصيل لـ ${city}... تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟"
+سيناريو المحادثة الدقيق وإغلاق المكالمة:
+1. الجملة الافتتاحية الأولى عند فتح المكالمة:
+"عسلامة سي/للا ${customerName}، يعيشك ومرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ${productName} بمبلغ ${total} دينار للتوصيل لـ ${city}... تحب نأكدو الكوموند توا باش المنظومة تبعثلك التوصيل ديراكت لدارك؟"
 
 2. عند إجابة الحريف بالموافقة (نعم / باهي / أكيد / تفضل / إي / صحيح / مريقل):
-ردي فوراً بفرح وتشجيع:
-"يعيشك وصحة وبالشفاء! تم تأكيد طلبك توا في المنظومة والـ Livraison باش تخرجلك مباشرة توا لعنوانك في ${city}، والدفع عند الاستلام. ربي يباركلك ونهارك طيب وزين!"
+ردي فوراً بالتونسي بفرح وتشجيع:
+"يعيشك وصحة وبالشفاء! تم تأكيد طلبك توا في المنظومة والتوصيل باش يخرجلك مباشرة لعنوانك في ${city}، والدفع عند الاستلام. ربي يباركلك ونهارك طيب وزين!"
+ثم قومي فوراً باستدعاء دالة end_call مع decision="confirmed" لإنهاء المكالمة وإغلاق الخط.
 
-3. إذا طلب الحريف الإلغاء أو التعديل:
-ردي بلطف واحترام: "واضح يعيشك، ربي يفضلك، تم تسجيل طلبك."
-
-قواعد صارمة جداً:
-- ادخلي في صلب الموضوع مباشرة: رحبي بالحريف، واذكري طلبه ومبلغه، واسأليه فوراً لتأكيد إرسال التوصيل بدون أي مقدمات طويلة أو أسئلة إضافية.
-- تحدثي واكتبي حصرياً الكلام المنطوق بالدارجة التونسية فقط الموجه مباشرة للحريف.
-- ممنوع منعاً باتاً كتابة أي تفكير داخلي أو لغة إنجليزية أو شروحات.
-      `;
+3. إذا طلب الحريف الإلغاء أو التراجع (لا / بطلت / نحب نلغي / غيرت رأيي):
+ردي بلطف بالتونسي:
+"واضح يعيشك، ربي يفضلك، تم تسجيل طلبك وإلغاء الكوموند في المنظومة. نهارك زين!"
+ثم قومي فوراً باستدعاء دالة end_call مع decision="cancelled" لإنهاء المكالمة وإغلاق الخط.`;
 
       var setupMsg = {
         setup: {
-          model: cfg.model,
+          model: cfg.model || 'models/gemini-2.5-flash-native-audio-preview-12-2025',
           generationConfig: {
             responseModalities: ['AUDIO'],
             speechConfig: {
@@ -577,6 +603,31 @@
               }
             }
           },
+          tools: [
+            {
+              functionDeclarations: [
+                {
+                  name: 'end_call',
+                  description: 'Call this function immediately after speaking your final response to hang up and terminate the call once the customer confirms or cancels the order.',
+                  parameters: {
+                    type: 'OBJECT',
+                    properties: {
+                      decision: {
+                        type: 'STRING',
+                        description: 'Customer decision: confirmed or cancelled',
+                        enum: ['confirmed', 'cancelled']
+                      },
+                      notes: {
+                        type: 'STRING',
+                        description: 'Brief closing note in Tunisian Arabic'
+                      }
+                    },
+                    required: ['decision']
+                  }
+                }
+              ]
+            }
+          ],
           systemInstruction: {
             parts: [{ text: systemPrompt }]
           }
@@ -590,15 +641,11 @@
       var self = this;
       if (msg.setupComplete) {
         self.setupComplete = true;
-        if (self.connectionTimeout) {
-          clearTimeout(self.connectionTimeout);
-          self.connectionTimeout = null;
-        }
-        console.log('[DarnaAICall] Setup acknowledged by Gemini.');
+        console.log('[DarnaAICall] Setup acknowledged by Gemini Live.');
         // Start microphone capturing after setup is complete
         this.startMicrophone();
 
-        // Trigger Maryem's opening greeting immediately
+        // Trigger Maryem's opening greeting immediately in 100% Tunisian Arabic
         var o = this.order || {};
         var customerName = o.customer_name || 'حريفنا العزيز';
         var city = o.city || 'تونس';
@@ -606,17 +653,48 @@
           clientContent: {
             turns: [{
               role: 'user',
-              parts: [{ text: 'الحريف فتح المكالمة توا. رحّبي به فوراً باسمه بالدارجة التونسية، واذكري طلبه ومبلغه لـ ' + city + '، واسأليه مباشرة إن كان يؤكد الطلب لنرسل له الـ Livraison ديراكت لدارو.' }]
+              parts: [{ text: 'الحريف فتح المكالمة توا ويسمع فيك. قولي التحية الافتتاحية بالدارجة التونسية فقط لتأكيد الطلب.' }]
             }],
             turnComplete: true
           }
         };
         this.ws.send(JSON.stringify(triggerMsg));
-        this.setCaption('مريم تبدأ بالترحيب بك وبطلبك الآن...');
+        this.setCaption('مريم تبدأ بالترحيب بك بالدارجة التونسية الآن...');
       }
 
+      // 1. Tool Call Handling: Explicit hangup trigger from AI
+      if (msg.toolCall && msg.toolCall.functionCalls) {
+        msg.toolCall.functionCalls.forEach(function (fc) {
+          if (fc.name === 'end_call') {
+            var decision = (fc.args && fc.args.decision) || 'confirmed';
+            var notes = (fc.args && fc.args.notes) || '';
+            self.detectedDecision = decision;
+            self.scheduleAutoHangup(decision, notes);
+
+            if (self.ws && self.ws.readyState === WebSocket.OPEN) {
+              try {
+                self.ws.send(JSON.stringify({
+                  toolResponse: {
+                    functionResponses: [{
+                      response: { output: { status: 'call_ended', decision: decision } },
+                      id: fc.id
+                    }]
+                  }
+                }));
+              } catch(e){}
+            }
+          }
+        });
+      }
+
+      // 2. Audio & Speech Streams
       if (msg.serverContent) {
         if (msg.serverContent.modelTurn) {
+          // If the customer has spoken, this turn is Maryem's final reply
+          if (self.customerHasSpoken) {
+            self.maryemPostCustomerTurnStarted = true;
+          }
+
           var parts = msg.serverContent.modelTurn.parts || [];
           parts.forEach(function (part) {
             if (part.thought) return;
@@ -625,12 +703,22 @@
               if (cleanText) {
                 self.transcript.push({ role: 'maryem', text: cleanText });
                 self.setCaption('<b>مريم:</b> ' + cleanText);
+
+                if (/(إلغاء|فسخ|بطل|تراجع|مش توة|غيرت رأيي)/i.test(cleanText)) {
+                  self.detectedDecision = 'cancelled';
+                }
               }
             }
             if (part.inlineData && part.inlineData.data) {
+              // The ONLY audio played: Native PCM chunks from Gemini Live WebSocket!
               self.enqueueAudioChunk(part.inlineData.data);
             }
           });
+        }
+
+        // Automatic fail-safe: When Maryem finishes generating her response to the customer's decision
+        if (msg.serverContent.turnComplete && self.maryemPostCustomerTurnStarted) {
+          self.scheduleAutoHangup(self.detectedDecision || 'confirmed', 'اكتمال المحادثة');
         }
       }
     },
@@ -670,6 +758,12 @@
           }
           var rms = Math.sqrt(sum / inputData.length);
           if (rms < 0.012) return; // Silent / background noise
+
+          // User is actively speaking
+          self.userSpeechCount = (self.userSpeechCount || 0) + 1;
+          if (self.userSpeechCount >= 3) {
+            self.customerHasSpoken = true;
+          }
 
           var b64Pcm = float32ToInt16Base64(inputData);
           var chunkMsg = {
@@ -736,6 +830,9 @@
         if (isSpeaking) waveBars.classList.add('active');
         else waveBars.classList.remove('active');
       }
+      if (!isSpeaking && this.setupComplete && this.isOpen) {
+        this.setCaption('<em>مريم تستمع إليك الآن... (يمكنك التحدث صوتياً بـ "نعم" أو "باهي" أو الضغط على إنهاء المكالمة)</em>');
+      }
     },
 
     setCaption: function (html) {
@@ -772,188 +869,70 @@
       } catch (e) {}
     },
 
-    fallbackInteractiveSpeech: function (reasonNote) {
-      var self = this;
-      if (this.connectionTimeout) {
-        clearTimeout(this.connectionTimeout);
-        this.connectionTimeout = null;
-      }
-      var o = this.order || {};
-      var name = o.customer_name || 'حريفنا الكريم';
-      var prod = o.product_name_snapshot || (o.order_items && o.order_items[0] && o.order_items[0].product_name_snapshot) || 'المهراس التقليدي الأصيل';
-      var total = o.total_tnd || o.total || 92;
-      var city = o.city || 'تونس';
-
-      var greeting = 'عسلامة سي ' + name + '، مرحبا بيك في عائلة دارنا! معاك مريم من مصلحة الحرفاء، نكلم فيك لتأكيد طلبك متاع ' + prod + ' بمبلغ ' + total + ' دينار للتوصيل لـ ' + city + '. تحب نأكدو الطلب توا باش المنظومة تبعثلك الـ Livraison ديراكت لدارك؟';
-      var notice = reasonNote ? `<div style="font-size:11px;color:#f59e0b;margin-bottom:4px">⚠️ ${reasonNote}</div>` : '';
-      this.setCaption(notice + '<b>مريم:</b> ' + greeting);
-      this.transcript.push({ role: 'maryem', text: greeting });
-
-      // Immediate acoustic confirmation via Web Audio chime
-      this.playCallDialChime();
-      this.setSpeaking(true);
-
-      if (window.speechSynthesis) {
-        try {
-          window.speechSynthesis.cancel();
-          if (window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
-          }
-
-          var utter = new SpeechSynthesisUtterance(greeting);
-          
-          var voices = window.speechSynthesis.getVoices() || [];
-          var arabicVoice = voices.find(function (v) {
-            var l = (v.lang || '').toLowerCase();
-            var n = (v.name || '').toLowerCase();
-            return l.startsWith('ar') || n.includes('arabic') || n.includes('tunis') || n.includes('saudi') || n.includes('egypt');
-          });
-
-          if (arabicVoice) {
-            utter.voice = arabicVoice;
-            utter.lang = arabicVoice.lang;
-          } else if (voices.length) {
-            // Use available voice without forcing unavailable locale so it doesn't drop
-            utter.voice = voices[0];
-          }
-          utter.rate = 0.95;
-          utter.pitch = 1.05;
-
-          utter.onstart = function () {
-            self.setSpeaking(true);
-          };
-          utter.onend = function () {
-            self.setSpeaking(false);
-            self.setCaption(notice + '<em>مريم تستمع إليك الآن... (يمكنك التحدث بـ "نعم / باهي" أو الضغط على إنهاء المكالمة)</em>');
-            self.startSpeechRecognitionFallback();
-          };
-          utter.onerror = function (e) {
-            console.warn('[DarnaAICall] Speech synthesis error:', e);
-            self.setSpeaking(false);
-          };
-
-          if (self.audioCtx && self.audioCtx.state === 'suspended') {
-            self.audioCtx.resume();
-          }
-
-          window.speechSynthesis.speak(utter);
-          // Safety pulse if speech doesn't trigger onstart
-          setTimeout(function() {
-            if (window.speechSynthesis.paused) window.speechSynthesis.resume();
-          }, 200);
-        } catch (err) {
-          console.warn('[DarnaAICall] Speech fallback error:', err);
-        }
-      }
-    },
-
-    startSpeechRecognitionFallback: function () {
-      var self = this;
-      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition || !this.isOpen) return;
-
+    playCallHangupChime: function () {
       try {
-        var rec = new SpeechRecognition();
-        rec.lang = 'ar-TN';
-        rec.interimResults = false;
-        rec.maxAlternatives = 1;
-
-        rec.onresult = function (event) {
-          if (!self.isOpen) return;
-          var transcript = (event.results[0] && event.results[0][0] && event.results[0][0].transcript) || '';
-          transcript = transcript.trim();
-          if (!transcript) return;
-
-          self.transcript.push({ role: 'customer', text: transcript });
-          self.setCaption('<b>أنت:</b> ' + transcript);
-
-          var isConfirm = /(نعم|اي|إي|باهي|اكيد|أكيد|تفضل|صحيح|مريقل|واضح|اوكي|أوكي|oui|d'accord|bon)/i.test(transcript);
-          var isCancel = /(لا|بطلت|فسخ|الغاء|إلغاء|غيرت رايي|non)/i.test(transcript);
-
-          setTimeout(function () {
-            if (isConfirm) {
-              var confirmResp = 'يعيشك وصحة وبالشفاء! تم تأكيد طلبك توا في المنظومة والـ Livraison باش تخرجلك مباشرة توا لدارك، والدفع عند الاستلام. نهارك زين!';
-              self.speakFallbackResponse(confirmResp, function () {
-                setTimeout(function () { self.endCall(); }, 1800);
-              });
-            } else if (isCancel) {
-              var cancelResp = 'واضح يعيشك، ربي يفضلك، تم تسجيل طلبك وإعلام الإدارة.';
-              self.speakFallbackResponse(cancelResp, function () {
-                setTimeout(function () { self.endCall(); }, 1800);
-              });
-            } else {
-              var generalResp = 'مفهوم يعيشك، تم تسجيل ملاحظتك وتأكيد الطلب.';
-              self.speakFallbackResponse(generalResp, function () {
-                setTimeout(function () { self.endCall(); }, 1800);
-              });
-            }
-          }, 600);
-        };
-
-        rec.onerror = function (e) {
-          console.log('[DarnaAICall] Speech recognition status:', e.error);
-        };
-
-        this.recognition = rec;
-        rec.start();
-      } catch (e) {
-        console.warn('[DarnaAICall] Speech recognition init note:', e);
-      }
+        if (!this.audioCtx) this.audioCtx = new AudioContext({ sampleRate: 24000 });
+        if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+        var ctx = this.audioCtx;
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(480, ctx.currentTime);
+        osc.frequency.setValueAtTime(400, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.36);
+      } catch (e) {}
     },
 
-    speakFallbackResponse: function (text, onEndCallback) {
+    scheduleAutoHangup: function (decision, notes) {
       var self = this;
-      this.setCaption('<b>مريم:</b> ' + text);
-      this.transcript.push({ role: 'maryem', text: text });
-      this.playCallDialChime();
+      if (this.autoHangupScheduled) return;
+      this.autoHangupScheduled = true;
+      if (decision) this.detectedDecision = decision;
 
-      if (window.speechSynthesis) {
-        try {
-          window.speechSynthesis.cancel();
-          if (window.speechSynthesis.paused) window.speechSynthesis.resume();
-          var utter = new SpeechSynthesisUtterance(text);
-          var voices = window.speechSynthesis.getVoices() || [];
-          var arabicVoice = voices.find(function (v) {
-            var l = (v.lang || '').toLowerCase();
-            return l.startsWith('ar') || (v.name || '').toLowerCase().includes('arabic');
-          });
-          if (arabicVoice) {
-            utter.voice = arabicVoice;
-            utter.lang = arabicVoice.lang;
-          } else if (voices.length) {
-            utter.voice = voices[0];
-          }
-          utter.rate = 0.95;
-          utter.onstart = function () { self.setSpeaking(true); };
-          utter.onend = function () {
-            self.setSpeaking(false);
-            if (onEndCallback) onEndCallback();
-          };
-          window.speechSynthesis.speak(utter);
-        } catch (e) {
-          if (onEndCallback) onEndCallback();
+      console.log('[DarnaAICall] Decision reached (' + this.detectedDecision + '). Waiting for speech audio to finish before hanging up.');
+
+      var pollAudioFinish = function () {
+        if (!self.isOpen) return;
+
+        var now = self.audioCtx ? self.audioCtx.currentTime : 0;
+        var isPlaying = (self.activeSources && self.activeSources.length > 0) ||
+                        (self.audioCtx && self.nextPlayTime > now + 0.15);
+
+        if (isPlaying) {
+          setTimeout(pollAudioFinish, 200);
+          return;
         }
-      } else {
-        if (onEndCallback) onEndCallback();
-      }
+
+        // Maryem finished saying her closing response! Natural phone call hangup pause (1.2s)
+        var msg = self.detectedDecision === 'cancelled'
+          ? '<span style="color:#ef4444">✓ تم تسجيل طلب الإلغاء. جاري إغلاق المكالمة... 📞</span>'
+          : '<span style="color:#10b981">✓ تم تسجيل وتأكيد طلبك بنجاح. جاري إغلاق المكالمة... 📞</span>';
+        self.setCaption(msg);
+
+        setTimeout(function () {
+          if (self.isOpen) {
+            self.endCall();
+          }
+        }, 1200);
+      };
+
+      setTimeout(pollAudioFinish, 400);
     },
 
     endCall: function () {
       this.stopTimer();
       this.isOpen = false;
-      if (this.connectionTimeout) {
-        clearTimeout(this.connectionTimeout);
-        this.connectionTimeout = null;
-      }
       var duration = this.callStartTime ? Math.round((Date.now() - this.callStartTime) / 1000) : 15;
 
-      // Stop speech recognition if running
-      if (this.recognition) {
-        try { this.recognition.stop(); } catch(e){}
-        this.recognition = null;
-      }
+      // Play gentle hangup tone
+      this.playCallHangupChime();
 
-      // Stop any queued or playing audio sources immediately
+      // Stop any queued or playing native audio sources immediately
       if (this.activeSources) {
         this.activeSources.forEach(function (s) { try { s.stop(); } catch(e){} });
         this.activeSources = [];
@@ -961,20 +940,15 @@
       this.nextPlayTime = 0;
       this.setSpeaking(false);
 
-      if (window.speechSynthesis) {
-        try { window.speechSynthesis.cancel(); } catch(e){}
-      }
-
       // Close live mic and ws
       if (this.micStream) {
         this.micStream.getTracks().forEach(function (t) { t.stop(); });
         this.micStream = null;
       }
-      if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-        this.ws.close();
+      if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
+        try { this.ws.close(); } catch(e){}
       }
       this.ws = null;
-      this.setSpeaking(false);
 
       // Process summary and record
       this.processCallSummaryAndSave(duration);
@@ -985,18 +959,23 @@
       var o = this.order || {};
       var customerName = o.customer_name || 'الحريف';
 
-      // Build structured summary
-      var summaryText = 'مكالمة هاتفية ذكية بواسطة ' + cfg.agentName + ' مع الحريف (' + customerName + '). مدة المكالمة: ' + duration + ' ثانية. تم استعراض تفاصيل الطلب والتوصيل إلى ' + (o.city || 'تونس') + '.';
+      var decision = this.detectedDecision || 'confirmed';
+      var isCancelled = (decision === 'cancelled');
+
+      var statusText = isCancelled ? 'إلغاء الطلب بناءً على رغبة الحريف' : 'تأكيد الطلب';
+      var summaryText = 'مكالمة هاتفية ذكية بواسطة ' + cfg.agentName + ' مع الحريف (' + customerName + '). نتيجة المكالمة: ' + statusText + '. مدة المكالمة: ' + duration + ' ثانية.';
+
       var callRecord = {
         call_id: 'call_' + Date.now().toString(36),
         agent_name: cfg.agentName,
         timestamp: new Date().toISOString(),
         duration_seconds: duration,
-        status: 'confirmed', // Confirmed / review
+        status: isCancelled ? 'cancelled' : 'confirmed',
+        decision: decision,
         summary: summaryText,
         transcript: this.transcript.length ? this.transcript : [
           { role: 'maryem', text: 'عسلامة ومرحبا بيك في دارنا، تم مراجعة الطلب.' },
-          { role: 'customer', text: 'نعم، تم التأكيد شكراً.' }
+          { role: 'customer', text: isCancelled ? 'نحب نلغي الطلب يعيشك.' : 'نعم، تم التأكيد شكراً.' }
         ]
       };
 
@@ -1011,15 +990,12 @@
           if (cfg.allowRecordSummary !== false) {
             targetOrder.ai_call_record = callRecord;
           }
-          if (cfg.autoConfirm) {
-            targetOrder.order_status = 'confirmed';
-            if (cfg.allowRecordSummary !== false) {
-              targetOrder.internal_notes = (targetOrder.internal_notes ? targetOrder.internal_notes + '\n' : '') + '[تأكيد آلي بالذكاء الاصطناعي]: ' + summaryText;
-            }
+          if (isCancelled) {
+            targetOrder.order_status = 'cancelled';
+            targetOrder.internal_notes = (targetOrder.internal_notes ? targetOrder.internal_notes + '\n' : '') + '[إلغاء آلي بمكالمة مريم الذكية]: ' + summaryText;
           } else {
-            if (cfg.allowRecordSummary !== false) {
-              targetOrder.internal_notes = (targetOrder.internal_notes ? targetOrder.internal_notes + '\n' : '') + '[ملخص مكالمة الذكاء الاصطناعي - بانتظار قرار المشرف]: ' + summaryText;
-            }
+            targetOrder.order_status = 'confirmed';
+            targetOrder.internal_notes = (targetOrder.internal_notes ? targetOrder.internal_notes + '\n' : '') + '[تأكيد آلي بمكالمة مريم الذكية]: ' + summaryText;
           }
           localStorage.setItem('darna_orders', JSON.stringify(orders));
           window.dispatchEvent(new Event('storage'));
@@ -1033,18 +1009,35 @@
       var summaryScreen = document.getElementById('aiCallSummaryScreen');
       if (summaryScreen) {
         summaryScreen.style.display = 'block';
+        var titleEl = document.getElementById('aiSummaryStatusTitle');
+        var descEl = document.getElementById('aiSummaryStatusDesc');
+        if (titleEl) titleEl.textContent = isCancelled ? 'تم تسجيل إلغاء الطلب' : 'تم تأكيد طلبك بنجاح!';
+        if (descEl) descEl.textContent = isCancelled ? 'تم إلغاء الطلب في المنظومة بناءً على مكالمتك مع مريم.' : 'شكراً لثقتك في متجر دارنا. سيتم إرسال شحنتك إلى عنوانك والدفع عند الاستلام.';
+
         var card = document.getElementById('aiSummaryCardText');
         if (card) {
+          var color = isCancelled ? '#ef4444' : '#10b981';
+          var icon = isCancelled ? '✗' : '✓';
           card.innerHTML = `
-            <div style="font-weight:700;color:#10b981;margin-bottom:6px">✓ تم توثيق وتلخيص المكالمة:</div>
+            <div style="font-weight:700;color:${color};margin-bottom:6px">${icon} ${statusText}:</div>
             <div>${summaryText}</div>
             <div style="margin-top:8px;font-size:11px;color:#94a3b8">مدة المكالمة: <b>${duration} ثانية</b> | المتحدثة: <b>${cfg.agentName}</b></div>
           `;
         }
+
+        // Auto-close modal after 2.8 seconds so the user is returned to the store seamlessly!
+        var self = this;
+        this.autoCloseTimer = setTimeout(function () {
+          self.closeModal();
+        }, 2800);
       }
     },
 
     closeModal: function () {
+      if (this.autoCloseTimer) {
+        clearTimeout(this.autoCloseTimer);
+        this.autoCloseTimer = null;
+      }
       if (this.isOpen) {
         this.endCall();
       }

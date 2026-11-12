@@ -78,6 +78,14 @@
       if (found) {
         found.quantity = Math.min(20, (found.quantity || 1) + qty);
       } else {
+        var matchedSz = Array.isArray(product.sizes) ? product.sizes.find(function(s) {
+          var sN = typeof s === 'string' ? s : (s.name || s.label);
+          return sN === size;
+        }) : null;
+        var effectiveCost = (matchedSz && typeof matchedSz === 'object' && matchedSz.cost_price !== undefined)
+          ? (parseFloat(matchedSz.cost_price) || 0)
+          : (parseFloat(product.cost_price_tnd || product.cost_price) || 0);
+
         items.push({
           key: key,
           id: product.id || 'prod-' + Date.now(),
@@ -87,7 +95,7 @@
           size: size,
           color: color,
           unit_price: price,
-          cost_price: parseFloat(product.cost_price_tnd || product.cost_price) || 0,
+          cost_price: effectiveCost,
           quantity: qty
         });
       }

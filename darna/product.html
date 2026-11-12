@@ -1736,11 +1736,12 @@
         name: 'المهراس التونسي التقليدي الأصيل',
         price_tnd: 64,
         original_price_tnd: 89,
+        cost_price_tnd: 32,
         has_size_pricing: true,
         sizes: [
-          { name: 'S', price: 54 },
-          { name: 'M', price: 64 },
-          { name: 'L', price: 79 }
+          { name: 'S', price: 54, cost_price: 26 },
+          { name: 'M', price: 64, cost_price: 32 },
+          { name: 'L', price: 79, cost_price: 40 }
         ],
         colors: [
           { name: 'حجري أصيل', hex: '#7a756b', image: 'mehres_classic.jpg' },
@@ -2319,6 +2320,14 @@
               subtotal += lineTot;
               totalQty += q;
               noteSizes.push(q + '× مقاس ' + sz);
+              var matchedSz = (currentProduct.sizes || []).find(function(s) {
+                var sN = typeof s === 'string' ? s : (s.name || s.label);
+                return sN === sz;
+              });
+              var szCost = (matchedSz && typeof matchedSz === 'object' && matchedSz.cost_price !== undefined)
+                ? (parseFloat(matchedSz.cost_price) || 0)
+                : (parseFloat(currentProduct.cost_price_tnd) || 0);
+
               items.push({
                 product_id: currentProduct.id || 'prod-mehres-core',
                 product_name_snapshot: currentProduct.name,
@@ -2326,7 +2335,7 @@
                 color: colorPicked,
                 quantity: q,
                 unit_price_tnd: pr.toFixed(2),
-                cost_price_tnd: parseFloat(currentProduct.cost_price_tnd) || 0,
+                cost_price_tnd: szCost,
                 line_total_tnd: lineTot
               });
             }
@@ -2348,6 +2357,14 @@
           var sizePicked = selectedSizeName || 'M';
           notesStr = 'المقاس: ' + sizePicked + ' | اللون: ' + colorPicked;
 
+          var matchedSingleSz = (currentProduct.sizes || []).find(function(s) {
+            var sN = typeof s === 'string' ? s : (s.name || s.label);
+            return sN === sizePicked;
+          });
+          var singleSzCost = (matchedSingleSz && typeof matchedSingleSz === 'object' && matchedSingleSz.cost_price !== undefined)
+            ? (parseFloat(matchedSingleSz.cost_price) || 0)
+            : (parseFloat(currentProduct.cost_price_tnd) || 0);
+
           items.push({
             product_id: currentProduct.id || 'prod-mehres-core',
             product_name_snapshot: currentProduct.name,
@@ -2355,7 +2372,7 @@
             color: colorPicked,
             quantity: orderQuantity,
             unit_price_tnd: (subtotal / orderQuantity).toFixed(2),
-            cost_price_tnd: parseFloat(currentProduct.cost_price_tnd) || 0,
+            cost_price_tnd: singleSzCost,
             line_total_tnd: subtotal
           });
         }
@@ -2537,6 +2554,6 @@
       if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
     </script>
     <!-- DARNA AI Voice Confirmation Engine (Gemini 2.5 Flash Native Audio) -->
-    <script src="ai-call.js?v=20261023_rev4"></script>
+    <script src="ai-call.js?v=20261111_autohangup"></script>
   </body>
 </html>

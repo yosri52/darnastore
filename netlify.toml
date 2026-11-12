@@ -7,6 +7,21 @@
 
 # Clean API routing to Netlify Functions
 [[redirects]]
+  from = "/api/admin/*"
+  to = "/.netlify/functions/admin-api"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin"
+  to = "/.netlify/functions/admin-api"
+  status = 200
+
+[[redirects]]
+  from = "/api/products"
+  to = "/.netlify/functions/get-products"
+  status = 200
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
