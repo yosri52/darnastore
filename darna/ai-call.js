@@ -490,7 +490,13 @@
     connectWebSocket: function () {
       var self = this;
       var cfg = getConfig();
-      var url = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=' + encodeURIComponent(cfg.apiKey || '');
+      if (!cfg.apiKey || cfg.apiKey.trim().length < 10) {
+        console.warn('[DarnaAICall] GEMINI_API_KEY is not configured in Netlify.');
+        self.setCaption('<span style="color:#f87171">تنبيه: مفتاح GEMINI_API_KEY غير مضبوط في Netlify. يرجى إضافته في إعدادات Netlify (Environment Variables) لتفعيل المكالمة.</span>');
+        return;
+      }
+
+      var url = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=' + encodeURIComponent(cfg.apiKey.trim());
 
       self.setupComplete = false;
 
@@ -543,7 +549,11 @@
       this.ws.onclose = function (event) {
         console.log('[DarnaAICall] WebSocket closed:', event.code, event.reason);
         if (self.isOpen && !self.setupComplete) {
-          self.setCaption('<span style="color:#f87171">انقطع اتصال الصوت الحي المباشر (رمز: ' + event.code + '). يمكنك الضغط على إنهاء المكالمة.</span>');
+          if (event.code === 1008) {
+            self.setCaption('<span style="color:#f87171">تعذر بدء المكالمة (رمز: 1008): مفتاح GEMINI_API_KEY غير مصرح أو غير مفعل. يرجى التحقق من إضافته في Netlify Environment Variables.</span>');
+          } else {
+            self.setCaption('<span style="color:#f87171">انقطع اتصال الصوت الحي المباشر (رمز: ' + event.code + '). يمكنك الضغط على إنهاء المكالمة.</span>');
+          }
         }
       };
     },

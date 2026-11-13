@@ -46,6 +46,16 @@ const FALLBACK_PRODUCTS = [
     stock_quantity: 10,
     is_active: true,
   },
+  {
+    id: "44444444-4444-4444-4444-444444444444",
+    name: "المهراس التونسي التقليدي الأصيل",
+    slug: "mehres-tunisien",
+    description: "المهراس التونسي التقليدي الأصيل من دارنا منحوت من الحجر الطبيعي الصلب.",
+    price_tnd: 64.0,
+    image_url: "mehres_classic.jpg",
+    stock_quantity: 50,
+    is_active: true,
+  },
 ];
 
 exports.handler = async (event) => {
